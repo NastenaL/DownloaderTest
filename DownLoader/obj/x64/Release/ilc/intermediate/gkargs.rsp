@@ -1,0 +1,11 @@
+﻿"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\CommonServiceLocator.dll"
+"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\DownLoader.exe"
+"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\GalaSoft.MvvmLight.dll"
+"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\GalaSoft.MvvmLight.Extras.dll"
+"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\GalaSoft.MvvmLight.Platform.dll"
+/Lib:"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in"
+/Lib:"C:\Program Files (x86)\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.native.compiler\2.2.3\tools\x64\ilc\lib\Private"
+/WinMD:"D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x64\Release\ilc\in\WinMetadata\Windows.winmd"
+/VSTelemetrySessionSettings:"{"IsOptedIn":true,"HostName":"Dev14","AppInsightsInstrumentationKey":"f144292e-e3b2-4011-ac90-20e5c03fbce5","AsimovInstrumentationKey":"AIF-312cbd79-9dbb-4c48-a7da-3cc2a931cb70","AppId":1001,"UserId":"6167f031-95f8-4ae6-9760-da7cb7ef909d","Id":"821f0b0d-23bf-451c-bfe7-8364ac640156","ProcessStartTime":637036218869187371}"
+/RdXmlPath:"C:\Program Files (x86)\Microsoft SDKs\UWPNuGetPackages\microsoft.net.native.compiler\2.2.3\tools\LibraryXML"
+/RunOnlyPreDR
