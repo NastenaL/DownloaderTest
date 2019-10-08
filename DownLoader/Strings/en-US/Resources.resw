@@ -216,7 +216,4 @@
   <data name="tbType.Text" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="tvAllDownloads" xml:space="preserve">
-    <value>All downloads</value>
-  </data>
 </root>

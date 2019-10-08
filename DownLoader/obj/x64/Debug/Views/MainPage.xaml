@@ -92,7 +92,7 @@
                      Command="{Binding StopDownload}"/>
         </StackPanel>
 
-        <Popup x:ConnectionId='3' x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" 
+        <Popup x:ConnectionId='3' x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" x:FieldModifier="public"
                DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                IsLightDismissEnabled="False" Grid.Row="2" Grid.ColumnSpan="9">

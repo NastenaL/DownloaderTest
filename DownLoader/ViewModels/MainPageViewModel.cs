@@ -42,12 +42,12 @@ namespace DownLoader.ViewModels
         private readonly INavigationService navigationService;
         private Windows.Networking.BackgroundTransfer.BackgroundDownloader backgroundDownloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
 
-    
-        
+
+
         #endregion
 
         #region Properties
-        
+
         public FileType FType { get; set; }
         public IEnumerable<FileType> FileTypes
         {
@@ -115,7 +115,7 @@ namespace DownLoader.ViewModels
                 return filterFilesByType;
             }
         }
-      
+
         public ICommand DownloadCommand
         {
             get
@@ -154,7 +154,7 @@ namespace DownLoader.ViewModels
         {
             navigationService = NavigationService;
             GoToSettings = new RelayCommand(NavigateCommandAction);
-   
+
             StopDownload = new RelayCommand(StopDownloadAction);
 
             Files = new ObservableCollection<DownloadFile>();
@@ -188,27 +188,27 @@ namespace DownLoader.ViewModels
         {
             navigationService.NavigateTo("Setting");
         }
-    
+
         private void ClosePopupAction(Popup popupName)
         {
             popupName.IsOpen = false;
         }
         private void FilterByType(ComboBox tvTypes)
         {
-          var search = Files.Where(i => i.Type.ToString() == tvTypes.SelectedValue.ToString());
-            foreach(DownloadFile file in search)
+            var search = Files.Where(i => i.Type.ToString() == tvTypes.SelectedValue.ToString());
+            foreach (DownloadFile file in search)
             {
                 SearchResult.Add(file);
             }
-           
+
         }
         private void StopDownloadAction()
         {
-            if(downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
+            if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
             {
                 downloadOperation.Pause();
             }
-            else if(downloadOperation.Progress.Status == BackgroundTransferStatus.PausedByApplication)
+            else if (downloadOperation.Progress.Status == BackgroundTransferStatus.PausedByApplication)
             {
                 downloadOperation.Resume();
             }
@@ -216,6 +216,20 @@ namespace DownLoader.ViewModels
 
         public async void Download(string link)
         {
+            if (link == null || link == "")
+            {
+                ContentDialog notFoundLinkFileDialog = new ContentDialog()
+                {
+                    Title = "Подтверждение действия",
+                    Content = "Вы не ввели ссылку, попробуем еще раз?",
+                    PrimaryButtonText = "ОК"
+                };
+                ContentDialogResult result = await notFoundLinkFileDialog.ShowAsync();
+
+                return;
+
+            }
+            
             FolderPicker folderPicker = new FolderPicker();
             folderPicker.SuggestedStartLocation = PickerLocationId.Downloads;
             folderPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -232,7 +246,7 @@ namespace DownLoader.ViewModels
                 Progress<DownloadOperation> progress = new Progress<DownloadOperation>(x => ProgressChanged(downloadOperation));
                 cancellationToken = new CancellationTokenSource();
                 try
-                { 
+                {
                     newFile.Id = downloadOperation.Guid;
                     newFile.Name = fileName;
                     newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
@@ -255,8 +269,8 @@ namespace DownLoader.ViewModels
                 catch (Exception)
                 {
                     status = "File not found";
-                    var messageDialog =new MessageDialog("No internet connection has been found.");
-                    
+                    var messageDialog = new MessageDialog("No internet connection has been found.");
+
                     await downloadOperation.ResultFile.DeleteAsync();
                     downloadOperation = null;
                 }
@@ -265,27 +279,28 @@ namespace DownLoader.ViewModels
 
         public string ProgressChanged(DownloadOperation downloadOperation)
         {
-           int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)downloadOperation.Progress.TotalBytesToReceive));
-           var NewTotalBytesToReceive = downloadOperation.GetResponseInformation().Headers["Content-Length"];
+            int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)downloadOperation.Progress.TotalBytesToReceive));
+            var NewTotalBytesToReceive = downloadOperation.GetResponseInformation().Headers["Content-Length"];
+            
 
             switch (downloadOperation.Progress.Status)
             {
                 case BackgroundTransferStatus.Running:
                     {
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
-                       
-                     
+
+
                         if (item != null)
                         {
-                            if (downloadOperation.Progress.TotalBytesToReceive == 0)
+                         
                             {
                                 item.FileSize = (Convert.ToInt32(NewTotalBytesToReceive) / 1024).ToString() + " kb";
                                 progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / Convert.ToInt32(NewTotalBytesToReceive)));
                                 item.State = progress;
                                 item.Status = string.Format("{0} of {1} kb. downloaded", downloadOperation.Progress.BytesReceived / 1024, Convert.ToInt32(NewTotalBytesToReceive) / 1024);
                             }
-                            SendUpdatableToastWithProgress(item.Name, progress, item.Status);
-                            
+                        //    SendUpdatableToastWithProgress(item.Name, progress, item.Status);
+
                         }
                         break;
                     }
@@ -296,8 +311,8 @@ namespace DownLoader.ViewModels
                         {
                             item.Status = string.Format("{0} of {1} kb. downloaded - {2}% complete.", downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024, progress);
                         }
-                       
-                        break; 
+
+                        break;
                     }
                 case BackgroundTransferStatus.PausedByApplication:
                     {
@@ -306,26 +321,26 @@ namespace DownLoader.ViewModels
                         {
                             item.Status = "Download paused.";
                         }
-                        break;  
+                        break;
                     }
                 case BackgroundTransferStatus.PausedCostedNetwork:
                     {
-                     status = "Download paused because of metered connection.";
-                        break; 
+                        status = "Download paused because of metered connection.";
+                        break;
                     }
                 case BackgroundTransferStatus.PausedNoNetwork:
                     {
-                     status = "No network detected. Please check your internet connection.";
-                     break;
+                        status = "No network detected. Please check your internet connection.";
+                        break;
                     }
                 case BackgroundTransferStatus.Error:
                     {
-                     status = "An error occured while downloading.";
+                        status = "An error occured while downloading.";
                         break;
                     }
                 case BackgroundTransferStatus.Canceled:
                     {
-                     status = "Download canceled.";
+                        status = "Download canceled.";
                         break;
                     }
             }
@@ -334,7 +349,7 @@ namespace DownLoader.ViewModels
             {
                 downloadOperation = null;
             }
-            return status="";
+            return status = "";
         }
         public async void SaveAs(string link)
         {
@@ -398,14 +413,14 @@ namespace DownLoader.ViewModels
                 customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
                 foreach (var c in customerList)
                 {
-                   Files.Add(c);
+                    Files.Add(c);
                 }
             }
         }
         #endregion
 
-       
-      public void SendUpdatableToastWithProgress(string FileName, double progress, string RecieveBytes)
+
+        public void SendUpdatableToastWithProgress(string FileName, double progress, string RecieveBytes)
         {
             // Define a tag (and optionally a group) to uniquely identify the notification, in order update the notification data later;
             string tag = "weekly-playlist";
