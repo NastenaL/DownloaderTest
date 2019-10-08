@@ -280,8 +280,12 @@ namespace DownLoader.ViewModels
         public string ProgressChanged(DownloadOperation downloadOperation)
         {
             int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)downloadOperation.Progress.TotalBytesToReceive));
-            var NewTotalBytesToReceive = downloadOperation.GetResponseInformation().Headers["Content-Length"];
-            
+            var NewTotalBytesToReceive = (double)downloadOperation.Progress.TotalBytesToReceive; 
+
+            if (downloadOperation.GetResponseInformation().Headers.ContainsKey("Content-Length"))
+            {
+                NewTotalBytesToReceive = Convert.ToDouble(downloadOperation.GetResponseInformation().Headers["Content-Length"]);
+            }
 
             switch (downloadOperation.Progress.Status)
             {
