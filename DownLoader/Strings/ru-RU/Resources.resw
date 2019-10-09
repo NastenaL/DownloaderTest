@@ -123,6 +123,9 @@
   <data name="bnBack.Content" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="bnCancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
   <data name="bnClosePopup.Content" xml:space="preserve">
     <value>Отмена</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="bnDownloadAs.Text" xml:space="preserve">
     <value>Скачать как</value>
+  </data>
+  <data name="bnOpenFolder.Content" xml:space="preserve">
+    <value>Открыть</value>
   </data>
   <data name="bnSetting.Content" xml:space="preserve">
     <value>Настройки</value>

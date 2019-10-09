@@ -91,17 +91,16 @@
                     Command="{Binding GoToSettings}"/>
             <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" Margin="5, 5" 
                      Command="{Binding StopDownload}"/>
-            <Button x:Uid="bnCancel" x:Name="bnCancel" Content="bnCancel" Grid.Column="2" Margin="5, 5" 
+            <Button x:Uid="bnCancel" Grid.Column="2" Margin="5, 5" 
                      Command="{Binding CancelDownload}"/>
         </StackPanel>
 
         <Popup x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" x:FieldModifier="public"
                DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
                HorizontalAlignment="Center" VerticalAlignment="Center"
-              
                IsLightDismissEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
 
-            <StackPanel BorderBrush="{ThemeResource SystemAccentColor}"  BorderThickness="2" Background="White" Width="400" Height="310" 
+            <StackPanel BorderBrush="{ThemeResource SystemAccentColor}"  BorderThickness="2" Background="White" Width="400" Height="360" 
                         Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <TextBlock x:Uid="tblockLink" FontWeight="Bold" Margin="10, 5"/>
@@ -110,6 +109,8 @@
 
                 <TextBlock x:Uid="tblockDescription" FontWeight="Bold" Margin="10, 5"/>
                 <TextBox Name="tbDescription" BorderBrush="{ThemeResource SystemAccentColor}" Margin="10, 5"
+                          AcceptsReturn="True"
+                         TextWrapping="Wrap"
                          BorderThickness="1" Width="370" HorizontalAlignment="Left"
                          Text="{Binding Description, Mode=TwoWay}"/>
 
@@ -206,7 +207,7 @@
                     </Button>
                     <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
                         Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
-                    <Button Content="Open" Command="{Binding OpenFile}"/>
+                    <Button x:Uid="bnOpenFolder" Margin="10, 5" Command="{Binding OpenFile}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
@@ -249,7 +250,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="TableDataTemplate">
                   
-                    <Grid Height="48">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="250"/>
                             <ColumnDefinition Width="100"/>

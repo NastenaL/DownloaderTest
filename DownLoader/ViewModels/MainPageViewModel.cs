@@ -449,10 +449,19 @@ namespace DownLoader.ViewModels
             ObservableCollection<DownloadFile> customerList = null;
             using (Stream stream = await file.OpenStreamForReadAsync())
             {
-                customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
-                foreach (var c in customerList)
+                try
                 {
-                    Files.Add(c);
+                    customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
+
+                    foreach (var c in customerList)
+                    {
+                        Files.Add(c);
+                    }
+
+                }
+                catch(Exception e)
+                {
+
                 }
             }
         }
