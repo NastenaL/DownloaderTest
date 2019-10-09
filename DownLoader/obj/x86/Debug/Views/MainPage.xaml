@@ -211,8 +211,10 @@
             </StackPanel>
         </Popup>
 
-        <ListView x:ConnectionId='7' x:Name="lvDownloads" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6"  DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  
-                   ItemsSource="{Binding Files, Mode=OneWay}" FontSize="11">
+        <ListView x:ConnectionId='7' x:Name="lvDownloads" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6"  
+                  DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  
+                   ItemsSource="{Binding Files, Mode=OneWay}" 
+                  FontSize="11" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="1">
             
             <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="DoubleTapped">
@@ -223,6 +225,8 @@
 
             <ListView.HeaderTemplate>
                 <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAccentColor}">
+                        
                     <Grid Padding="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="250"/>
@@ -232,17 +236,19 @@
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="270"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" x:Uid="gridHeadFileName" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="1" x:Uid="gridHeadSize" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="2" x:Uid="gridType" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="3" x:Uid="gridHeadState" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="4" x:Uid="gridHeaderDate" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="5" x:Uid="gridHeaderDescription" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="0" FontWeight="Bold" x:Uid="gridHeadFileName" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="1" FontWeight="Bold" x:Uid="gridHeadSize" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" FontWeight="Bold" x:Uid="gridType" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="3" FontWeight="Bold" x:Uid="gridHeadState" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="4" FontWeight="Bold" x:Uid="gridHeaderDate" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="5" FontWeight="Bold" x:Uid="gridHeaderDescription" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="TableDataTemplate">
+                  
                     <Grid Height="48">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="250"/>
@@ -252,28 +258,24 @@
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="270"/>
                         </Grid.ColumnDefinitions>
-                        <Ellipse Height="32" Width="32" VerticalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Placeholder.png"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Name}">
+                        
+                        <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Center" Text="{Binding Name}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="TextWrapping" Value="Wrap"/>
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding FileSize}"/>
+                        <TextBlock Grid.Column="1" Margin="7"  VerticalAlignment="Center" Text="{Binding FileSize}"/>
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{Binding Type}"/>
                    
-                            <StackPanel Grid.Column="3">
+                            <StackPanel Grid.Column="3" Margin="5">
                                 <ProgressBar x:Name="pbLoading" Value="{Binding State, Mode=OneWay}" 
                                              Minimum="0" Maximum="100" Height="20"/>
                                 <TextBlock Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
                         
-                        <TextBlock Grid.Column="4" VerticalAlignment="Center" Text="{Binding DateTime}">
+                        <TextBlock Grid.Column="4" Margin="5" VerticalAlignment="Center" Text="{Binding DateTime}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="TextWrapping" Value="Wrap"/>
@@ -289,6 +291,7 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Grid>
+         
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
