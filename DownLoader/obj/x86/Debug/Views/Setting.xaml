@@ -3,7 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:vm="using:DownLoader.ViewModels">
@@ -50,8 +52,14 @@
               Grid.Row="2" Grid.Column="2"
               OffContent="Light"
               OnContent="Dark"
-              IsOn="False"
-                                             />
+              IsOn="{Binding IsDark}"
+              DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}">
+            <i:Interaction.Behaviors>
+                <ic:EventTriggerBehavior EventName="Toggled">
+                    <ic:InvokeCommandAction Command="{Binding ChangeTheme}" CommandParameter="{Binding ElementName=tglAppTheme}"/>
+                </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </ToggleSwitch>
 
         <TextBlock x:ConnectionId='5' x:Name="tbLanguage" x:Uid="tbLanguage" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
                    Grid.Column="0" Grid.Row="3" />
@@ -62,7 +70,13 @@
           DisplayMemberPath="DisplayName"
           SelectedValuePath="LanguageCode" 
           SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" 
-                                                         />
+                                                         >
+           <!-- <i:Interaction.Behaviors>
+                <ic:EventTriggerBehavior EventName="SelectionChanged">
+                    <ic:InvokeCommandAction Command="{Binding ChangeL}" CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
+                </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors> -->
+        </ComboBox>
     </Grid>
 </Page>
 

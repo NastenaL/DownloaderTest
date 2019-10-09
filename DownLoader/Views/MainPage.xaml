@@ -8,6 +8,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x1="using:System"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -90,12 +91,15 @@
                     Command="{Binding GoToSettings}"/>
             <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" Margin="5, 5" 
                      Command="{Binding StopDownload}"/>
+            <Button x:Uid="bnCancel" x:Name="bnCancel" Content="bnCancel" Grid.Column="2" Margin="5, 5" 
+                     Command="{Binding CancelDownload}"/>
         </StackPanel>
 
         <Popup x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" x:FieldModifier="public"
                DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
                HorizontalAlignment="Center" VerticalAlignment="Center"
-               IsLightDismissEnabled="False" Grid.Row="2" Grid.ColumnSpan="9">
+              
+               IsLightDismissEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
 
             <StackPanel BorderBrush="{ThemeResource SystemAccentColor}"  BorderThickness="2" Background="White" Width="400" Height="310" 
                         Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -163,55 +167,8 @@
             </i:Interaction.Behaviors>
         </ComboBox>
 
-        <controls:DataGrid x:Name="MainGrid"  x:FieldModifier="public" 
-                           Grid.Column="3" Grid.ColumnSpan="6" Grid.Row="3" Margin="15,1,-3.6,32.2"
-                           AutoGenerateColumns="False" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                           DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" 
-                           ItemsSource="{Binding Files, Mode=OneWay}" SelectionMode="Single" >
-
-            <i:Interaction.Behaviors>
-                <ic:EventTriggerBehavior EventName="SelectionChanged">
-                    <ic:InvokeCommandAction Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
-                </ic:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-
-            <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn x:Uid="gridHeadFileName" Width="250" FontSize="12" Binding="{Binding Name}">
-                    <controls:DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                        </Style>
-                    </controls:DataGridTextColumn.ElementStyle>
-                </controls:DataGridTextColumn>
-                <controls:DataGridTextColumn x:Uid="gridHeadSize" Width="100" FontSize="12" Binding="{Binding FileSize, Mode=TwoWay}"/>
-                <controls:DataGridTextColumn x:Uid="gridType" Width="100" FontSize="12" Binding="{Binding Type}"/>
-                <controls:DataGridTemplateColumn x:Uid="gridHeadState" Width="220">
-                    <controls:DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <ProgressBar x:Name="pbLoading" Value="{Binding State, Mode=OneWay}" 
-                                             Minimum="0" Maximum="100" Height="20"/>
-                                <TextBlock Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </controls:DataGridTemplateColumn.CellTemplate>
-                </controls:DataGridTemplateColumn>
-                <controls:DataGridTextColumn x:Uid="gridHeaderDate" Width="90" FontSize="12" Binding="{Binding DateTime}">
-                    <controls:DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                        </Style>
-                    </controls:DataGridTextColumn.ElementStyle>
-                </controls:DataGridTextColumn>
-                <controls:DataGridTextColumn x:Uid="gridHeaderDescription" Width="270" FontSize="12" Binding="{Binding Description}">
-                    <controls:DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                        </Style>
-                    </controls:DataGridTextColumn.ElementStyle>
-                </controls:DataGridTextColumn>
-            </controls:DataGrid.Columns>
-        </controls:DataGrid>
+  
+      
 
         <Popup x:Name="FileDelails" IsOpen="{Binding IsOpen}" HorizontalAlignment="Center" VerticalAlignment="Center"
                DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
@@ -221,39 +178,120 @@
                         Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <TextBlock x:Uid="tblFileName" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock Name="tbFileName" Text="{Binding ElementName=MainGrid, Path=SelectedItem.Name}" Margin="10, 5"/>
+                <TextBlock Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}" Margin="10, 5"/>
 
                 <TextBlock x:Uid="tbSize" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock Name="tbFileSize" Text="{Binding ElementName=MainGrid, Path=SelectedItem.FileSize}" Margin="10, 5"/>
+                <TextBlock Name="tbFileSize" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" Margin="10, 5"/>
 
                 <TextBlock x:Uid="tbType" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock Name="tbFileType" Text="{Binding ElementName=MainGrid, Path=SelectedItem.Type}" Margin="10, 5"/>
+                <TextBlock Name="tbFileType" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Type}" Margin="10, 5"/>
 
                 <TextBlock x:Uid="tbDate" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock Name="tbDataTime" Text="{Binding ElementName=MainGrid, Path=SelectedItem.DateTime}" Margin="10, 5"/>
+                <TextBlock Name="tbDataTime" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.DateTime}" Margin="10, 5"/>
 
                 <TextBlock x:Uid="tbDescription" FontWeight="Bold" Margin="10, 5"/>
                 <TextBox Name="tbpDescription" BorderBrush="{ThemeResource SystemAccentColor}" Margin="10, 5"
                          BorderThickness="1" Width="370" HorizontalAlignment="Left"
-                         Text="{Binding ElementName=MainGrid, Path=SelectedItem.Description, Mode=TwoWay}"/>
+                         Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"/>
 
                 <StackPanel Orientation="Horizontal">
                     <Button x:Uid="bnUpdate" Margin="10,5" >
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
+                                <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
+                                <ic:InvokeCommandAction Command="{Binding RefreshDataGrid}" CommandParameter="{Binding ElementName=lvDownloads}"/>
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
-                                <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" CommandParameter="{Binding ElementName=MainGrid, Path=SelectedItem}"/>
-                                <ic:InvokeCommandAction Command="{Binding RefreshDataGrid}" CommandParameter="{Binding ElementName=MainGrid}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
                     <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
                         Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
+                    <Button Content="Open" Command="{Binding OpenFile}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
 
-   
+        <ListView x:Name="lvDownloads" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6"  DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  
+                   ItemsSource="{Binding Files, Mode=OneWay}" FontSize="11">
+            
+            <i:Interaction.Behaviors>
+                <ic:EventTriggerBehavior EventName="DoubleTapped">
+                    <ic:InvokeCommandAction Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
+                </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+
+
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="270"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" x:Uid="gridHeadFileName" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="1" x:Uid="gridHeadSize" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" x:Uid="gridType" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="3" x:Uid="gridHeadState" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="4" x:Uid="gridHeaderDate" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="5" x:Uid="gridHeaderDescription" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="TableDataTemplate">
+                    <Grid Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="270"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Height="32" Width="32" VerticalAlignment="Center">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Placeholder.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Name}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding FileSize}"/>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{Binding Type}"/>
+                   
+                            <StackPanel Grid.Column="3">
+                                <ProgressBar x:Name="pbLoading" Value="{Binding State, Mode=OneWay}" 
+                                             Minimum="0" Maximum="100" Height="20"/>
+                                <TextBlock Text="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        
+                        <TextBlock Grid.Column="4" VerticalAlignment="Center" Text="{Binding DateTime}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        
+                        <TextBlock Grid.Column="5" VerticalAlignment="Center" Text="{Binding Description}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>

@@ -150,22 +150,22 @@
   <data name="downLoadFileAs.Content" xml:space="preserve">
     <value>Download as</value>
   </data>
-  <data name="gridHeaderDate.Header" xml:space="preserve">
+  <data name="gridHeaderDate.Text" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="gridHeaderDescription.Header" xml:space="preserve">
+  <data name="gridHeaderDescription.Text" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="gridHeadFileName.Header" xml:space="preserve">
+  <data name="gridHeadFileName.Text" xml:space="preserve">
     <value>File name</value>
   </data>
-  <data name="gridHeadSize.Header" xml:space="preserve">
+  <data name="gridHeadSize.Text" xml:space="preserve">
     <value>Size</value>
   </data>
-  <data name="gridHeadState.Header" xml:space="preserve">
+  <data name="gridHeadState.Text" xml:space="preserve">
     <value>State</value>
   </data>
-  <data name="gridType.Header" xml:space="preserve">
+  <data name="gridType.Text" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="menuAddLink.Text" xml:space="preserve">

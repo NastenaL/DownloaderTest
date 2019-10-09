@@ -46,6 +46,9 @@
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp.notifications\5.1.1\lib\uap10.0\Microsoft.Toolkit.Uwp.Notifications.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp.ui\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
     </AppxPackagedFile>
@@ -75,6 +78,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\newtonsoft.json\10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\notificationsextensions.win10\14332.0.2\lib\uap10.0\NotificationsExtensions.Win10.dll">
+      <PackagePath>NotificationsExtensions.Win10.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\robmikh.compositionsurfacefactory\0.7.3\runtimes\win10-x86\native\Robmikh.CompositionSurfaceFactory.dll">
       <PackagePath>Robmikh.CompositionSurfaceFactory.dll</PackagePath>

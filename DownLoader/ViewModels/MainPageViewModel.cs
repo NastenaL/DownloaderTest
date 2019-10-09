@@ -22,12 +22,14 @@ using Windows.UI.Xaml.Controls;
 
 using Windows.UI.Notifications;
 using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.UI.Xaml;
 
 namespace DownLoader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         #region Fields
+        
         private CancellationTokenSource cancellationToken;
         public DownloadFile newFile = new DownloadFile();
         private DownloadOperation downloadOperation;
@@ -58,6 +60,7 @@ namespace DownLoader.ViewModels
         }
 
         public RelayCommand GoToSettings { get; private set; }
+        public RelayCommand OpenFile { get; private set; }
         public string Description { get; set; }
         public string Status
         {
@@ -82,7 +85,7 @@ namespace DownLoader.ViewModels
             get
             {
                 if (refreshDataGrid == null)
-                    refreshDataGrid = new RelayCommand<DataGrid>(i => RefreshGrid(i));
+                    refreshDataGrid = new RelayCommand<ListView>(i => RefreshGrid(i));
                 return refreshDataGrid;
             }
         }
@@ -154,8 +157,9 @@ namespace DownLoader.ViewModels
         {
             navigationService = NavigationService;
             GoToSettings = new RelayCommand(NavigateCommandAction);
-
+            OpenFile = new RelayCommand(OpenFileActionAsync);
             StopDownload = new RelayCommand(StopDownloadAction);
+            CancelDownload = new RelayCommand(CancelDownloadAction);
 
             Files = new ObservableCollection<DownloadFile>();
             Load();
@@ -163,12 +167,43 @@ namespace DownLoader.ViewModels
 
         #region Methods
 
+        private void CancelDownloadAction()
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
 
+            // Re-create the CancellationTokenSource and activeDownloads for future downloads.
+            cancellationToken = new CancellationTokenSource();
+            var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
+            Files.Remove(item);
+            Save();
+        }
+
+        private async void OpenFileActionAsync()
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Downloads;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                // Application now has read/write access to the picked file
+            //    this.textBlock.Text = "Picked photo: " + file.Name;
+            }
+            else
+            {
+            //    this.textBlock.Text = "Operation cancelled.";
+            }
+        }
         private void OpenPopupAction(Popup popupName)
         {
             popupName.IsOpen = true;
         }
-        private void RefreshGrid(DataGrid dataGrid)
+        private void RefreshGrid(ListView dataGrid)
         {
             dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Files;

@@ -150,22 +150,22 @@
   <data name="downLoadFileAs.Content" xml:space="preserve">
     <value>Скачать как</value>
   </data>
-  <data name="gridHeaderDate.Header" xml:space="preserve">
+  <data name="gridHeaderDate.Text" xml:space="preserve">
     <value>Дата</value>
   </data>
-  <data name="gridHeaderDescription.Header" xml:space="preserve">
+  <data name="gridHeaderDescription.Text" xml:space="preserve">
     <value>Описание</value>
   </data>
-  <data name="gridHeadFileName.Header" xml:space="preserve">
+  <data name="gridHeadFileName.Text" xml:space="preserve">
     <value>Имя файла</value>
   </data>
-  <data name="gridHeadSize.Header" xml:space="preserve">
+  <data name="gridHeadSize.Text" xml:space="preserve">
     <value>Размер</value>
   </data>
-  <data name="gridHeadState.Header" xml:space="preserve">
+  <data name="gridHeadState.Text" xml:space="preserve">
     <value>Состояние</value>
   </data>
-  <data name="gridType.Header" xml:space="preserve">
+  <data name="gridType.Text" xml:space="preserve">
     <value>Тип файла</value>
   </data>
   <data name="menuAddLink.Text" xml:space="preserve">

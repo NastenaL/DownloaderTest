@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-10-01T07:43:11.087</Modified>
+      <Modified>2019-10-09T08:18:26.817</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.exe">
       <PackagePath>entrypoint\DownLoader.exe</PackagePath>
-      <Modified>2019-10-01T07:43:08.414</Modified>
+      <Modified>2019-10-09T08:18:22.826</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -61,6 +61,10 @@
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
       <Modified>2019-03-15T19:15:34.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp.notifications\5.1.1\lib\uap10.0\Microsoft.Toolkit.Uwp.Notifications.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
+      <Modified>2019-03-15T19:15:44.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\microsoft.toolkit.uwp.ui\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
@@ -101,6 +105,10 @@
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\newtonsoft.json\10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
       <Modified>2017-06-18T10:57:10.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\notificationsextensions.win10\14332.0.2\lib\uap10.0\NotificationsExtensions.Win10.dll">
+      <PackagePath>NotificationsExtensions.Win10.dll</PackagePath>
+      <Modified>2016-07-05T11:08:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\robmikh.compositionsurfacefactory\0.7.3\runtimes\win10-x86\native\Robmikh.CompositionSurfaceFactory.dll">
       <PackagePath>Robmikh.CompositionSurfaceFactory.dll</PackagePath>
@@ -166,23 +174,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.xr.xml">
       <PackagePath>DownLoader.xr.xml</PackagePath>
-      <Modified>2019-10-01T07:43:07.994</Modified>
+      <Modified>2019-10-09T08:15:45.999</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Microsoft.UI.Xaml\DensityStyles\Compact.xbf">
       <PackagePath>Microsoft.UI.Xaml\DensityStyles\Compact.xbf</PackagePath>
-      <Modified>2019-10-01T07:43:08.025</Modified>
+      <Modified>2019-10-09T08:18:22.393</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-10-01T07:43:08.026</Modified>
+      <Modified>2019-10-09T08:18:22.394</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-10-01T07:43:08.021</Modified>
+      <Modified>2019-10-09T08:18:22.388</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\Setting.xbf">
       <PackagePath>Views\Setting.xbf</PackagePath>
-      <Modified>2019-10-01T07:43:08.027</Modified>
+      <Modified>2019-10-09T08:18:22.394</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.18362.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -206,11 +214,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-10-01T07:40:30.808</Modified>
+      <Modified>2019-10-09T08:18:23.340</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\DownLoader.exe">
       <PackagePath>DownLoader.exe</PackagePath>
-      <Modified>2019-10-01T07:43:11.078</Modified>
+      <Modified>2019-10-09T08:18:26.809</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
