@@ -137,13 +137,11 @@
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
-
                     <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
                             Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
-
 
         <Popup x:ConnectionId='4' x:Name="FileDelails" IsOpen="{Binding IsOpen}" HorizontalAlignment="Center" VerticalAlignment="Center"
                DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
@@ -193,7 +191,7 @@
 
         <ListView x:ConnectionId='5' x:Name="lvDownloads" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
                   DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  
-                   ItemsSource="{Binding Files, Mode=OneWay}" Margin="10"
+                   ItemsSource="{Binding Files, Mode=OneWay}" Margin="10" Height="470" 
                   FontSize="11" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="1">
 
             <i:Interaction.Behaviors>
@@ -201,7 +199,6 @@
                     <ic:InvokeCommandAction Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
                 </ic:EventTriggerBehavior>
             </i:Interaction.Behaviors>
-
 
             <ListView.HeaderTemplate>
                 <DataTemplate>
@@ -271,11 +268,9 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Grid>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 </Page>
 

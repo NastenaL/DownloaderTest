@@ -122,8 +122,8 @@
     <Compile Include="Models\DataStorage.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\PopUpControl.cs" />
-    <Compile Include="Models\ToastProgressNotification.cs" />
+    <Compile Include="Models\Controls\PopUpControl.cs" />
+    <Compile Include="Models\Controls\ToastProgressNotification.cs" />
     <Compile Include="Servises\AppSettings.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

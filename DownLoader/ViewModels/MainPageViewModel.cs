@@ -38,7 +38,7 @@ namespace DownLoader.ViewModels
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControl popUpControl = new PopUpControl();
         readonly ToastProgressNotification toastNotification = new ToastProgressNotification();
-        
+
 
         #endregion
 

@@ -58,8 +58,8 @@ namespace DownLoader.Models
         public string Description { get; set; }
         #endregion
 
-    #region INotifyPropertyChanged Members
-    public event PropertyChangedEventHandler PropertyChanged;
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
 
     private void OnPropertyChanged(string propertyChanged)
     {

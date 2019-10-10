@@ -14,37 +14,7 @@ namespace DownLoader.Models
 
         #region Methods
 
-        internal void SendCompletedToast(string FileName)
-        {
-            ToastContent toastContent = new ToastContent()
-            {
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                            {
-                                new AdaptiveText()
-                                {
-                                    Text = "Download completed!"
-                                },
 
-                                new AdaptiveText()
-                                {
-                                    Text = FileName
-                                }
-                            }
-                    }
-                }
-            };
-
-            ToastNotification notification = new ToastNotification(toastContent.GetXml())
-            {
-                Tag = toastNotification.Tag
-            };
-
-            toastNotifier.Show(notification);
-        }
         internal void SendUpdatableToastWithProgress(string FileName)
         {
             string tag = "downloads";
@@ -105,7 +75,39 @@ namespace DownLoader.Models
             toastNotification.Data = data;
             toastNotifier.Update(toastNotification.Data, tag, group);
         }
-        
+
+        internal void SendCompletedToast(string FileName)
+        {
+            ToastContent toastContent = new ToastContent()
+            {
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = "Download completed!"
+                                },
+
+                                new AdaptiveText()
+                                {
+                                    Text = FileName
+                                }
+                            }
+                    }
+                }
+            };
+
+            ToastNotification notification = new ToastNotification(toastContent.GetXml())
+            {
+                Tag = toastNotification.Tag
+            };
+
+            toastNotifier.Hide(toastNotification);
+            toastNotifier.Show(notification);
+        }
         #endregion
     }
 }

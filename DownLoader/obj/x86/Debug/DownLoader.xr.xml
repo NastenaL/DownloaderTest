@@ -102,6 +102,7 @@
       <RootProperty Name="DataContext" />
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
