@@ -25,7 +25,7 @@ namespace DownLoader.ViewModels
         #region Fields
         
         private CancellationTokenSource cancellationToken;
-        private readonly DownloadFile newFile = new DownloadFile();
+
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
         private ICommand downloadCommand;
@@ -187,6 +187,7 @@ namespace DownLoader.ViewModels
 
         public async void Download(string link)
         {
+            Progress<DownloadOperation> progress = null;
             if (link == null || link == "")
             {
                 ContentDialog notFoundLinkFileDialog = new ContentDialog()
@@ -214,11 +215,11 @@ namespace DownLoader.ViewModels
                 var request = HttpWebRequest.Create(downloadUrl) as HttpWebRequest;
                 StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
                 downloadOperation = backgroundDownloader.CreateDownload(downloadUrl, file);
-                Progress<DownloadOperation> progress = new Progress<DownloadOperation>(x => ProgressChanged(downloadOperation));
+                progress = new Progress<DownloadOperation>(x => ProgressChanged(downloadOperation));
                 cancellationToken = new CancellationTokenSource();
                 try
                 {
-                    
+                    DownloadFile newFile = new DownloadFile();
                     newFile.Id = downloadOperation.Guid;
                     newFile.Name = fileName;
                     toastNotification.SendUpdatableToastWithProgress(newFile.Name);
@@ -229,10 +230,15 @@ namespace DownLoader.ViewModels
                     newFile.Description = Description;
                     newFile.Status = Status;
                     Files.Add(newFile);
+                   
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
 
                     toastNotification.SendCompletedToast(fileName);
                     dataStorage.Save(Files);
+
+                   cancellationToken.Dispose();
+                   downloadUrl = null;
+                
                 }
                 catch (TaskCanceledException)
                 {
@@ -343,7 +349,8 @@ namespace DownLoader.ViewModels
 
             try
             {
-                await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
+               DownloadFile newFile = new DownloadFile();
+        await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
                 newFile.Id = downloadOperation.Guid;
                 newFile.Name = file.Name;
                 newFile.DateTime = DateTime.Now;
