@@ -13,16 +13,14 @@
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="IsOpen" />
     <RootPropertyPathName Name="Height" />
-    <RootPropertyPathName Name="OpenFile" />
     <RootPropertyPathName Name="ClosePopUp" />
-    <RootPropertyPathName Name="RefreshDataGrid" />
+    <RootPropertyPathName Name="RefreshDataListView" />
     <RootPropertyPathName Name="UpdateFileDescription" />
     <RootPropertyPathName Name="SelectedItem" />
-    <RootPropertyPathName Name="FileTypes" />
-    <RootPropertyPathName Name="FilterFilesByType" />
     <RootPropertyPathName Name="DownloadCommandAs" />
     <RootPropertyPathName Name="Text" />
     <RootPropertyPathName Name="DownloadCommand" />
+    <RootPropertyPathName Name="FileTypes" />
     <RootPropertyPathName Name="FType" />
     <RootPropertyPathName Name="CancelDownload" />
     <RootPropertyPathName Name="StopDownload" />
@@ -85,12 +83,12 @@
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Background" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
       <RootProperty Name="IsOpen" />
@@ -100,40 +98,19 @@
       <RootProperty Name="IsLightDismissEnabled" />
       <RootProperty Name="Child" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TreeView">
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="SelectionMode" />
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="ItemsSource" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
-      <RootMethod Name="GetBehaviors" />
-      <RootMethod Name="SetBehaviors" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="SelectedIndex" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="SelectedValue" />
-      <RootProperty Name="DisplayMemberPath" />
-      <RootProperty Name="SelectedValuePath" />
-      <RootProperty Name="SelectedItem" />
-      <RootEvent Name="SelectionChanged" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="DataContext" />
       <RootProperty Name="ItemsSource" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="HeaderTemplate" />
       <RootProperty Name="ItemTemplate" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Source" />
@@ -200,6 +177,22 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Name" />
       <RootProperty Name="DataContext" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="Name" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="SelectedIndex" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedValue" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="DisplayMemberPath" />
+      <RootProperty Name="SelectedValuePath" />
+      <RootProperty Name="SelectedItem" />
+      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuBarItem">
       <RootProperty Name="AccessKey" />

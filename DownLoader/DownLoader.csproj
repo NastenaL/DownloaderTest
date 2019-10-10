@@ -124,6 +124,7 @@
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Node.cs" />
+    <Compile Include="Models\ToastProgressNotification.cs" />
     <Compile Include="Servises\AppSettings.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

@@ -22,7 +22,7 @@ namespace DownLoader.ViewModels
         private ObservableCollection<Models.Language> languages;
 
         #endregion
-        CultureInfo ci;
+   //     CultureInfo ci;
         
         #region Properties
         private ICommand changeL;
@@ -88,9 +88,7 @@ namespace DownLoader.ViewModels
         }
         private void RaisePropertyChanged([CallerMemberName] string caller = null)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(caller));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
         }
 
         #endregion

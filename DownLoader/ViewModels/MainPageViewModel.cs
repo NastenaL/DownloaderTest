@@ -17,12 +17,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Primitives;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.UI.Xaml.Controls;
-
-using Windows.UI.Notifications;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.UI.Xaml;
 
 namespace DownLoader.ViewModels
 {
@@ -36,16 +31,14 @@ namespace DownLoader.ViewModels
         private ICommand closePopUp;
         private ICommand downloadCommand;
         private ICommand downloadCommandAs;
-        private ICommand filterFilesByType;
         private ICommand openPopUp;
-        private ICommand refreshDataGrid;
+        private ICommand refreshDataList;
         private ICommand updateFileDescription;
-        private string status = "initialization...";
         private readonly INavigationService navigationService;
-        private Windows.Networking.BackgroundTransfer.BackgroundDownloader backgroundDownloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
+        private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
+      
 
-
-
+        ToastProgressNotification tpn = new ToastProgressNotification();
         #endregion
 
         #region Properties
@@ -60,16 +53,8 @@ namespace DownLoader.ViewModels
         }
 
         public RelayCommand GoToSettings { get; private set; }
-        public RelayCommand OpenFile { get; private set; }
         public string Description { get; set; }
-        public string Status
-        {
-            get { return status; }
-            set
-            {
-                status = value;
-            }
-        }
+        public string Status { get; set; } = "initialization...";
         public ICommand UpdateFileDescription
         {
             get
@@ -80,13 +65,13 @@ namespace DownLoader.ViewModels
             }
         }
 
-        public ICommand RefreshDataGrid
+        public ICommand RefreshDataListView
         {
             get
             {
-                if (refreshDataGrid == null)
-                    refreshDataGrid = new RelayCommand<ListView>(i => RefreshGrid(i));
-                return refreshDataGrid;
+                if (refreshDataList == null)
+                    refreshDataList = new RelayCommand<ListView>(i => RefreshListView(i));
+                return refreshDataList;
             }
         }
         public ICommand OpenPopUp
@@ -106,16 +91,6 @@ namespace DownLoader.ViewModels
                 if (closePopUp == null)
                     closePopUp = new RelayCommand<Popup>(i => ClosePopupAction(i));
                 return closePopUp;
-            }
-        }
-
-        public ICommand FilterFilesByType
-        {
-            get
-            {
-                if (filterFilesByType == null)
-                    filterFilesByType = new RelayCommand<ComboBox>(i => FilterByType(i));
-                return filterFilesByType;
             }
         }
 
@@ -157,7 +132,6 @@ namespace DownLoader.ViewModels
         {
             navigationService = NavigationService;
             GoToSettings = new RelayCommand(NavigateCommandAction);
-            OpenFile = new RelayCommand(OpenFileActionAsync);
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
 
@@ -172,43 +146,28 @@ namespace DownLoader.ViewModels
             cancellationToken.Cancel();
             cancellationToken.Dispose();
 
-            // Re-create the CancellationTokenSource and activeDownloads for future downloads.
             cancellationToken = new CancellationTokenSource();
             var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
             Files.Remove(item);
             Save();
         }
-
-        private async void OpenFileActionAsync()
+        private void ClosePopupAction(Popup popupName)
         {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Downloads;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            if (file != null)
-            {
-                // Application now has read/write access to the picked file
-            //    this.textBlock.Text = "Picked photo: " + file.Name;
-            }
-            else
-            {
-            //    this.textBlock.Text = "Operation cancelled.";
-            }
+            popupName.IsOpen = false;
+        }
+        private void NavigateCommandAction()
+        {
+            navigationService.NavigateTo("Setting");
         }
         private void OpenPopupAction(Popup popupName)
         {
             popupName.IsOpen = true;
         }
-        private void RefreshGrid(ListView dataGrid)
+        private void RefreshListView(ListView dataGrid)
         {
             dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Files;
         }
-
         private void UpdateDescription(DownloadFile file)
         {
             var item = Files.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
@@ -219,24 +178,8 @@ namespace DownLoader.ViewModels
             Save();
         }
 
-        private void NavigateCommandAction()
-        {
-            navigationService.NavigateTo("Setting");
-        }
-
-        private void ClosePopupAction(Popup popupName)
-        {
-            popupName.IsOpen = false;
-        }
-        private void FilterByType(ComboBox tvTypes)
-        {
-            var search = Files.Where(i => i.Type.ToString() == tvTypes.SelectedValue.ToString());
-            foreach (DownloadFile file in search)
-            {
-                SearchResult.Add(file);
-            }
-
-        }
+       
+       
         private void StopDownloadAction()
         {
             if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
@@ -264,10 +207,12 @@ namespace DownLoader.ViewModels
                 return;
 
             }
-            
-            FolderPicker folderPicker = new FolderPicker();
-            folderPicker.SuggestedStartLocation = PickerLocationId.Downloads;
-            folderPicker.ViewMode = PickerViewMode.Thumbnail;
+
+            FolderPicker folderPicker = new FolderPicker
+            {
+                SuggestedStartLocation = PickerLocationId.Downloads,
+                ViewMode = PickerViewMode.Thumbnail
+            };
             folderPicker.FileTypeFilter.Add("*");
 
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
@@ -282,8 +227,11 @@ namespace DownLoader.ViewModels
                 cancellationToken = new CancellationTokenSource();
                 try
                 {
+                    
                     newFile.Id = downloadOperation.Guid;
                     newFile.Name = fileName;
+                    tpn.SendUpdatableToastWithProgress(newFile.Name);
+                   // SendUpdatableToastWithProgress(newFile.Name);
                     newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
                     newFile.DateTime = DateTime.Now;
                     newFile.Type = FType;
@@ -293,17 +241,16 @@ namespace DownLoader.ViewModels
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
 
                     Save();
-
                 }
                 catch (TaskCanceledException)
                 {
-                    status = "Download canceled.";
+                    Status = "Download canceled.";
                     await downloadOperation.ResultFile.DeleteAsync();
                     downloadOperation = null;
                 }
                 catch (Exception)
                 {
-                    status = "File not found";
+                    Status = "File not found";
                     var messageDialog = new MessageDialog("No internet connection has been found.");
 
                     await downloadOperation.ResultFile.DeleteAsync();
@@ -321,26 +268,20 @@ namespace DownLoader.ViewModels
             {
                 NewTotalBytesToReceive = Convert.ToDouble(downloadOperation.GetResponseInformation().Headers["Content-Length"]);
             }
-
             switch (downloadOperation.Progress.Status)
             {
                 case BackgroundTransferStatus.Running:
                     {
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
-
-
                         if (item != null)
                         {
-                         
-                            {
                                 item.FileSize = (Convert.ToInt32(NewTotalBytesToReceive) / 1024).ToString() + " kb";
                                 progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / Convert.ToInt32(NewTotalBytesToReceive)));
                                 item.State = progress;
                                 item.Status = string.Format("{0} of {1} kb. downloaded", downloadOperation.Progress.BytesReceived / 1024, Convert.ToInt32(NewTotalBytesToReceive) / 1024);
-                            }
-                        //    SendUpdatableToastWithProgress(item.Name, progress, item.Status);
-
+                                tpn.UpdateProgress(NewTotalBytesToReceive, (double)downloadOperation.Progress.BytesReceived, item.Status);
                         }
+                        tpn.SendCompletedToast(item.Name);
                         break;
                     }
                 case BackgroundTransferStatus.Completed:
@@ -350,7 +291,7 @@ namespace DownLoader.ViewModels
                         {
                             item.Status = string.Format("{0} of {1} kb. downloaded - {2}% complete.", downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024, progress);
                         }
-
+                        
                         break;
                     }
                 case BackgroundTransferStatus.PausedByApplication:
@@ -364,22 +305,22 @@ namespace DownLoader.ViewModels
                     }
                 case BackgroundTransferStatus.PausedCostedNetwork:
                     {
-                        status = "Download paused because of metered connection.";
+                        Status = "Download paused because of metered connection.";
                         break;
                     }
                 case BackgroundTransferStatus.PausedNoNetwork:
                     {
-                        status = "No network detected. Please check your internet connection.";
+                        Status = "No network detected. Please check your internet connection.";
                         break;
                     }
                 case BackgroundTransferStatus.Error:
                     {
-                        status = "An error occured while downloading.";
+                        Status = "An error occured while downloading.";
                         break;
                     }
                 case BackgroundTransferStatus.Canceled:
                     {
-                        status = "Download canceled.";
+                        Status = "Download canceled.";
                         break;
                     }
             }
@@ -388,15 +329,17 @@ namespace DownLoader.ViewModels
             {
                 downloadOperation = null;
             }
-            return status = "";
+            return Status = "";
         }
         public async void SaveAs(string link)
         {
             Uri downloadUrl = new Uri(link);
             String fileName = Path.GetFileName(downloadUrl.ToString());
 
-            FileSavePicker savePicker = new FileSavePicker();
-            savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            FileSavePicker savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
             savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { Path.GetExtension(fileName) });
             savePicker.SuggestedFileName = "NewFile";
 
@@ -424,7 +367,7 @@ namespace DownLoader.ViewModels
             }
             catch (TaskCanceledException)
             {
-                status = "Download canceled.";
+                Status = "Download canceled.";
                 await downloadOperation.ResultFile.DeleteAsync();
                 downloadOperation = null;
             }
@@ -446,12 +389,11 @@ namespace DownLoader.ViewModels
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile file = await localFolder.GetFileAsync("downloads.xml");
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
-            ObservableCollection<DownloadFile> customerList = null;
             using (Stream stream = await file.OpenStreamForReadAsync())
             {
                 try
                 {
-                    customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
+                    ObservableCollection<DownloadFile> customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
 
                     foreach (var c in customerList)
                     {
@@ -459,88 +401,13 @@ namespace DownLoader.ViewModels
                     }
 
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
 
                 }
             }
         }
         #endregion
-
-
-        public void SendUpdatableToastWithProgress(string FileName, double progress, string RecieveBytes)
-        {
-            // Define a tag (and optionally a group) to uniquely identify the notification, in order update the notification data later;
-            string tag = "weekly-playlist";
-            string group = "downloads";
-
-            // Construct the toast content with data bound fields
-            var content = new ToastContent()
-            {
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                {
-                    new AdaptiveText()
-                    {
-                        Text = "Downloading ..."
-                    },
-
-                    new AdaptiveProgressBar()
-                    {
-                        Title = FileName,
-                        Value = new BindableProgressBarValue("progress"),
-                        ValueStringOverride = new BindableString("RecieveBytes"),
-                        Status = new BindableString("RecieveBytes")
-                    }
-                }
-                    }
-                }
-            };
-
-            // Generate the toast notification
-            var toast = new ToastNotification(content.GetXml());
-
-            // Assign the tag and group
-            toast.Tag = tag;
-            toast.Group = group;
-
-            // Assign initial NotificationData values
-            // Values must be of type string
-            toast.Data = new NotificationData();
-            toast.Data.Values["progressValue"] = "0.6";
-            toast.Data.Values["progressValueString"] = "15/26 songs";
-            toast.Data.Values["progressStatus"] = "Downloading...";
-
-            // Provide sequence number to prevent out-of-order updates, or assign 0 to indicate "always update"
-            toast.Data.SequenceNumber = 1;
-
-            // Show the toast notification to the user
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        }
-        public void UpdateProgress()
-        {
-            // Construct a NotificationData object;
-            string tag = "weekly-playlist";
-            string group = "downloads";
-
-            // Create NotificationData and make sure the sequence number is incremented
-            // since last update, or assign 0 for updating regardless of order
-            var data = new NotificationData
-            {
-                SequenceNumber = 2
-            };
-
-            // Assign new values
-            // Note that you only need to assign values that changed. In this example
-            // we don't assign progressStatus since we don't need to change it
-            data.Values["progressValue"] = "0.7";
-            data.Values["progressValueString"] = "18/26 songs";
-
-            // Update the existing notification's data by using tag/group
-            ToastNotificationManager.CreateToastNotifier().Update(data, tag, group);
-        }
     }
+
 }
