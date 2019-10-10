@@ -36,7 +36,9 @@ namespace DownLoader.ViewModels
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
         readonly DataStorage dataStorage = new DataStorage();
+        readonly PopUpControl popUpControl = new PopUpControl();
         readonly ToastProgressNotification toastNotification = new ToastProgressNotification();
+        
 
         #endregion
 
@@ -78,7 +80,7 @@ namespace DownLoader.ViewModels
             get
             {
                 if (openPopUp == null)
-                    openPopUp = new RelayCommand<Popup>(i => OpenPopupAction(i));
+                    openPopUp = new RelayCommand<Popup>(i => popUpControl.OpenPopupAction(i));
                 return openPopUp;
             }
         }
@@ -88,7 +90,7 @@ namespace DownLoader.ViewModels
             get
             {
                 if (closePopUp == null)
-                    closePopUp = new RelayCommand<Popup>(i => ClosePopupAction(i));
+                    closePopUp = new RelayCommand<Popup>(i => popUpControl.ClosePopupAction(i));
                 return closePopUp;
             }
         }
@@ -150,18 +152,12 @@ namespace DownLoader.ViewModels
             Files.Remove(item);
             dataStorage.Save(Files);
         }
-        private void ClosePopupAction(Popup popupName)
-        {
-            popupName.IsOpen = false;
-        }
+
         private void NavigateCommandAction()
         {
             navigationService.NavigateTo("Setting");
         }
-        private void OpenPopupAction(Popup popupName)
-        {
-            popupName.IsOpen = true;
-        }
+       
         private void RefreshListView(ListView dataGrid)
         {
             dataGrid.ItemsSource = null;

@@ -13,6 +13,7 @@ namespace DownLoader.Models
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile file = await localFolder.CreateFileAsync("downloads.xml", CreationCollisionOption.ReplaceExisting);
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
+
             using (Stream stream = await file.OpenStreamForWriteAsync())
             {
                 serializer.Serialize(stream, downloadFiles);
@@ -24,6 +25,7 @@ namespace DownLoader.Models
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile file = await localFolder.GetFileAsync("downloads.xml");
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
+
             using (Stream stream = await file.OpenStreamForReadAsync())
             {
                 try
@@ -34,12 +36,8 @@ namespace DownLoader.Models
                     {
                         downloadFiles.Add(c);
                     }
-
                 }
-                catch (Exception)
-                {
-
-                }
+                catch (Exception) {}
             }
         }
     }
