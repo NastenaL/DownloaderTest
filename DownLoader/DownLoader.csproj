@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behavior\OpenWBehavior.cs" />
+    <Compile Include="Models\DataStorage.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\ToastProgressNotification.cs" />

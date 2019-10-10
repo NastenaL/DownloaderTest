@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using DownLoader.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Xml.Serialization;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Controls;
@@ -26,7 +25,7 @@ namespace DownLoader.ViewModels
         #region Fields
         
         private CancellationTokenSource cancellationToken;
-        public DownloadFile newFile = new DownloadFile();
+        private readonly DownloadFile newFile = new DownloadFile();
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
         private ICommand downloadCommand;
@@ -36,7 +35,9 @@ namespace DownLoader.ViewModels
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
-        readonly ToastProgressNotification tpn = new ToastProgressNotification();
+        readonly DataStorage dataStorage = new DataStorage();
+        readonly ToastProgressNotification toastNotification = new ToastProgressNotification();
+
         #endregion
 
         #region Properties
@@ -134,7 +135,7 @@ namespace DownLoader.ViewModels
             CancelDownload = new RelayCommand(CancelDownloadAction);
 
             Files = new ObservableCollection<DownloadFile>();
-            Load();
+            dataStorage.Load(Files);
         }
 
         #region Methods
@@ -147,7 +148,7 @@ namespace DownLoader.ViewModels
             cancellationToken = new CancellationTokenSource();
             var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
             Files.Remove(item);
-            Save();
+            dataStorage.Save(Files);
         }
         private void ClosePopupAction(Popup popupName)
         {
@@ -173,10 +174,8 @@ namespace DownLoader.ViewModels
             {
                 item.Description = file.Description;
             }
-            Save();
+            dataStorage.Save(Files);
         }
-
-       
        
         private void StopDownloadAction()
         {
@@ -201,9 +200,7 @@ namespace DownLoader.ViewModels
                     PrimaryButtonText = "ОК"
                 };
                 ContentDialogResult result = await notFoundLinkFileDialog.ShowAsync();
-
                 return;
-
             }
 
             FolderPicker folderPicker = new FolderPicker
@@ -228,8 +225,8 @@ namespace DownLoader.ViewModels
                     
                     newFile.Id = downloadOperation.Guid;
                     newFile.Name = fileName;
-                    tpn.SendUpdatableToastWithProgress(newFile.Name);
-                   // SendUpdatableToastWithProgress(newFile.Name);
+                    toastNotification.SendUpdatableToastWithProgress(newFile.Name);
+                   
                     newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
                     newFile.DateTime = DateTime.Now;
                     newFile.Type = FType;
@@ -238,7 +235,8 @@ namespace DownLoader.ViewModels
                     Files.Add(newFile);
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
 
-                    Save();
+                    toastNotification.SendCompletedToast(fileName);
+                    dataStorage.Save(Files);
                 }
                 catch (TaskCanceledException)
                 {
@@ -277,9 +275,9 @@ namespace DownLoader.ViewModels
                                 progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / Convert.ToInt32(NewTotalBytesToReceive)));
                                 item.State = progress;
                                 item.Status = string.Format("{0} of {1} kb. downloaded", downloadOperation.Progress.BytesReceived / 1024, Convert.ToInt32(NewTotalBytesToReceive) / 1024);
-                                tpn.UpdateProgress(NewTotalBytesToReceive, (double)downloadOperation.Progress.BytesReceived, item.Status);
+                                toastNotification.UpdateProgress(NewTotalBytesToReceive, (double)downloadOperation.Progress.BytesReceived, item.Status);
                         }
-                        tpn.SendCompletedToast(item.Name);
+                        
                         break;
                     }
                 case BackgroundTransferStatus.Completed:
@@ -361,7 +359,7 @@ namespace DownLoader.ViewModels
                 newFile.Status = Status;
                 Files.Add(newFile);
 
-                Save();
+                dataStorage.Save(Files);
             }
             catch (TaskCanceledException)
             {
@@ -370,42 +368,6 @@ namespace DownLoader.ViewModels
                 downloadOperation = null;
             }
         }
-
-        public async void Save()
-        {
-            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            StorageFile file = await localFolder.CreateFileAsync("downloads.xml", CreationCollisionOption.ReplaceExisting);
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
-            using (Stream stream = await file.OpenStreamForWriteAsync())
-            {
-                serializer.Serialize(stream, this.Files);
-            }
-        }
-
-        public async void Load()
-        {
-            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            StorageFile file = await localFolder.GetFileAsync("downloads.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
-            using (Stream stream = await file.OpenStreamForReadAsync())
-            {
-                try
-                {
-                    ObservableCollection<DownloadFile> customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
-
-                    foreach (var c in customerList)
-                    {
-                        Files.Add(c);
-                    }
-
-                }
-                catch(Exception)
-                {
-
-                }
-            }
-        }
         #endregion
     }
-
 }
