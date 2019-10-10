@@ -120,10 +120,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behavior\OpenWBehavior.cs" />
-    <Compile Include="Converters\TypeToTextConventer.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\Node.cs" />
     <Compile Include="Models\ToastProgressNotification.cs" />
     <Compile Include="Servises\AppSettings.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />

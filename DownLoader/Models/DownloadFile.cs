@@ -17,11 +17,13 @@ namespace DownLoader.Models
 
     public class DownloadFile : INotifyPropertyChanged
     {
+        #region Fields
         private int state;
         private string fileSize;
         private string status;
-        #region Properties
+        #endregion
 
+        #region Properties
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string FileSize
@@ -54,17 +56,15 @@ namespace DownLoader.Models
             }
         }
         public string Description { get; set; }
-
         #endregion
 
     #region INotifyPropertyChanged Members
     public event PropertyChangedEventHandler PropertyChanged;
-
 
     private void OnPropertyChanged(string propertyChanged)
     {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
         }
     #endregion
-}
+    }
 }

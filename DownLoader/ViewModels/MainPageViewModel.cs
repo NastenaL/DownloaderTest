@@ -36,9 +36,7 @@ namespace DownLoader.ViewModels
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
-      
-
-        ToastProgressNotification tpn = new ToastProgressNotification();
+        readonly ToastProgressNotification tpn = new ToastProgressNotification();
         #endregion
 
         #region Properties

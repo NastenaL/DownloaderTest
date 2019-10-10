@@ -1,18 +1,50 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Notifications;
 
 namespace DownLoader.Models
 {
     class ToastProgressNotification
     {
-        internal static readonly ToastNotifier NOTIFIER = ToastNotificationManager.CreateToastNotifier();
-        internal ToastNotification toast;
+        #region Fields
 
+        private static readonly ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
+        private ToastNotification toastNotification;
+
+        #endregion
+
+        #region Methods
+
+        internal void SendCompletedToast(string FileName)
+        {
+            ToastContent toastContent = new ToastContent()
+            {
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = "Download completed!"
+                                },
+
+                                new AdaptiveText()
+                                {
+                                    Text = FileName
+                                }
+                            }
+                    }
+                }
+            };
+
+            ToastNotification notification = new ToastNotification(toastContent.GetXml())
+            {
+                Tag = toastNotification.Tag
+            };
+
+            toastNotifier.Show(notification);
+        }
         internal void SendUpdatableToastWithProgress(string FileName)
         {
             string tag = "downloads";
@@ -44,19 +76,19 @@ namespace DownLoader.Models
                 }
             };
 
-            toast = new ToastNotification(content.GetXml())
+            toastNotification = new ToastNotification(content.GetXml())
             {
                 Tag = tag,
                 Group = group,
                 Data = new NotificationData()
             };
-            toast.Data.Values["progress"] = "0";
-            toast.Data.Values["RecieveBytes"] = "0 kb";
+            toastNotification.Data.Values["progress"] = "0";
+            toastNotification.Data.Values["RecieveBytes"] = "0 kb";
 
 
-            toast.Data.SequenceNumber = 0;
+            toastNotification.Data.SequenceNumber = 0;
 
-            NOTIFIER.Show(toast);
+            toastNotifier.Show(toastNotification);
         }
         internal void UpdateProgress(double TotalBytes, double RecieveBytes, string Status)
         {
@@ -70,39 +102,10 @@ namespace DownLoader.Models
 
             data.Values["progress"] = (RecieveBytes / TotalBytes).ToString();
             data.Values["RecieveBytes"] = Status;
-            toast.Data = data;
-            NOTIFIER.Update(toast.Data, tag, group);
+            toastNotification.Data = data;
+            toastNotifier.Update(toastNotification.Data, tag, group);
         }
-        internal void SendCompletedToast(string FileName)
-        {
-            ToastContent toastContent = new ToastContent()
-            {
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                            {
-                                new AdaptiveText()
-                                {
-                                    Text = "Download completed!"
-                                },
-
-                                new AdaptiveText()
-                                {
-                                    Text = FileName
-                                }
-                            }
-                    }
-                }
-            };
-
-            ToastNotification notification = new ToastNotification(toastContent.GetXml())
-            {
-                Tag = toast.Tag
-            };
-
-            NOTIFIER.Show(notification);
-        }
+        
+        #endregion
     }
 }
