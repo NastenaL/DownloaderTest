@@ -22,7 +22,7 @@ namespace DownLoader.ViewModels
         private ObservableCollection<Models.Language> languages;
 
         #endregion
-   //     CultureInfo ci;
+       string ci = Windows.Globalization.Language.CurrentInputMethodLanguageTag;
         
         #region Properties
         private ICommand changeL;
@@ -47,7 +47,7 @@ namespace DownLoader.ViewModels
             set
             {
                 selectedLanguage = value;
-                appSettings.PrimaryLanguageOverride = value.LanguageCode;
+                appSettings.PrimaryLanguageOverride = ci;//value.LanguageCode;
                 RaisePropertyChanged();
             }
         }

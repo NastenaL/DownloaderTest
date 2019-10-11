@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>ADE4077E97EFB8BE6A8F3AC340DB853E02A846F449931254AFBE54EBFE72180C</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>8E206D9ADF81847758AB8641C88D6C0AA7EBD3D3ED0B14163933CDBB47D59C8F</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>3180927e-1231-4688-8f30-ba4194a4dc6c_1.0.0.0_x86__mq4syvt9xe2ag</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>3180927e-1231-4688-8f30-ba4194a4dc6c_mq4syvt9xe2ag!App</RegisteredUserModeAppID>
     <RegisteredPackageID>3180927e-1231-4688-8f30-ba4194a4dc6c</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-10-11T07:06:55.874</Modified>
+      <Modified>2019-10-11T11:22:32.391</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.exe">
       <PackagePath>entrypoint\DownLoader.exe</PackagePath>
-      <Modified>2019-10-11T07:06:53.208</Modified>
+      <Modified>2019-10-11T11:22:28.841</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -134,12 +134,14 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2019-03-18T15:36:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2019-09-06T10:34:35.664</Modified>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\Assets\Wide310x150Logo.scale-400.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-09-05T20:33:51.419</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-09-05T20:33:51.419</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\Assets\SplashScreen.scale-200.png">
@@ -172,25 +174,29 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-09-05T20:33:51.419</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+      <Modified>2019-09-06T10:34:35.664</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.xr.xml">
       <PackagePath>DownLoader.xr.xml</PackagePath>
-      <Modified>2019-10-10T12:13:46.478</Modified>
+      <Modified>2019-10-11T10:33:54.854</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Microsoft.UI.Xaml\DensityStyles\Compact.xbf">
       <PackagePath>Microsoft.UI.Xaml\DensityStyles\Compact.xbf</PackagePath>
-      <Modified>2019-10-11T07:06:52.814</Modified>
+      <Modified>2019-10-11T11:22:28.461</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-10-11T07:06:52.814</Modified>
+      <Modified>2019-10-11T11:22:28.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-10-11T07:06:52.809</Modified>
+      <Modified>2019-10-11T11:22:28.456</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\Setting.xbf">
       <PackagePath>Views\Setting.xbf</PackagePath>
-      <Modified>2019-10-11T07:06:52.815</Modified>
+      <Modified>2019-10-11T11:22:28.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.18362.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -214,11 +220,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-10-11T07:06:53.483</Modified>
+      <Modified>2019-10-11T10:20:12.398</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\DownLoader.exe">
       <PackagePath>DownLoader.exe</PackagePath>
-      <Modified>2019-10-11T07:06:55.866</Modified>
+      <Modified>2019-10-11T11:22:32.382</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

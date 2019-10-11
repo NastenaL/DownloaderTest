@@ -1,42 +1,38 @@
-﻿using DownLoader.Servises;
+﻿using CommonServiceLocator;
+using DownLoader.Servises;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Windows.Globalization;
+using System;
+using System.Linq;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Notifications;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace DownLoader.ViewModels
 {
    public class SettingViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
-        private ICommand changeTheme;
-    
+        private INavigationService navigationService;
+        readonly LiveTile tile = new LiveTile();
+
         public bool IsDark;
 
-      
-        public ICommand ChangeTheme
-        {
-            get
-            {
-                if (changeTheme == null)
-                    changeTheme = new RelayCommand<ToggleSwitch>(i => ChangeThemeAction(i));
-                return changeTheme;
-            }
-        }
+   
 
         public RelayCommand NavigateCommand { get; private set; }
         public RelayCommand IsLightCommand { get; private set; }
 
 
-        public SettingViewModel(INavigationService navigationService)
+        public SettingViewModel(INavigationService _navigationService)
         {
-            _navigationService = navigationService;
+            navigationService = _navigationService;
             NavigateCommand = new RelayCommand(NavigateCommandAction);
             IsLightCommand = new RelayCommand(IsLightCommandAction);
+          
+           tile.CreateTileAsync();
         }
 
         private void IsLightCommandAction()
@@ -46,9 +42,10 @@ namespace DownLoader.ViewModels
             else
                 IsDark = false;
         }
+
         private void NavigateCommandAction()
         {
-            _navigationService.GoBack(); 
+            navigationService.GoBack(); 
         }
        
 

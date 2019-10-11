@@ -23,7 +23,7 @@ namespace DownLoader.ViewModels
 
         private DownloadOperation downloadOperation;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
-        readonly DataStorageViewModel dataStorage = new DataStorageViewModel();
+        readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControlViewModel popUpControl = new PopUpControlViewModel();
         public ObservableCollection<DownloadFile> Files { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DownLoader.Servises;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
@@ -6,7 +7,7 @@ using Windows.Storage;
 
 namespace DownLoader.Models
 {
-    class DataStorageViewModel
+    class DataStorage
     {
         public async void Save(ObservableCollection<DownloadFile> downloadFiles)
         {
@@ -22,7 +23,7 @@ namespace DownLoader.Models
 
         public async void Load(ObservableCollection<DownloadFile> downloadFiles)
         {
-            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+           StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile file = await localFolder.GetFileAsync("downloads.xml");
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<DownloadFile>));
 

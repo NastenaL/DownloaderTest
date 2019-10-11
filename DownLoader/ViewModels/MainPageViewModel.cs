@@ -17,6 +17,8 @@ using System.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Controls;
+using CommonServiceLocator;
+using DownLoader.Servises;
 
 namespace DownLoader.ViewModels
 {
@@ -25,7 +27,7 @@ namespace DownLoader.ViewModels
         #region Fields
 
         private CancellationTokenSource cancellationToken;
-
+ //       readonly LiveTile tile = new LiveTile();
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
         private ICommand downloadCommand;
@@ -35,10 +37,12 @@ namespace DownLoader.ViewModels
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
-        readonly DataStorageViewModel dataStorage = new DataStorageViewModel();
+        readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControlViewModel popUpControl = new PopUpControlViewModel();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
-     //   public DownloadFileViewModel downloadVM = new DownloadFileViewModel();
+
+        // public DownloadFileViewModel downloadVM = new DownloadFileViewModel();
+
 
         #endregion
 
@@ -115,7 +119,7 @@ namespace DownLoader.ViewModels
         }
         public RelayCommand CancelDownload { get; set; }
         public RelayCommand StopDownload { get; set; }
-
+        public RelayCommand UpdateTile { get; set; }
         public ObservableCollection<DownloadFile> Files { get; set; }
 
         public ObservableCollection<DownloadFile> SearchResult
@@ -135,12 +139,19 @@ namespace DownLoader.ViewModels
             GoToSettings = new RelayCommand(NavigateCommandAction);
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
+         //   UpdateTile = new RelayCommand(UpdateTileAction);
 
             Files = new ObservableCollection<DownloadFile>();
             dataStorage.Load(Files);
+
         }
 
         #region Methods
+        private void UpdateTileAction()
+        {
+            LiveTile tile = new LiveTile();
+            tile.CreateTileAsync();
+        }
 
         private void CancelDownloadAction()
         {
@@ -219,9 +230,11 @@ namespace DownLoader.ViewModels
                 cancellationToken = new CancellationTokenSource();
                 try
                 {
-                    DownloadFile newFile = new DownloadFile();
-                    newFile.Id = downloadOperation.Guid;
-                    newFile.Name = fileName;
+                    DownloadFile newFile = new DownloadFile
+                    {
+                        Id = downloadOperation.Guid,
+                        Name = fileName
+                    };
                     toastNotification.SendUpdatableToastWithProgress(newFile.Name);
 
                     newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
@@ -230,15 +243,12 @@ namespace DownLoader.ViewModels
                     newFile.Description = Description;
                     newFile.Status = Status;
                     Files.Add(newFile);
-
+                
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
-
+                    
                     toastNotification.SendCompletedToast(fileName);
                     dataStorage.Save(Files);
-
-                    cancellationToken.Dispose();
-                    downloadUrl = null;
-
+                    UpdateTileAction();
                 }
                 catch (TaskCanceledException)
                 {
@@ -372,5 +382,7 @@ namespace DownLoader.ViewModels
             }
         }
         #endregion
+
+
     }
 }

@@ -125,6 +125,7 @@
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
                                 <ic:InvokeCommandAction Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
+                                <ic:InvokeCommandAction Command="{Binding UpdateTile}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
@@ -271,5 +272,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+       
+
     </Grid>
 </Page>

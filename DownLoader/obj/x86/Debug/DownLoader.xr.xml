@@ -19,6 +19,7 @@
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="DownloadCommandAs" />
     <RootPropertyPathName Name="Text" />
+    <RootPropertyPathName Name="UpdateTile" />
     <RootPropertyPathName Name="DownloadCommand" />
     <RootPropertyPathName Name="FileTypes" />
     <RootPropertyPathName Name="FType" />
