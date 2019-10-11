@@ -2,7 +2,7 @@
 
 namespace DownLoader.Models
 {
-    class PopUpControl
+    class PopUpControlViewModel
     {
         internal void ClosePopupAction(Popup popupName)
         {

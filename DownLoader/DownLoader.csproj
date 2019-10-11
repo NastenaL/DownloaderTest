@@ -119,12 +119,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataStorage.cs" />
+    <Compile Include="ViewModels\DataStorageViewModel.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\Controls\PopUpControl.cs" />
-    <Compile Include="Models\Controls\ToastProgressNotification.cs" />
+    <Compile Include="ViewModels\Controls\PopUpControlViewModel.cs" />
+    <Compile Include="ViewModels\Controls\ToastNotificationViewModel.cs" />
     <Compile Include="Servises\AppSettings.cs" />
+    <Compile Include="ViewModels\DownloadFileViewModel.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />

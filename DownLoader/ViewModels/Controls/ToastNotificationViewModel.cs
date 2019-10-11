@@ -3,18 +3,14 @@ using Windows.UI.Notifications;
 
 namespace DownLoader.Models
 {
-    class ToastProgressNotification
+    class ToastNotificationViewModel
     {
         #region Fields
-
         private static readonly ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
         private ToastNotification toastNotification;
-
         #endregion
 
         #region Methods
-
-
         internal void SendUpdatableToastWithProgress(string FileName)
         {
             string tag = "downloads";
@@ -54,10 +50,7 @@ namespace DownLoader.Models
             };
             toastNotification.Data.Values["progress"] = "0";
             toastNotification.Data.Values["RecieveBytes"] = "0 kb";
-
-
             toastNotification.Data.SequenceNumber = 0;
-
             toastNotifier.Show(toastNotification);
         }
         internal void UpdateProgress(double TotalBytes, double RecieveBytes, string Status)
@@ -95,7 +88,7 @@ namespace DownLoader.Models
                                 {
                                     Text = FileName
                                 }
-                            }
+                        }
                     }
                 }
             };

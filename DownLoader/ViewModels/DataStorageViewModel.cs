@@ -6,7 +6,7 @@ using Windows.Storage;
 
 namespace DownLoader.Models
 {
-    class DataStorage
+    class DataStorageViewModel
     {
         public async void Save(ObservableCollection<DownloadFile> downloadFiles)
         {
