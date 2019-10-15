@@ -11,7 +11,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     
     <Grid x:ConnectionId='2' x:Name="MainWindow">
@@ -70,16 +75,16 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                     DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" >
-            <Button x:ConnectionId='18' x:Uid="bnAddLink" x:Name="bnAddLink" Grid.Column="0" Margin="10,5"
+            <Button x:ConnectionId='18' x:Uid="bnAddLink" x:Name="bnAddLink" Grid.Column="0" 
                     Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button x:ConnectionId='19' x:Uid="bnSetting" x:Name="bnSetting" Grid.Column="1" Margin="5,5"  
+            <Button x:ConnectionId='19' x:Uid="bnSetting" x:Name="bnSetting" Grid.Column="1" 
                     Command="{Binding GoToSettings}"
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button x:ConnectionId='20' x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" Margin="5, 5" 
+            <Button x:ConnectionId='20' x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" 
                      Command="{Binding StopDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button x:Uid="bnCancel" Grid.Column="2" Margin="5, 5" 
+            <Button x:Uid="bnCancel" Grid.Column="2" 
                      Command="{Binding CancelDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
         </StackPanel>
@@ -92,25 +97,25 @@
             <StackPanel BorderBrush="{ThemeResource SystemAccentColor}"  BorderThickness="2" Background="White" Width="400" Height="340" 
                         Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBlock x:Uid="tblockLink" FontWeight="Bold" Margin="10, 5"/>
-                <TextBox x:ConnectionId='15' Name="tbLink" BorderBrush="{ThemeResource SystemAccentColor}" Margin="10, 5"
-                         BorderThickness="1" Width="370" HorizontalAlignment="Left"/>
+                <TextBlock x:Uid="tblockLink" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBox x:ConnectionId='15' Name="tbLink"
+                         Style="{StaticResource TextBoxStyle}"/>
 
-                <TextBlock x:Uid="tblockDescription" FontWeight="Bold" Margin="10, 5"/>
-                <TextBox x:ConnectionId='16' Name="tbDescription" BorderBrush="{ThemeResource SystemAccentColor}" Margin="10, 5"
+                <TextBlock x:Uid="tblockDescription" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBox x:ConnectionId='16' Name="tbDescription"
                          AcceptsReturn="True" TextWrapping="Wrap"
-                         BorderThickness="1" Width="370" HorizontalAlignment="Left"
-                         Text="{Binding Description, Mode=TwoWay}"/>
+                         Text="{Binding Description, Mode=TwoWay}"
+                         Style="{StaticResource TextBoxStyle}"/>
 
-                <TextBlock x:Uid="tblockType" Margin="10, 5" FontWeight="Bold"/>
-                <ComboBox x:ConnectionId='17' Name="cbType" BorderBrush="SteelBlue" SelectedIndex="0" Margin="10,5"
-                          BorderThickness="1" Width="370" HorizontalAlignment="Left"
+                <TextBlock x:Uid="tblockType" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <ComboBox x:ConnectionId='17' Name="cbType" SelectedIndex="1"
                           ItemsSource="{Binding FileTypes}"
-                          SelectedValue="{Binding FType, Mode=TwoWay}"/>
+                          SelectedValue="{Binding FType, Mode=TwoWay}"
+                          Style="{StaticResource ComboBoxStyle}"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" >
 
-                    <Button x:Uid="downLoadFile" HorizontalAlignment="Right" Margin="5" 
+                    <Button x:Uid="downLoadFile"
                             Style="{StaticResource ButtonsStyle}" >
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
@@ -121,7 +126,7 @@
                         </i:Interaction.Behaviors>
                     </Button>
 
-                    <Button x:Uid="downLoadFileAs" HorizontalAlignment="Right" Margin="5"
+                    <Button x:Uid="downLoadFileAs"
                             Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
@@ -130,7 +135,7 @@
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
-                    <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
+                    <Button x:Uid="bnClosePopup"
                             Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
                             Style="{StaticResource ButtonsStyle}"/>
                 </StackPanel>
@@ -144,41 +149,38 @@
             <StackPanel Background="White" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="2" Width="420" Height="{Binding ElementName=MainWindow, Path=Height}" 
                         Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBlock x:Uid="tblFileName" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock x:ConnectionId='10' Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}" Margin="10, 5">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                <TextBlock x:Uid="tblFileName" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock x:ConnectionId='10' Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
+                           Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBlock x:Uid="tbSize" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock x:ConnectionId='11' Name="tbFileSize" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" Margin="10, 5"/>
+                <TextBlock x:Uid="tbSize" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock x:ConnectionId='11' Name="tbFileSize" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" 
+                           Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBlock x:Uid="tbType" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock x:ConnectionId='12' Name="tbFileType" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Type}" Margin="10, 5"/>
+                <TextBlock x:Uid="tbType" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock x:ConnectionId='12' Name="tbFileType" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Type}"
+                           Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBlock x:Uid="tbDate" Text="gridHeadFileName" FontWeight="Bold" Margin="10, 5"/>
-                <TextBlock x:ConnectionId='13' Name="tbDataTime" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.DateTime}" Margin="10, 5"/>
+                <TextBlock x:Uid="tbDate" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock x:ConnectionId='13' Name="tbDataTime" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.DateTime}"
+                           Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBlock x:Uid="tbDescription" FontWeight="Bold" Margin="10, 5"/>
-                <TextBox x:ConnectionId='14' Name="tbpDescription" BorderBrush="{ThemeResource SystemAccentColor}" Margin="10, 5"
-                         BorderThickness="1" Width="370" HorizontalAlignment="Left"
-                         Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"/>
+                <TextBlock x:Uid="tbDescription" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBox x:ConnectionId='14' Name="tbpDescription" HorizontalAlignment="Left" Width="370"
+                         Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"
+                         Style="{StaticResource TextBoxStyle}"/>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Uid="bnUpdate" Margin="10,5" 
+                    <Button x:Uid="bnUpdate"
                             Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
-                                <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" CommandParameter="{Binding ElementName=lvDownloads}"/>
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
+                                <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" CommandParameter="{Binding ElementName=lvDownloads}"/>                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
-                    <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
+                    <Button x:Uid="bnClosePopup" HorizontalAlignment="Right"
                         Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"
                             Style="{StaticResource ButtonsStyle}"/>
                 </StackPanel>

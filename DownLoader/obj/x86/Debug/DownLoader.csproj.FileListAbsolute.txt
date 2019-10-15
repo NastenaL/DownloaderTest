@@ -110,3 +110,6 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Microsoft.Toolkit
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ButtonStyle.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ButtonStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TextFieldsStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\TextFieldsStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\TextFieldsStyle.xbf

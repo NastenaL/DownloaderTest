@@ -6,6 +6,8 @@
     <Style TargetType="Button" x:Key="ButtonsStyle">
         <Setter Property="Background" Value="{ThemeResource SystemAccentColor}"/>
         <Setter Property="Foreground" Value="White"/>
-       
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10,5"/>
+        
     </Style>
 </ResourceDictionary>
