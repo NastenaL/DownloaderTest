@@ -147,6 +147,9 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
       <PackagePath>Styles\ButtonStyle.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\PopupStyle.xbf">
+      <PackagePath>Styles\PopupStyle.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TextFieldsStyle.xbf">
       <PackagePath>Styles\TextFieldsStyle.xbf</PackagePath>
     </AppxPackagedFile>

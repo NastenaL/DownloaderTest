@@ -15,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -42,7 +43,7 @@
         </Grid.ColumnDefinitions>
 
         <MenuBar VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"    
-                 DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" Foreground="Black">
+                 DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}">
             <MenuBarItem x:Uid="menuFile" AccessKey="F">
                 <MenuFlyoutItem x:Uid="menuAddLink"
                                 Icon="OpenFile"
@@ -89,21 +90,16 @@
                     Style="{StaticResource ButtonsStyle}"/>
         </StackPanel>
 
-        <Popup x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" x:FieldModifier="public"
-               DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
-               HorizontalAlignment="Center" VerticalAlignment="Center"
-               IsLightDismissEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
+        <Popup x:Name="AddLinkPopup" x:FieldModifier="public"
+               Style="{StaticResource PopupStyle}">
 
-            <StackPanel BorderBrush="{ThemeResource SystemAccentColor}"  BorderThickness="2" Background="White" Width="400" Height="340" 
-                        Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Style="{StaticResource StackPanelStyle}">
 
                 <TextBlock x:Uid="tblockLink" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbLink"
-                         Style="{StaticResource TextBoxStyle}"/>
+                <TextBox Name="tbLink" Style="{StaticResource TextBoxStyle}"/>
 
                 <TextBlock x:Uid="tblockDescription" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBox Name="tbDescription"
-                         AcceptsReturn="True" TextWrapping="Wrap"
                          Text="{Binding Description, Mode=TwoWay}"
                          Style="{StaticResource TextBoxStyle}"/>
 
@@ -113,7 +109,7 @@
                           SelectedValue="{Binding FType, Mode=TwoWay}"
                           Style="{StaticResource ComboBoxStyle}"/>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" >
+                <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
 
                     <Button x:Uid="downLoadFile"
                             Style="{StaticResource ButtonsStyle}" >
@@ -135,6 +131,7 @@
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
+                    
                     <Button x:Uid="bnClosePopup"
                             Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
                             Style="{StaticResource ButtonsStyle}"/>
@@ -142,12 +139,10 @@
             </StackPanel>
         </Popup>
 
-        <Popup x:Name="FileDelails" IsOpen="{Binding IsOpen}" HorizontalAlignment="Center" VerticalAlignment="Center"
-               DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
-               IsLightDismissEnabled="False" Grid.Row="2" Grid.ColumnSpan="10">
+        <Popup x:Name="FileDelails"
+               Style="{StaticResource PopupStyle}">
 
-            <StackPanel Background="White" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="2" Width="420" Height="{Binding ElementName=MainWindow, Path=Height}" 
-                        Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Style="{StaticResource StackPanelStyle}">
 
                 <TextBlock x:Uid="tblFileName" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBlock Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
@@ -170,7 +165,7 @@
                          Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"
                          Style="{StaticResource TextBoxStyle}"/>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
                     <Button x:Uid="bnUpdate"
                             Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>

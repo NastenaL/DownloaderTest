@@ -11,6 +11,7 @@ App.xbf
 DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf
+Styles\PopupStyle.xbf
 Styles\TextFieldsStyle.xbf
 Views\MainPage.xbf
 Views\Setting.xbf
