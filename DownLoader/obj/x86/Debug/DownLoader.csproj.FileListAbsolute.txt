@@ -116,3 +116,6 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\TextFields
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\PopupStyle.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\PopupStyle.xbf
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\PopupStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ListViewStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ListViewStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ListViewStyle.xbf
