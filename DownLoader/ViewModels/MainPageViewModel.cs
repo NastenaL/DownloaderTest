@@ -17,7 +17,6 @@ using System.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Controls;
-using CommonServiceLocator;
 using DownLoader.Servises;
 
 namespace DownLoader.ViewModels
@@ -27,7 +26,6 @@ namespace DownLoader.ViewModels
         #region Fields
 
         private CancellationTokenSource cancellationToken;
- //       readonly LiveTile tile = new LiveTile();
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
         private ICommand downloadCommand;
@@ -40,10 +38,6 @@ namespace DownLoader.ViewModels
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControlViewModel popUpControl = new PopUpControlViewModel();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
-
-        // public DownloadFileViewModel downloadVM = new DownloadFileViewModel();
-
-
         #endregion
 
         #region Properties
@@ -88,7 +82,6 @@ namespace DownLoader.ViewModels
                 return openPopUp;
             }
         }
-
         public ICommand ClosePopUp
         {
             get
@@ -98,7 +91,6 @@ namespace DownLoader.ViewModels
                 return closePopUp;
             }
         }
-
         public ICommand DownloadCommand
         {
             get
@@ -121,16 +113,7 @@ namespace DownLoader.ViewModels
         public RelayCommand StopDownload { get; set; }
         public RelayCommand UpdateTile { get; set; }
         public ObservableCollection<DownloadFile> Files { get; set; }
-
-        public ObservableCollection<DownloadFile> SearchResult
-        {
-            get { return Files; }
-            set
-            {
-                Files = value;
-            }
-        }
-
+       
         #endregion
 
         public MainPageViewModel(INavigationService NavigationService)
@@ -139,11 +122,9 @@ namespace DownLoader.ViewModels
             GoToSettings = new RelayCommand(NavigateCommandAction);
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
-         //   UpdateTile = new RelayCommand(UpdateTileAction);
 
             Files = new ObservableCollection<DownloadFile>();
             dataStorage.Load(Files);
-
         }
 
         #region Methods
@@ -382,7 +363,5 @@ namespace DownLoader.ViewModels
             }
         }
         #endregion
-
-
     }
 }

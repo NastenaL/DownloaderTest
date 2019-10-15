@@ -10,6 +10,7 @@ Assets\Wide310x150Logo.scale-400.png
 App.xbf
 DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
+Styles\ButtonStyle.xbf
 Views\MainPage.xbf
 Views\Setting.xbf
 Properties\Default.rd.xml

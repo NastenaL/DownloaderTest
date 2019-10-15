@@ -126,7 +126,6 @@
     <Compile Include="ViewModels\Controls\PopUpControlViewModel.cs" />
     <Compile Include="ViewModels\Controls\ToastNotificationViewModel.cs" />
     <Compile Include="Servises\AppSettings.cs" />
-    <Compile Include="ViewModels\DownloadFileViewModel.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
@@ -160,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

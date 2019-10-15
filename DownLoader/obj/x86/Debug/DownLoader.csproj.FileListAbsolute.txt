@@ -107,3 +107,6 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Microsoft.Toolkit
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\NotificationsExtensions.Win10.dll
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\NotificationsExtensions.Win10.pdb
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Microsoft.Toolkit.Uwp.Notifications.pri.xml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ButtonStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ButtonStyle.xbf

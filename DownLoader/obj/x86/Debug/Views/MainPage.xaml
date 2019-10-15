@@ -11,22 +11,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="ButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColorLight1}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="ButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColorLight1}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
     </Page.Resources>
-
+    
     <Grid x:ConnectionId='2' x:Name="MainWindow">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -50,7 +37,7 @@
         </Grid.ColumnDefinitions>
 
         <MenuBar VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"    
-                 DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}">
+                 DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" Foreground="Black">
             <MenuBarItem x:Uid="menuFile" AccessKey="F">
                 <MenuFlyoutItem x:Uid="menuAddLink"
                                 Icon="OpenFile"
@@ -84,13 +71,17 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                     DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" >
             <Button x:ConnectionId='18' x:Uid="bnAddLink" x:Name="bnAddLink" Grid.Column="0" Margin="10,5"
-                    Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
+                    Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
+                    Style="{StaticResource ButtonsStyle}"/>
             <Button x:ConnectionId='19' x:Uid="bnSetting" x:Name="bnSetting" Grid.Column="1" Margin="5,5"  
-                    Command="{Binding GoToSettings}"/>
+                    Command="{Binding GoToSettings}"
+                    Style="{StaticResource ButtonsStyle}"/>
             <Button x:ConnectionId='20' x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" Margin="5, 5" 
-                     Command="{Binding StopDownload}"/>
+                     Command="{Binding StopDownload}"
+                    Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnCancel" Grid.Column="2" Margin="5, 5" 
-                     Command="{Binding CancelDownload}"/>
+                     Command="{Binding CancelDownload}"
+                    Style="{StaticResource ButtonsStyle}"/>
         </StackPanel>
 
         <Popup x:ConnectionId='3' x:Name="AddLinkPopup" IsOpen="{Binding IsOpen}" x:FieldModifier="public"
@@ -120,7 +111,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" >
 
                     <Button x:Uid="downLoadFile" HorizontalAlignment="Right" Margin="5" 
-                            Background="{ThemeResource SystemAccentColor}" >
+                            Style="{StaticResource ButtonsStyle}" >
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
@@ -130,7 +121,8 @@
                         </i:Interaction.Behaviors>
                     </Button>
 
-                    <Button x:Uid="downLoadFileAs" HorizontalAlignment="Right" Margin="5">
+                    <Button x:Uid="downLoadFileAs" HorizontalAlignment="Right" Margin="5"
+                            Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
@@ -139,7 +131,8 @@
                         </i:Interaction.Behaviors>
                     </Button>
                     <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
-                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
+                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
+                            Style="{StaticResource ButtonsStyle}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
@@ -175,7 +168,8 @@
                          Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"/>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Uid="bnUpdate" Margin="10,5" >
+                    <Button x:Uid="bnUpdate" Margin="10,5" 
+                            Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
@@ -185,7 +179,8 @@
                         </i:Interaction.Behaviors>
                     </Button>
                     <Button x:Uid="bnClosePopup" HorizontalAlignment="Right" Margin="5" 
-                        Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
+                        Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"
+                            Style="{StaticResource ButtonsStyle}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
@@ -272,9 +267,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-       
-
     </Grid>
 </Page>
 

@@ -5,17 +5,13 @@ using Windows.UI.StartScreen;
 using Windows.UI.Notifications;
 using Microsoft.Toolkit.Uwp.Notifications;
 using DownLoader.ViewModels;
-using System.Collections.ObjectModel;
-using DownLoader.Models;
 
 namespace DownLoader.Servises
 {
     class LiveTile
     {
         TileNotification tileNotification;
-        internal SecondaryTile secondaryTile;
-        TileBindingContentAdaptive tileBindingContentAdaptive;
-        MainPageViewModel main = ServiceLocator.Current.GetInstance<MainPageViewModel>();
+        readonly MainPageViewModel main = ServiceLocator.Current.GetInstance<MainPageViewModel>();
         internal async void CreateTileAsync()
         {
             var secondaryTile = new SecondaryTile(
@@ -27,14 +23,15 @@ namespace DownLoader.Servises
             var success = await secondaryTile.RequestCreateAsync();
             if (success)
             {
-                tileBindingContentAdaptive = new TileBindingContentAdaptive
+                var tileBindingContentAdaptive = new TileBindingContentAdaptive
                 {
                     Children =
                     {
                        new AdaptiveText()
                         {
                             Text = main.Files.Last().Name,
-                            HintStyle = AdaptiveTextStyle.Base
+                            HintStyle = AdaptiveTextStyle.Base,
+                            HintWrap = true
                         },
 
                         new AdaptiveText()
@@ -48,7 +45,7 @@ namespace DownLoader.Servises
                 {
                     Branding = TileBranding.Name,
                     Content = tileBindingContentAdaptive,
-                    DisplayName = main.Files.Last().DateTime.ToShortTimeString()
+                    DisplayName = main.Files.Last().FileSize
                 };
 
                 var tileContent = new TileContent
@@ -62,7 +59,6 @@ namespace DownLoader.Servises
                 };
 
                 var xmlDoc = tileContent.GetXml();
-
 
                 tileNotification = new TileNotification(xmlDoc);
                 var tileUpdaterForSecondaryTile = TileUpdateManager.CreateTileUpdaterForSecondaryTile("tilePage");

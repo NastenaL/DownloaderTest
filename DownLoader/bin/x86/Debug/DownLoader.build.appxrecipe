@@ -144,6 +144,9 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
+      <PackagePath>Styles\ButtonStyle.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
     </AppxPackagedFile>
