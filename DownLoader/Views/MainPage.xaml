@@ -14,9 +14,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
-                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
-                <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MenuBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -43,12 +44,14 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <MenuBar VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"    
+        <MenuBar Style="{StaticResource MenubarStyle}"    
                  DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}">
-            <MenuBarItem x:Uid="menuFile" AccessKey="F">
+            <MenuBarItem x:Uid="menuFile" 
+                         AccessKey="F">
                 <MenuFlyoutItem x:Uid="menuAddLink"
                                 Icon="OpenFile"
-                               Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}">
+                                Command="{Binding OpenPopUp}" 
+                                CommandParameter="{Binding ElementName=AddLinkPopup}">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Key="O"
                                              Modifiers="Control" />
@@ -63,11 +66,6 @@
                                              Modifiers="Control" />
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-                <MenuFlyoutSubItem Text="Demo">
-                    <MenuFlyoutItem Text="A"/>
-                    <MenuFlyoutItem Text="B"/>
-                    <MenuFlyoutItem Text="C"/>
-                </MenuFlyoutSubItem>
             </MenuBarItem>
             <MenuBarItem x:Uid="menuHelp"
                          AccessKey="H">
@@ -75,49 +73,59 @@
             </MenuBarItem>
         </MenuBar>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                    DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}" >
-            <Button x:Uid="bnAddLink" x:Name="bnAddLink" Grid.Column="0" 
-                    Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
+        <StackPanel Style="{StaticResource MenuButtonStackPanel}" >
+            <Button x:Uid="bnAddLink" 
+                    x:Name="bnAddLink" 
+                    Grid.Column="0" 
+                    Command="{Binding OpenPopUp}" 
+                    CommandParameter="{Binding ElementName=AddLinkPopup}"
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button x:Uid="bnSetting" x:Name="bnSetting" Grid.Column="1" 
+            <Button x:Uid="bnSetting" 
+                    x:Name="bnSetting" 
+                    Grid.Column="1" 
                     Command="{Binding GoToSettings}"
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="2" 
-                     Command="{Binding StopDownload}"
+                    Command="{Binding StopDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnCancel" Grid.Column="2" 
-                     Command="{Binding CancelDownload}"
+                    Command="{Binding CancelDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
         </StackPanel>
 
-        <Popup x:Name="AddLinkPopup" x:FieldModifier="public"
+        <Popup x:Name="AddLinkPopup" 
+               x:FieldModifier="public"
                Style="{StaticResource PopupStyle}">
 
             <StackPanel Style="{StaticResource StackPanelStyle}">
 
-                <TextBlock x:Uid="tblockLink" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbLink" Style="{StaticResource TextBoxStyle}"/>
+                <TextBlock x:Uid="tblockLink" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBox Name="tbLink" 
+                         Style="{StaticResource TextBoxStyle}"/>
 
-                <TextBlock x:Uid="tblockDescription" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock x:Uid="tblockDescription" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBox Name="tbDescription"
                          Text="{Binding Description, Mode=TwoWay}"
                          Style="{StaticResource TextBoxStyle}"/>
 
-                <TextBlock x:Uid="tblockType" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <ComboBox Name="cbType" SelectedIndex="1"
+                <TextBlock x:Uid="tblockType" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+                <ComboBox Name="cbType"
                           ItemsSource="{Binding FileTypes}"
                           SelectedValue="{Binding FType, Mode=TwoWay}"
                           Style="{StaticResource ComboBoxStyle}"/>
 
                 <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
-
                     <Button x:Uid="downLoadFile"
                             Style="{StaticResource ButtonsStyle}" >
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
-                                <ic:InvokeCommandAction Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
+                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/>
+                                <ic:InvokeCommandAction Command="{Binding DownloadCommand}" 
+                                                        CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
                                 <ic:InvokeCommandAction Command="{Binding UpdateTile}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
@@ -127,8 +135,10 @@
                             Style="{StaticResource ButtonsStyle}">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
+                                <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" 
+                                                        CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
+                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
@@ -142,9 +152,7 @@
 
         <Popup x:Name="FileDelails"
                Style="{StaticResource PopupStyle}">
-
             <StackPanel Style="{StaticResource StackPanelStyle}">
-
                 <TextBlock x:Uid="tblFileName" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBlock Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
                            Style="{StaticResource TextBlockStyle}"/>
@@ -167,7 +175,7 @@
 
                 <TextBlock x:Uid="tbDescription" 
                            Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbpDescription" HorizontalAlignment="Left" Width="370"
+                <TextBox Name="tbpDescription"
                          Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"
                          Style="{StaticResource TextBoxStyle}"/>
 
@@ -183,8 +191,9 @@
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
-                    <Button x:Uid="bnClosePopup" HorizontalAlignment="Right"
-                        Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"
+                    <Button x:Uid="bnClosePopup"
+                            Command="{Binding ClosePopUp}" 
+                            CommandParameter="{Binding ElementName=FileDelails}"
                             Style="{StaticResource ButtonsStyle}"/>
                 </StackPanel>
             </StackPanel>

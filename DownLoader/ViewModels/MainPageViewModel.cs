@@ -18,13 +18,13 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Controls;
 using DownLoader.Servises;
+using Windows.ApplicationModel.Resources.Core;
 
 namespace DownLoader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         #region Fields
-
         private CancellationTokenSource cancellationToken;
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
@@ -35,6 +35,9 @@ namespace DownLoader.ViewModels
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
+        private ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
+        private ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+        private string status;
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControlViewModel popUpControl = new PopUpControlViewModel();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
@@ -53,7 +56,7 @@ namespace DownLoader.ViewModels
 
         public RelayCommand GoToSettings { get; private set; }
         public string Description { get; set; }
-        public string Status { get; set; } = "initialization...";
+        public string Status {get;set;}
         public ICommand UpdateFileDescription
         {
             get
@@ -165,15 +168,25 @@ namespace DownLoader.ViewModels
             dataStorage.Save(Files);
         }
 
-        private void StopDownloadAction()
+        private async void StopDownloadAction()
         {
-            if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
+            try
             {
-                downloadOperation.Pause();
+                if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
+                {
+                    downloadOperation.Pause();
+                }
+                else if (downloadOperation.Progress.Status == BackgroundTransferStatus.PausedByApplication)
+                {
+                    downloadOperation.Resume();
+                }
             }
-            else if (downloadOperation.Progress.Status == BackgroundTransferStatus.PausedByApplication)
+            catch (Exception)
             {
-                downloadOperation.Resume();
+                var resourceValue = resourceMap.GetValue("stopErrorString", resourceContext);
+
+                var messageDialog = new MessageDialog(resourceValue.ValueAsString);
+                await messageDialog.ShowAsync();
             }
         }
 
@@ -184,8 +197,8 @@ namespace DownLoader.ViewModels
             {
                 ContentDialog notFoundLinkFileDialog = new ContentDialog()
                 {
-                    Title = "Подтверждение действия",
-                    Content = "Вы не ввели ссылку, попробуем еще раз?",
+                    Title = resourceMap.GetValue("titleErrorDownloadFileDialog", resourceContext).ValueAsString,
+                    Content = resourceMap.GetValue("contentErrorDownloadFileDialog", resourceContext).ValueAsString,
                     PrimaryButtonText = "ОК"
                 };
                 ContentDialogResult result = await notFoundLinkFileDialog.ShowAsync();
@@ -233,7 +246,7 @@ namespace DownLoader.ViewModels
                 }
                 catch (TaskCanceledException)
                 {
-                    Status = "Download canceled.";
+                    Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
                     await downloadOperation.ResultFile.DeleteAsync();
                     downloadOperation = null;
                 }
@@ -267,7 +280,7 @@ namespace DownLoader.ViewModels
                             item.FileSize = (Convert.ToInt32(NewTotalBytesToReceive) / 1024).ToString() + " kb";
                             progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / Convert.ToInt32(NewTotalBytesToReceive)));
                             item.State = progress;
-                            item.Status = string.Format("{0} of {1} kb. downloaded", downloadOperation.Progress.BytesReceived / 1024, Convert.ToInt32(NewTotalBytesToReceive) / 1024);
+                            item.Status = string.Format(resourceMap.GetValue("runningStatus", resourceContext).ValueAsString, downloadOperation.Progress.BytesReceived / 1024, Convert.ToInt32(NewTotalBytesToReceive) / 1024);
                             toastNotification.UpdateProgress(NewTotalBytesToReceive, (double)downloadOperation.Progress.BytesReceived, item.Status);
                         }
 
@@ -278,38 +291,39 @@ namespace DownLoader.ViewModels
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                         if (item != null)
                         {
-                            item.Status = string.Format("{0} of {1} kb. downloaded - {2}% complete.", downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024, progress);
+                            item.Status = string.Format(resourceMap.GetValue("runningStatus", resourceContext).ValueAsString, downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024);
                         }
 
                         break;
                     }
                 case BackgroundTransferStatus.PausedByApplication:
                     {
+                   
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                         if (item != null)
                         {
-                            item.Status = "Download paused.";
+                            item.Status = resourceMap.GetValue("pausedByApplicationStatus", resourceContext).ValueAsString;
                         }
                         break;
                     }
                 case BackgroundTransferStatus.PausedCostedNetwork:
                     {
-                        Status = "Download paused because of metered connection.";
+                        Status = resourceMap.GetValue("pausedCostedNetworkStatus", resourceContext).ValueAsString;
                         break;
                     }
                 case BackgroundTransferStatus.PausedNoNetwork:
                     {
-                        Status = "No network detected. Please check your internet connection.";
+                        Status = resourceMap.GetValue("pausedNoNetworkStatus", resourceContext).ValueAsString;
                         break;
                     }
                 case BackgroundTransferStatus.Error:
                     {
-                        Status = "An error occured while downloading.";
+                        Status = resourceMap.GetValue("errorStatus", resourceContext).ValueAsString;
                         break;
                     }
                 case BackgroundTransferStatus.Canceled:
                     {
-                        Status = "Download canceled.";
+                        Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
                         break;
                     }
             }
@@ -357,7 +371,7 @@ namespace DownLoader.ViewModels
             }
             catch (TaskCanceledException)
             {
-                Status = "Download canceled.";
+                Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
                 await downloadOperation.ResultFile.DeleteAsync();
                 downloadOperation = null;
             }

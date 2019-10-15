@@ -150,11 +150,20 @@
   <data name="bnUpdate.Content" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="canceledStatus" xml:space="preserve">
+    <value>Download canceled</value>
+  </data>
+  <data name="contentErrorDownloadFileDialog" xml:space="preserve">
+    <value>You are not input link for download, try again</value>
+  </data>
   <data name="downLoadFile.Content" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="downLoadFileAs.Content" xml:space="preserve">
     <value>Download as</value>
+  </data>
+  <data name="errorStatus" xml:space="preserve">
+    <value>An error occured while downloading</value>
   </data>
   <data name="gridHeaderDate.Text" xml:space="preserve">
     <value>Date</value>
@@ -186,11 +195,26 @@
   <data name="menuSettings.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="pausedByApplicationStatus" xml:space="preserve">
+    <value>Download paused.</value>
+  </data>
+  <data name="pausedCostedNetworkStatus" xml:space="preserve">
+    <value>Download paused because of metered connection.</value>
+  </data>
+  <data name="pausedNoNetworkStatus" xml:space="preserve">
+    <value>No network detected. Please check your internet connection.</value>
+  </data>
   <data name="rbDarkTheme.Text" xml:space="preserve">
     <value>Dark theme</value>
   </data>
   <data name="rbLightTheme.Text" xml:space="preserve">
     <value>Light theme</value>
+  </data>
+  <data name="runningStatus" xml:space="preserve">
+    <value>{0} of {1} kb. downloaded</value>
+  </data>
+  <data name="stopErrorString" xml:space="preserve">
+    <value>To use the stop function, at least one download must be active</value>
   </data>
   <data name="tbDate.Text" xml:space="preserve">
     <value>Download date</value>
@@ -221,5 +245,8 @@
   </data>
   <data name="tbType.Text" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="titleErrorDownloadFileDialog" xml:space="preserve">
+    <value>Confirm actions</value>
   </data>
 </root>

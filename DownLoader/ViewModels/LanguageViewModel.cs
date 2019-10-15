@@ -1,14 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows.Input;
 using DownLoader.Servises;
 using GalaSoft.MvvmLight.Command;
 using Windows.Globalization;
-using Windows.UI.Xaml.Controls;
 
 namespace DownLoader.ViewModels
 {
@@ -47,14 +44,13 @@ namespace DownLoader.ViewModels
             set
             {
                 selectedLanguage = value;
-                appSettings.PrimaryLanguageOverride = ci;//value.LanguageCode;
+                appSettings.PrimaryLanguageOverride = value.LanguageCode;
                 RaisePropertyChanged();
             }
         }
 
         private void CmbLanguage_SelectionChanged(string selectedLanguage)
         {
-          //   selectedLanguage = System.Globalization.CultureInfo.CurrentCulture;//"ru-RU";
             ApplicationLanguages.PrimaryLanguageOverride = selectedLanguage;
             Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset();
             // Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();

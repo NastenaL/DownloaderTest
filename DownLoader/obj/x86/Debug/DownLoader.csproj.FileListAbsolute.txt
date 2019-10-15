@@ -119,3 +119,6 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\PopupStyle
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ListViewStyle.xbf
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ListViewStyle.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ListViewStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\MenuBarStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\MenuBarStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\MenuBarStyle.xbf

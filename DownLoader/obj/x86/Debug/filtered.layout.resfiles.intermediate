@@ -12,6 +12,7 @@ DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf
 Styles\ListViewStyle.xbf
+Styles\MenuBarStyle.xbf
 Styles\PopupStyle.xbf
 Styles\TextFieldsStyle.xbf
 Views\MainPage.xbf

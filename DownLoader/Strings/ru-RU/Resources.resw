@@ -150,11 +150,20 @@
   <data name="bnUpdate.Content" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="canceledStatus" xml:space="preserve">
+    <value>Загрузка отменена</value>
+  </data>
+  <data name="contentErrorDownloadFileDialog" xml:space="preserve">
+    <value>Вы не ввели ссылку для скачивания файла, попробуйте еще раз</value>
+  </data>
   <data name="downLoadFile.Content" xml:space="preserve">
     <value>Скачать</value>
   </data>
   <data name="downLoadFileAs.Content" xml:space="preserve">
     <value>Скачать как</value>
+  </data>
+  <data name="errorStatus" xml:space="preserve">
+    <value>Во время загрузки произошла ошибка</value>
   </data>
   <data name="gridHeaderDate.Text" xml:space="preserve">
     <value>Дата</value>
@@ -186,11 +195,26 @@
   <data name="menuSettings.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="pausedByApplicationStatus" xml:space="preserve">
+    <value>Скачивание приостановлено</value>
+  </data>
+  <data name="pausedCostedNetworkStatus" xml:space="preserve">
+    <value>Загрузка остановлена из-за отсутствия соединения</value>
+  </data>
+  <data name="pausedNoNetworkStatus" xml:space="preserve">
+    <value>Отсутствует соединение с интернетом</value>
+  </data>
   <data name="rbDarkTheme.Text" xml:space="preserve">
     <value>Темная тема</value>
   </data>
   <data name="rbLightTheme.Text" xml:space="preserve">
     <value>Светлая тема</value>
+  </data>
+  <data name="runningStatus" xml:space="preserve">
+    <value>{0} из {1} kb. загружено</value>
+  </data>
+  <data name="stopErrorString" xml:space="preserve">
+    <value>Для использования функции остановки загрузки необходимо, чтоб была активна хотя б одна загрузка</value>
   </data>
   <data name="tbDate.Text" xml:space="preserve">
     <value>Дата загрузки</value>
@@ -221,5 +245,8 @@
   </data>
   <data name="tbType.Text" xml:space="preserve">
     <value>Тип</value>
+  </data>
+  <data name="titleErrorDownloadFileDialog" xml:space="preserve">
+    <value>Подтверждение действия</value>
   </data>
 </root>
