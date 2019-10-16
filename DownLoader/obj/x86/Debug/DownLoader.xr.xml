@@ -117,9 +117,6 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Text" />
       <RootProperty Name="Name" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
       <RootProperty Name="Style" />
@@ -159,8 +156,7 @@
       <RootProperty Name="DisplayMemberPath" />
       <RootProperty Name="SelectedValuePath" />
       <RootProperty Name="SelectedItem" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">

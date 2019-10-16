@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -13,7 +13,6 @@
     <Page.Resources>
         <ResourceDictionary>
             <vm:LanguageViewModel x:Key="LanguageVM"/>
-
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
@@ -45,7 +44,7 @@
                 Command="{Binding NavigateCommand}"
                 Style="{StaticResource ButtonsStyle}"/>
 
-        <TextBlock x:Name="tbTheme" x:Uid="tbTheme" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
+        <TextBlock x:Name="tbTheme" x:Uid="tbTheme" Style="{StaticResource HeaderTextBlockStyle}"
                    Grid.Column="0" Grid.Row="2" />
         <ToggleSwitch Name="tglAppTheme" 
               Grid.Row="2" Grid.Column="2"
@@ -60,32 +59,32 @@
             </i:Interaction.Behaviors>
         </ToggleSwitch>
 
-        <TextBlock x:Uid="tbLanguage" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
-                   Grid.Column="0" Grid.Row="3" />
-
-        <ComboBox x:Name="CmbLanguage" DataContext="{Binding Source={StaticResource LanguageVM}}"  
-         Grid.Row="3" Grid.Column="2"  Style="{StaticResource ComboBoxStyle}"
-         ItemsSource="{Binding Languages}" 
-          DisplayMemberPath="DisplayName"
-          SelectedValuePath="LanguageCode" 
-          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+        <TextBlock x:Uid="tbLanguage" 
+                   Grid.Column="0" Grid.Row="3" 
+                   Style="{StaticResource HeaderTextBlockStyle}"/>
+        <ComboBox x:Name="CmbLanguage" 
+                  DataContext="{Binding Source={StaticResource LanguageVM}}"
+                  DisplayMemberPath="DisplayName"
+                  Grid.Row="3" Grid.Column="2"  Grid.ColumnSpan="3"
+                  ItemsSource="{Binding Languages}" 
+                  SelectedValuePath="LanguageCode" 
+                  SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                  Style="{StaticResource ComboBoxStyle}">
             <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="SelectionChanged">
-                <ic:InvokeCommandAction Command="{Binding ChangeLanguage}" 
-                                        CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
-               
-            </ic:EventTriggerBehavior>
+                    <ic:InvokeCommandAction Command="{Binding ChangeLanguage}" 
+                                            CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
+                </ic:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </ComboBox>
 
-        <TextBlock x:Uid="tbAddTile" Grid.Column="0" Grid.Row="4" />
+        <TextBlock x:Uid="tbAddTile" Grid.Column="0" Grid.Row="4" Style="{StaticResource HeaderTextBlockStyle}"/>
         <Button x:Uid="bnAddTile" Grid.Column="2" Grid.Row="4"
                 Command="{Binding AddTile}" CommandParameter="{Binding ElementName=Colour}"
                 DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}"
                 Style="{StaticResource ButtonsStyle}"/>
 
-        <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" VerticalAlignment="Center" Margin="20">
-
+        <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" Style="{StaticResource ComboBoxStyle}" Width="Auto">
             <ComboBoxItem Tag="FF000000" IsSelected="True">
                 <Rectangle Width="25" Height="14" Fill="Black"/>
             </ComboBoxItem>
