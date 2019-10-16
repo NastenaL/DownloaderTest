@@ -13,30 +13,18 @@
     <Page.Resources>
         <ResourceDictionary>
             <vm:LanguageViewModel x:Key="LanguageVM"/>
-           
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
-                    <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            
-            
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="ButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColorLight1}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="ButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColorLight1}"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -46,11 +34,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Grid.Row="1" Name="bnBack" x:Uid="bnBack" 
-                 DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}"
-                Command="{Binding NavigateCommand}" Margin="10,10"
+
+        <Button x:Uid="bnBack" Name="bnBack"
+                DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
+                Grid.Row="0"
+                Command="{Binding NavigateCommand}"
                 Style="{StaticResource ButtonsStyle}"/>
 
         <TextBlock x:Name="tbTheme" x:Uid="tbTheme" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
@@ -68,21 +60,62 @@
             </i:Interaction.Behaviors>
         </ToggleSwitch>
 
-        <TextBlock x:Name="tbLanguage" x:Uid="tbLanguage" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
+        <TextBlock x:Uid="tbLanguage" Width="120"  HorizontalAlignment="Left" Margin="10,10,10,10"
                    Grid.Column="0" Grid.Row="3" />
 
         <ComboBox x:Name="CmbLanguage" DataContext="{Binding Source={StaticResource LanguageVM}}"  
-         Grid.Row="3" Grid.Column="2"  Margin="10,10,10,10"
+         Grid.Row="3" Grid.Column="2"  Style="{StaticResource ComboBoxStyle}"
          ItemsSource="{Binding Languages}" 
           DisplayMemberPath="DisplayName"
           SelectedValuePath="LanguageCode" 
-          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" 
-          SelectionChanged="CmbLanguage_SelectionChanged">
-           <!-- <i:Interaction.Behaviors>
+          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="SelectionChanged">
-                    <ic:InvokeCommandAction Command="{Binding ChangeL}" CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
-                </ic:EventTriggerBehavior>
-            </i:Interaction.Behaviors> -->
+                <ic:InvokeCommandAction Command="{Binding ChangeLanguage}" 
+                                        CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
+               
+            </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </ComboBox>
+
+        <TextBlock x:Uid="tbAddTile" Grid.Column="0" Grid.Row="4" />
+        <Button x:Uid="bnAddTile" Grid.Column="2" Grid.Row="4"
+                Command="{Binding AddTile}" CommandParameter="{Binding ElementName=Colour}"
+                DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}"
+                Style="{StaticResource ButtonsStyle}"/>
+
+        <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" VerticalAlignment="Center" Margin="20">
+
+            <ComboBoxItem Tag="FF000000" IsSelected="True">
+                <Rectangle Width="25" Height="14" Fill="Black"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FF808080">
+                <Rectangle Width="25" Height="14" Fill="Gray"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FFFF0000">
+                <Rectangle Width="25" Height="14" Fill="Red"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FFFFA500">
+                <Rectangle Width="25" Height="14" Fill="Orange"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FFFFFF00">
+                <Rectangle Width="25" Height="14" Fill="Yellow"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FF008000">
+                <Rectangle Width="25" Height="14" Fill="Green"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FF00FFFF">
+                <Rectangle Width="25" Height="14" Fill="Cyan"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FF0000FF">
+                <Rectangle Width="25" Height="14" Fill="Blue"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FFFF00FF">
+                <Rectangle Width="25" Height="14" Fill="Magenta"/>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="FF800080">
+                <Rectangle Width="25" Height="14" Fill="Purple"/>
+            </ComboBoxItem>
         </ComboBox>
     </Grid>
 </Page>

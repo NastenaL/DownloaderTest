@@ -27,10 +27,13 @@
     <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="DisplayName" />
     <RootPropertyPathName Name="LanguageCode" />
+    <RootPropertyPathName Name="AddTile" />
+    <RootPropertyPathName Name="SettingNewInstance" />
     <RootPropertyPathName Name="Languages" />
     <RootPropertyPathName Name="SelectedLanguage" />
+    <RootPropertyPathName Name="ChangeLanguage" />
+    <RootPropertyPathName Name="SelectedValue" />
     <RootPropertyPathName Name="IsDark" />
-    <RootPropertyPathName Name="SettingNewInstance" />
     <RootPropertyPathName Name="ChangeTheme" />
     <RootPropertyPathName Name="NavigateCommand" />
   </Roots.PropertyPathNames>
@@ -42,7 +45,6 @@
     <RootType FullName="Windows.UI.Xaml.ResourceDictionary">
       <RootProperty Name="MergedDictionaries" />
       <RootProperty Name="Source" />
-      <RootProperty Name="ThemeDictionaries" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Orientation" />
@@ -80,7 +82,6 @@
       <RootProperty Name="CommandParameter" />
       <RootProperty Name="Name" />
       <RootProperty Name="DataContext" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
@@ -155,11 +156,12 @@
       <RootProperty Name="SelectedValue" />
       <RootProperty Name="Style" />
       <RootProperty Name="DataContext" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="DisplayMemberPath" />
       <RootProperty Name="SelectedValuePath" />
       <RootProperty Name="SelectedItem" />
-      <RootEvent Name="SelectionChanged" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="AcceptsReturn" />
@@ -212,15 +214,22 @@
     </RootType>
     <RootType FullName="DownLoader.MainPage" />
     <RootType FullName="DownLoader.ViewModels.LanguageViewModel" />
-    <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
-      <RootProperty Name="Color" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
       <RootProperty Name="Name" />
       <RootProperty Name="OffContent" />
       <RootProperty Name="OnContent" />
       <RootProperty Name="IsOn" />
       <RootProperty Name="DataContext" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBoxItem">
+      <RootProperty Name="Tag" />
+      <RootProperty Name="IsSelected" />
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Fill" />
     </RootType>
     <RootType FullName="DownLoader.Views.Setting" />
   </Roots.RootTypes>

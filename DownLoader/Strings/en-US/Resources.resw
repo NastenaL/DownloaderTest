@@ -120,6 +120,9 @@
   <data name="bnAddLink.Content" xml:space="preserve">
     <value>Add link</value>
   </data>
+  <data name="bnAddTile.Content" xml:space="preserve">
+    <value>Add tile</value>
+  </data>
   <data name="bnBack.Content" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="stopErrorString" xml:space="preserve">
     <value>To use the stop function, at least one download must be active</value>
+  </data>
+  <data name="tbAddTile.Text" xml:space="preserve">
+    <value>Tile</value>
   </data>
   <data name="tbDate.Text" xml:space="preserve">
     <value>Download date</value>

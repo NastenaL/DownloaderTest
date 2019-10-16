@@ -1,8 +1,4 @@
-﻿using CommonServiceLocator;
-using DownLoader.Models;
-using DownLoader.Servises;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace DownLoader
 {
@@ -11,11 +7,6 @@ namespace DownLoader
         public MainPage()
         {
             this.InitializeComponent();
-
-            // Set theme for window root
-            FrameworkElement root = (FrameworkElement)Window.Current.Content;
-            root.RequestedTheme = AppSettings.Theme;
         }
-
     }
 }

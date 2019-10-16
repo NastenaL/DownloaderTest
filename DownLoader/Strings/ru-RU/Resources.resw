@@ -120,6 +120,9 @@
   <data name="bnAddLink.Content" xml:space="preserve">
     <value>Добавить ссылку</value>
   </data>
+  <data name="bnAddTile.Content" xml:space="preserve">
+    <value>Добавить плитку</value>
+  </data>
   <data name="bnBack.Content" xml:space="preserve">
     <value>Назад</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="stopErrorString" xml:space="preserve">
     <value>Для использования функции остановки загрузки необходимо, чтоб была активна хотя б одна загрузка</value>
+  </data>
+  <data name="tbAddTile.Text" xml:space="preserve">
+    <value>Плитка</value>
   </data>
   <data name="tbDate.Text" xml:space="preserve">
     <value>Дата загрузки</value>

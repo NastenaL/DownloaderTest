@@ -1,24 +1,25 @@
-﻿using GalaSoft.MvvmLight;
+﻿using DownLoader.Models;
+using DownLoader.Servises;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
-using System.Windows.Input;
-using Windows.Networking.BackgroundTransfer;
-using System.Threading;
-using Windows.Storage.Pickers;
-using System.Threading.Tasks;
-using Windows.Storage;
-using System.Net;
-using System.IO;
 using System.Collections.Generic;
-using DownLoader.Models;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Controls;
-using DownLoader.Servises;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Resources.Core;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.ViewModels
 {
@@ -35,9 +36,8 @@ namespace DownLoader.ViewModels
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
-        private ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
-        private ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
-        private string status;
+        private readonly ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
+        private readonly ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControlViewModel popUpControl = new PopUpControlViewModel();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
@@ -53,7 +53,6 @@ namespace DownLoader.ViewModels
                 return Enum.GetValues(typeof(FileType)).Cast<FileType>();
             }
         }
-
         public RelayCommand GoToSettings { get; private set; }
         public string Description { get; set; }
         public string Status {get;set;}
@@ -121,6 +120,11 @@ namespace DownLoader.ViewModels
 
         public MainPageViewModel(INavigationService NavigationService)
         {
+
+            // Set theme for window root
+            FrameworkElement root = (FrameworkElement)Window.Current.Content;
+            root.RequestedTheme = AppSettings.Theme;
+
             navigationService = NavigationService;
             GoToSettings = new RelayCommand(NavigateCommandAction);
             StopDownload = new RelayCommand(StopDownloadAction);

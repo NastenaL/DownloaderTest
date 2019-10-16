@@ -1,38 +1,34 @@
-﻿using CommonServiceLocator;
-using DownLoader.Servises;
+﻿using DownLoader.Servises;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using System;
-using System.Linq;
-using Windows.UI.StartScreen;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Notifications;
-using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace DownLoader.ViewModels
 {
    public class SettingViewModel : ViewModelBase
     {
-        private INavigationService navigationService;
+        private readonly INavigationService navigationService;
+        public bool IsDark;
         readonly LiveTile tile = new LiveTile();
 
-        public bool IsDark;
-
-   
-
         public RelayCommand NavigateCommand { get; private set; }
+   //     public RelayCommand AddTile { get; set; }
         public RelayCommand IsLightCommand { get; private set; }
 
 
         public SettingViewModel(INavigationService _navigationService)
         {
+            FrameworkElement root = (FrameworkElement)Window.Current.Content;
+            root.RequestedTheme = AppSettings.Theme;
+
             navigationService = _navigationService;
             NavigateCommand = new RelayCommand(NavigateCommandAction);
             IsLightCommand = new RelayCommand(IsLightCommandAction);
+    //        AddTile = new RelayCommand(AddTileAction);
           
-           tile.CreateTileAsync();
         }
 
         private void IsLightCommandAction()
@@ -47,7 +43,34 @@ namespace DownLoader.ViewModels
         {
             navigationService.GoBack(); 
         }
-       
+
+        private void AddTileAction(ComboBox color)
+        {
+            tile.CreateTileAsync();
+            tile.AddColor(color);
+        }
+
+        private ICommand changeTheme;
+        public ICommand ChangeTheme
+        {
+            get
+            {
+                if (changeTheme == null)
+                    changeTheme = new RelayCommand<ToggleSwitch>(i => ChangeThemeAction(i));
+                return changeTheme;
+            }
+        }
+
+        private ICommand addTile;
+        public ICommand AddTile
+        {
+            get
+            {
+                if (addTile == null)
+                    addTile = new RelayCommand<ComboBox>(i => AddTileAction(i));
+                return addTile;
+            }
+        }
 
         private void ChangeThemeAction(ToggleSwitch sender)
         {

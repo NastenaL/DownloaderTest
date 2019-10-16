@@ -1,11 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommonServiceLocator;
+using DownLoader.Servises;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using DownLoader.Servises;
-using GalaSoft.MvvmLight.Command;
 using Windows.Globalization;
+using Windows.UI.Xaml.Controls;
 
 namespace DownLoader.ViewModels
 {
@@ -19,19 +22,9 @@ namespace DownLoader.ViewModels
         private ObservableCollection<Models.Language> languages;
 
         #endregion
-       string ci = Windows.Globalization.Language.CurrentInputMethodLanguageTag;
         
         #region Properties
-        private ICommand changeL;
-        public ICommand ChangeL
-        {
-            get
-            {
-                if (changeL == null)
-                    changeL = new RelayCommand<string>(i => CmbLanguage_SelectionChanged(i));
-                return changeL;
-            }
-        }
+   
 
         public ObservableCollection<Models.Language> Languages
         {
@@ -43,17 +36,14 @@ namespace DownLoader.ViewModels
             get => selectedLanguage;
             set
             {
-                selectedLanguage = value;
-                appSettings.PrimaryLanguageOverride = value.LanguageCode;
-                RaisePropertyChanged();
+                try
+                {
+                    selectedLanguage = value;
+                    appSettings.PrimaryLanguageOverride = value.LanguageCode;
+                    RaisePropertyChanged();
+                }
+                catch (Exception) { }
             }
-        }
-
-        private void CmbLanguage_SelectionChanged(string selectedLanguage)
-        {
-            ApplicationLanguages.PrimaryLanguageOverride = selectedLanguage;
-            Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset();
-            // Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
         }
 
         #endregion
@@ -88,5 +78,26 @@ namespace DownLoader.ViewModels
         }
 
         #endregion
+
+        private ICommand changeLanguage;
+        public ICommand ChangeLanguage
+        {
+            get
+            {
+                if (changeLanguage == null)
+                    changeLanguage = new RelayCommand<string>(i => ChangeLanguageAction(i));
+                return changeLanguage;
+            }
+        }
+
+        private void ChangeLanguageAction(string CmbLanguage)
+        {
+            Frame frame = new Frame();
+            CmbLanguage = SelectedLanguage.LanguageCode;
+            ApplicationLanguages.PrimaryLanguageOverride = CmbLanguage;
+           
+            Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset();
+            // Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
+        }
     }
 }
