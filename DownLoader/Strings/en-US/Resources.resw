@@ -207,6 +207,18 @@
   <data name="pausedNoNetworkStatus" xml:space="preserve">
     <value>No network detected. Please check your internet connection.</value>
   </data>
+  <data name="purchaseDialogBuyButton" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="purchaseDialogCloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="purchaseDialogContent" xml:space="preserve">
+    <value>To download files larger than 50 MB buy the full version</value>
+  </data>
+  <data name="purchaseDialogTitle" xml:space="preserve">
+    <value>Notification</value>
+  </data>
   <data name="rbDarkTheme.Text" xml:space="preserve">
     <value>Dark theme</value>
   </data>

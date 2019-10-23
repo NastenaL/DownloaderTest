@@ -95,7 +95,8 @@ namespace DownLoader.Servises
                 }
                 catch (Exception)
                 {
-                    NotifyUser("The upgrade transaction failed. You still have a trial license for this app.", NotifyType.ErrorMessage);
+                    mainPageVM.CancelDownloadAction();
+                    //  NotifyUser("The upgrade transaction failed. You still have a trial license for this app.", NotifyType.ErrorMessage);
                 }
             }
             else

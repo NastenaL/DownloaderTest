@@ -26,6 +26,7 @@
     <RootPropertyPathName Name="link" />
     <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="CancelDownload" />
+    <RootPropertyPathName Name="IsEnableB" />
     <RootPropertyPathName Name="StopDownload" />
     <RootPropertyPathName Name="ResumeDownload" />
     <RootPropertyPathName Name="ActualHeight" />
@@ -193,7 +194,6 @@
       <RootProperty Name="Resources" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="DownLoader.Models.SideMenu" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>

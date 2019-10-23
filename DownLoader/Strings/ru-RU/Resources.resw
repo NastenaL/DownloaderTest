@@ -207,6 +207,18 @@
   <data name="pausedNoNetworkStatus" xml:space="preserve">
     <value>Отсутствует соединение с интернетом</value>
   </data>
+  <data name="purchaseDialogBuyButton" xml:space="preserve">
+    <value>Купить</value>
+  </data>
+  <data name="purchaseDialogCloseButton" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="purchaseDialogContent" xml:space="preserve">
+    <value>Для скачивания файлов размером более 50 МБ купите полную версию</value>
+  </data>
+  <data name="purchaseDialogTitle" xml:space="preserve">
+    <value>Уведомление</value>
+  </data>
   <data name="rbDarkTheme.Text" xml:space="preserve">
     <value>Темная тема</value>
   </data>

@@ -119,7 +119,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\SideMenu.cs" />
     <Compile Include="Servises\ApiPurchase.cs" />
     <Compile Include="Servises\ContentDialogMaker.cs" />
     <Compile Include="Servises\DataStorage.cs" />

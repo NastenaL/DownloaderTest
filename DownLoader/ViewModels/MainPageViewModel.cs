@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,11 +25,31 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
         ApiPurchase api = new ApiPurchase();
         ContentDialog dialog;
+        private bool isEnableB = false;
 
+        public bool IsEnableB
+        {
+            get { return isEnableB; }
+            set
+            {
+                isEnableB = value;
+                OnPropertyChanged("IsEnableB");
+            }
+        }
+
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+        #endregion
 
         #region Fields
         private CancellationTokenSource cancellationToken;
@@ -272,7 +293,7 @@ namespace DownLoader.ViewModels
                         dataStorage.Save(Files);
                         UpdateTileAction();
                     }
-                    
+                    IsEnableB = false;
                 }
                 catch (TaskCanceledException)
                 {
@@ -320,11 +341,11 @@ namespace DownLoader.ViewModels
 
                 dialog = new ContentDialog
                 {
-                    Title = "Title",
-                    Content = "Для скачивания файлов размером более 50 МБ купите полную версию",
-                    PrimaryButtonText = "Купить",
+                    Title = resourceMap.GetValue("purchaseDialogTitle", resourceContext).ValueAsString,
+                    Content = resourceMap.GetValue("purchaseDialogContent", resourceContext).ValueAsString,
+                    PrimaryButtonText = resourceMap.GetValue("purchaseDialogBuyButton", resourceContext).ValueAsString,
                     PrimaryButtonCommand = new RelayCommand(Purchase),
-                    CloseButtonText = "Закрыть",
+                    CloseButtonText = resourceMap.GetValue("purchaseDialogCloseButton", resourceContext).ValueAsString,
                     CloseButtonCommand = new RelayCommand(CancelPurchase)
                 };
                 await ContentDialogMaker.CreateContentDialogAsync(dialog, true);
@@ -334,6 +355,7 @@ namespace DownLoader.ViewModels
                 {
                     case BackgroundTransferStatus.Running:
                         {
+                        IsEnableB = true;
                             var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                             if (item != null)
                             {
@@ -347,7 +369,8 @@ namespace DownLoader.ViewModels
                         }
                     case BackgroundTransferStatus.Completed:
                         {
-                            var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
+                        
+                        var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                             if (item != null)
                             {
                                 item.Status = string.Format(resourceMap.GetValue("runningStatus", resourceContext).ValueAsString, downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024);
@@ -381,7 +404,8 @@ namespace DownLoader.ViewModels
                         }
                     case BackgroundTransferStatus.Canceled:
                         {
-                            Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
+                        IsEnableB = false;
+                        Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
                             break;
                         }
                 }

@@ -16,7 +16,6 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <model:SideMenu x:Key="SideMenu"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListViewStyle.xaml"/>
@@ -104,13 +103,16 @@
                 </StackPanel>
             </Button>
             <Button x:Uid="bnResume" Grid.Column="2" 
+                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
                     Command="{Binding ResumeDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="3" 
-                    Command="{Binding StopDownload}" IsEnabled="False"
+            <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="3"
+                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
+                    Command="{Binding StopDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnCancel" Grid.Column="4" 
                     Command="{Binding CancelDownload}"
+                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnSetting" 
                     x:Name="bnSetting" 
