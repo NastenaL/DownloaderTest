@@ -19,12 +19,17 @@
     <RootPropertyPathName Name="DownloadCommandAs" />
     <RootPropertyPathName Name="Text" />
     <RootPropertyPathName Name="UpdateTile" />
+    <RootPropertyPathName Name="EnableButton" />
     <RootPropertyPathName Name="DownloadCommand" />
     <RootPropertyPathName Name="FileTypes" />
     <RootPropertyPathName Name="FType" />
+    <RootPropertyPathName Name="link" />
+    <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="CancelDownload" />
     <RootPropertyPathName Name="StopDownload" />
-    <RootPropertyPathName Name="GoToSettings" />
+    <RootPropertyPathName Name="ResumeDownload" />
+    <RootPropertyPathName Name="ActualHeight" />
+    <RootPropertyPathName Name="SideMenu" />
     <RootPropertyPathName Name="DisplayName" />
     <RootPropertyPathName Name="LanguageCode" />
     <RootPropertyPathName Name="AddTile" />
@@ -50,15 +55,19 @@
       <RootProperty Name="Orientation" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Style" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Height" />
       <RootProperty Name="Children" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
+      <RootProperty Name="Style" />
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
       <RootProperty Name="Padding" />
+      <RootProperty Name="Height" />
       <RootProperty Name="Background" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -66,6 +75,8 @@
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetColumnSpan" />
       <RootMethod Name="SetColumnSpan" />
+      <RootMethod Name="GetRowSpan" />
+      <RootMethod Name="SetRowSpan" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
@@ -80,13 +91,18 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Command" />
       <RootProperty Name="CommandParameter" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="IsEnabled" />
       <RootProperty Name="Name" />
       <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
-      <RootProperty Name="Foreground" />
       <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="FontSize" />
     </RootType>
@@ -94,7 +110,6 @@
       <RootProperty Name="Property" />
       <RootProperty Name="Value" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Source" />
       <RootProperty Name="Mode" />
@@ -117,6 +132,7 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Text" />
       <RootProperty Name="Name" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
       <RootProperty Name="Style" />
@@ -132,20 +148,26 @@
       <RootProperty Name="Style" />
       <RootProperty Name="HeaderTemplate" />
       <RootProperty Name="ItemTemplate" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuBar">
-      <RootProperty Name="Style" />
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Items" />
+      <RootEvent Name="ContainerContentChanging" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.UIElement">
+      <RootProperty Name="Opacity" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Panel">
       <RootProperty Name="Background" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.NavigationViewItem" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuBar" />
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
       <RootProperty Name="IsLightDismissEnabled" />
       <RootProperty Name="IsOpen" />
       <RootProperty Name="Style" />
       <RootProperty Name="Child" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="Name" />
@@ -171,6 +193,7 @@
       <RootProperty Name="Resources" />
       <RootProperty Name="Content" />
     </RootType>
+    <RootType FullName="DownLoader.Models.SideMenu" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>
@@ -192,26 +215,29 @@
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuBarItem">
-      <RootProperty Name="AccessKey" />
-      <RootProperty Name="Items" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Stretch" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
-      <RootProperty Name="Text" />
-      <RootProperty Name="Icon" />
-      <RootProperty Name="Command" />
-      <RootProperty Name="CommandParameter" />
-      <RootProperty Name="KeyboardAccelerators" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.Expander">
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="IsExpanded" />
+      <RootProperty Name="ExpandDirection" />
+      <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutSeparator" />
-    <RootType FullName="Windows.UI.Xaml.Input.KeyboardAccelerator">
-      <RootProperty Name="Key" />
-      <RootProperty Name="Modifiers" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ListViewItem">
+      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="DownLoader.MainPage" />
     <RootType FullName="DownLoader.ViewModels.LanguageViewModel" />
     <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
       <RootProperty Name="Name" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="OffContent" />
       <RootProperty Name="OnContent" />
       <RootProperty Name="IsOn" />

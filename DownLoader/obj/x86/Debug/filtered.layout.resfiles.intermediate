@@ -1,5 +1,7 @@
 WinMetadata\Windows.winmd
+Assets\buttonIcon\add.png
 Assets\LockScreenLogo.scale-200.png
+Assets\PurchaseInfo.xml
 Assets\SplashScreen.scale-200.png
 Assets\Square150x150Logo.scale-200.png
 Assets\Square44x44Logo.scale-200.png
@@ -12,9 +14,11 @@ DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf
 Styles\ListViewStyle.xbf
+Styles\MainPageStyle.xbf
 Styles\MenuBarStyle.xbf
 Styles\PopupStyle.xbf
 Styles\TextFieldsStyle.xbf
 Views\MainPage.xbf
 Views\Setting.xbf
+data\trial-mode.xml
 Properties\Default.rd.xml

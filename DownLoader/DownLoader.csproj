@@ -119,12 +119,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\SideMenu.cs" />
+    <Compile Include="Servises\ApiPurchase.cs" />
+    <Compile Include="Servises\ContentDialogMaker.cs" />
     <Compile Include="Servises\DataStorage.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Servises\LiveTile.cs" />
-    <Compile Include="ViewModels\Controls\PopUpControlViewModel.cs" />
-    <Compile Include="ViewModels\Controls\ToastNotificationViewModel.cs" />
+    <Compile Include="Servises\Controls\PopUpControl.cs" />
+    <Compile Include="Servises\Controls\ToastNotificationViewModel.cs" />
     <Compile Include="Servises\AppSettings.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -144,7 +147,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\buttonIcon\add.png" />
+    <Content Include="Assets\PurchaseInfo.xml" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="data\trial-mode.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -164,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MainPageStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -44,17 +44,20 @@
                 Command="{Binding NavigateCommand}"
                 Style="{StaticResource ButtonsStyle}"/>
 
-        <TextBlock x:Name="tbTheme" x:Uid="tbTheme" Style="{StaticResource HeaderTextBlockStyle}"
-                   Grid.Column="0" Grid.Row="2" />
-        <ToggleSwitch Name="tglAppTheme" 
-              Grid.Row="2" Grid.Column="2"
-              OffContent="Light"
-              OnContent="Dark"
-              IsOn="{Binding IsDark}"
-              DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}">
+        <TextBlock x:Name="tbTheme" x:Uid="tbTheme" 
+                   Grid.Column="0" Grid.Row="2" 
+                   Style="{StaticResource HeaderTextBlockStyle}"/>
+        <ToggleSwitch Name="tglAppTheme"
+                      Margin="10"
+                      Grid.Row="2" Grid.Column="2"
+                      OffContent="Light"
+                      OnContent="Dark"
+                      IsOn="{Binding IsDark}"
+                      DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}">
             <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="Toggled">
-                    <ic:InvokeCommandAction Command="{Binding ChangeTheme}" CommandParameter="{Binding ElementName=tglAppTheme}"/>
+                    <ic:InvokeCommandAction Command="{Binding ChangeTheme}" 
+                                            CommandParameter="{Binding ElementName=tglAppTheme}"/>
                 </ic:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </ToggleSwitch>
@@ -86,34 +89,34 @@
 
         <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" Style="{StaticResource ComboBoxStyle}" Width="Auto">
             <ComboBoxItem Tag="FF000000" IsSelected="True">
-                <Rectangle Width="25" Height="14" Fill="Black"/>
+                <Rectangle Width="40" Height="14" Fill="Black"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FF808080">
-                <Rectangle Width="25" Height="14" Fill="Gray"/>
+                <Rectangle Width="40" Height="14" Fill="Gray"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FFFF0000">
-                <Rectangle Width="25" Height="14" Fill="Red"/>
+                <Rectangle Width="40" Height="14" Fill="Red"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FFFFA500">
-                <Rectangle Width="25" Height="14" Fill="Orange"/>
+                <Rectangle Width="40" Height="14" Fill="Orange"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FFFFFF00">
-                <Rectangle Width="25" Height="14" Fill="Yellow"/>
+                <Rectangle Width="40" Height="14" Fill="Yellow"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FF008000">
-                <Rectangle Width="25" Height="14" Fill="Green"/>
+                <Rectangle Width="40" Height="14" Fill="Green"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FF00FFFF">
-                <Rectangle Width="25" Height="14" Fill="Cyan"/>
+                <Rectangle Width="40" Height="14" Fill="Cyan"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FF0000FF">
-                <Rectangle Width="25" Height="14" Fill="Blue"/>
+                <Rectangle Width="40" Height="14" Fill="Blue"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FFFF00FF">
-                <Rectangle Width="25" Height="14" Fill="Magenta"/>
+                <Rectangle Width="40" Height="14" Fill="Magenta"/>
             </ComboBoxItem>
             <ComboBoxItem Tag="FF800080">
-                <Rectangle Width="25" Height="14" Fill="Purple"/>
+                <Rectangle Width="40" Height="14" Fill="Purple"/>
             </ComboBoxItem>
         </ComboBox>
     </Grid>

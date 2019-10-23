@@ -1,5 +1,4 @@
-﻿using DownLoader.Servises;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
@@ -31,9 +30,9 @@ namespace DownLoader.Models
             {
                 try
                 {
-                    ObservableCollection<DownloadFile> customerList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
+                    ObservableCollection<DownloadFile> downloadList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
 
-                    foreach (var c in customerList)
+                    foreach (var c in downloadList)
                     {
                         downloadFiles.Add(c);
                     }

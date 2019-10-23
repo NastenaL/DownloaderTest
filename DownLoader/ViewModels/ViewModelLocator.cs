@@ -24,7 +24,6 @@ namespace DownLoader.ViewModels
             }
         }
 
-        
         public SettingViewModel SettingNewInstance
         {
             get

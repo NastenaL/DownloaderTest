@@ -5,5 +5,6 @@
     xmlns:local="using:DownLoader">
     <Application.Resources>
         <vm:ViewModelLocator xmlns:vm="using:DownLoader.ViewModels" x:Key="Locator" />
+       
     </Application.Resources>
 </Application>

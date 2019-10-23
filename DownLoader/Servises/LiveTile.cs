@@ -1,11 +1,11 @@
 ﻿using CommonServiceLocator;
 using DownLoader.ViewModels;
+using Microsoft.Toolkit.Uwp.Notifications;
 using System;
+using System.Globalization;
 using System.Linq;
 using Windows.UI.StartScreen;
 using Windows.UI.Notifications;
-using Microsoft.Toolkit.Uwp.Notifications;
-using System.Globalization;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
@@ -13,9 +13,13 @@ namespace DownLoader.Servises
 {
     class LiveTile
     {
+        #region Fields
+        readonly MainPageViewModel main = ServiceLocator.Current.GetInstance<MainPageViewModel>();
         SecondaryTile secondaryTile;
         TileNotification tileNotification;
-        readonly MainPageViewModel main = ServiceLocator.Current.GetInstance<MainPageViewModel>();
+        #endregion
+
+        #region Methods
         internal async void CreateTileAsync()
         {
               secondaryTile = new SecondaryTile(
@@ -24,8 +28,6 @@ namespace DownLoader.Servises
                "displayname",
                new Uri("ms-appx:///Assets/StoreLogo.png", UriKind.Absolute),
                TileSize.Default);
-
-
             var success = await secondaryTile.RequestCreateAsync();
             if (success)
             {
@@ -65,9 +67,7 @@ namespace DownLoader.Servises
                 };
 
                 var xmlDoc = tileContent.GetXml();
-
                 tileNotification = new TileNotification(xmlDoc);
-               
                 var tileUpdaterForSecondaryTile = TileUpdateManager.CreateTileUpdaterForSecondaryTile("tilePage");
                 tileUpdaterForSecondaryTile.Update(tileNotification);
             }
@@ -80,12 +80,11 @@ namespace DownLoader.Servises
             Byte.Parse(value.Substring(4, 2), NumberStyles.HexNumber),
             Byte.Parse(value.Substring(6, 2), NumberStyles.HexNumber));
         }
-
         public void AddColor(ComboBox colour)
         {
             Color background = stringToColour(((ComboBoxItem)colour.SelectedItem).Tag.ToString());
             secondaryTile.VisualElements.BackgroundColor = background;
         }
-
+        #endregion
     }
 }
