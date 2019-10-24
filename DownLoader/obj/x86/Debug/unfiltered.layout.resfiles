@@ -17,7 +17,9 @@ Styles\ListViewStyle.xbf
 Styles\MainPageStyle.xbf
 Styles\MenuBarStyle.xbf
 Styles\PopupStyle.xbf
+Styles\TabControlStyle.xbf
 Styles\TextFieldsStyle.xbf
+Styles\ThemeStyle.xbf
 Views\MainPage.xbf
 Views\Setting.xbf
 data\trial-mode.xml

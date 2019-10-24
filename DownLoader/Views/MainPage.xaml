@@ -5,11 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:model="using:DownLoader.Models"
-    xmlns:service="using:DownLoader.Servises"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x1="using:System"
+  
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -23,11 +20,12 @@
                 <ResourceDictionary Source="/Styles/MenuBarStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+             
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
     
-    <Grid x:Name="MainWindow" Style="{StaticResource MainPageGrid}">
+    <Grid x:Name="MainWindow" Style="{StaticResource MainPageGrid}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -73,23 +71,17 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListViewItem>
-                               
-                                    <TextBlock Text="vl,edv"/>
-                                
+                                <TextBlock Text="Test"/>
                             </ListViewItem>
-                          
                         </ListView>
-                        
                     </Grid>
-                   
-                    
                 </controls:Expander>
             </Grid>
             
         </StackPanel>
 
         <StackPanel Style="{StaticResource MenuButtonStackPanel}" Grid.Column="1">
-            <Button x:Uid="bnAddLink" 
+            <Button x:Uid="bnAddLink"
                     x:Name="bnAddLink" 
                     Grid.Column="1"
                     Command="{Binding OpenPopUp}" 
@@ -146,23 +138,19 @@
                           Style="{StaticResource ComboBoxStyle}"/>
 
                 <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
-                    <Button x:Uid="downLoadFile"
-                            Style="{StaticResource ButtonsStyle}" >
+                    <Button x:Uid="downLoadFile" >
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
                                                         CommandParameter="{Binding ElementName=AddLinkPopup}"/>
                                 <ic:InvokeCommandAction Command="{Binding DownloadCommand}" 
                                                         CommandParameter="{Binding ElementName=tbLink, Path=Text}"/>
-                                <ic:InvokeCommandAction Command="{Binding EnableButton}" 
-                                                        CommandParameter="{Binding ElementName=bnStop}"/>
                                 <ic:InvokeCommandAction Command="{Binding UpdateTile}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
 
-                    <Button x:Uid="downLoadFileAs"
-                            Style="{StaticResource ButtonsStyle}">
+                    <Button x:Uid="downLoadFileAs">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" 
@@ -174,8 +162,7 @@
                     </Button>
                     
                     <Button x:Uid="bnClosePopup"
-                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"
-                            Style="{StaticResource ButtonsStyle}"/>
+                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
@@ -211,8 +198,7 @@
                          Style="{StaticResource TextBoxStyle}"/>
 
                 <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
-                    <Button x:Uid="bnUpdate"
-                            Style="{StaticResource ButtonsStyle}">
+                    <Button x:Uid="bnUpdate">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" 
@@ -225,12 +211,10 @@
                     </Button>
                     <Button x:Uid="bnClosePopup"
                             Command="{Binding ClosePopUp}" 
-                            CommandParameter="{Binding ElementName=FileDelails}"
-                            Style="{StaticResource ButtonsStyle}"/>
+                            CommandParameter="{Binding ElementName=FileDelails}"/>
                 </StackPanel>
             </StackPanel>
         </Popup>
-
 
         <ListView x:Name="lvDownloads" 
                   DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  

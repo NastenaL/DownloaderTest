@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:DownLoader.Models"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
@@ -13,14 +14,17 @@
     <Page.Resources>
         <ResourceDictionary>
             <vm:LanguageViewModel x:Key="LanguageVM"/>
+            <model:UserAccount x:Key="UserAccount"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MainPageStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource MainPageGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -41,31 +45,36 @@
         <Button x:Uid="bnBack" Name="bnBack"
                 DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
                 Grid.Row="0"
-                Command="{Binding NavigateCommand}"
-                Style="{StaticResource ButtonsStyle}"/>
+                Command="{Binding NavigateCommand}"/>
 
-        <TextBlock x:Name="tbTheme" x:Uid="tbTheme" 
+        <Pivot x:Name="rootPivot" Title="PIVOT TITLE" Grid.Row="1" Style="{StaticResource PivotStyle}">
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Общее" Style="{StaticResource TextBlockStyle}"/>
+                </PivotItem.Header>
+                <StackPanel>
+                    <TextBlock x:Name="tbTheme" x:Uid="tbTheme" 
                    Grid.Column="0" Grid.Row="2" 
                    Style="{StaticResource HeaderTextBlockStyle}"/>
-        <ToggleSwitch Name="tglAppTheme"
+                    <ToggleSwitch Name="tglAppTheme"
                       Margin="10"
                       Grid.Row="2" Grid.Column="2"
                       OffContent="Light"
                       OnContent="Dark"
                       IsOn="{Binding IsDark}"
                       DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}">
-            <i:Interaction.Behaviors>
-                <ic:EventTriggerBehavior EventName="Toggled">
-                    <ic:InvokeCommandAction Command="{Binding ChangeTheme}" 
+                        <i:Interaction.Behaviors>
+                            <ic:EventTriggerBehavior EventName="Toggled">
+                                <ic:InvokeCommandAction Command="{Binding ChangeTheme}" 
                                             CommandParameter="{Binding ElementName=tglAppTheme}"/>
-                </ic:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </ToggleSwitch>
+                            </ic:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </ToggleSwitch>
 
-        <TextBlock x:Uid="tbLanguage" 
+                    <TextBlock x:Uid="tbLanguage" 
                    Grid.Column="0" Grid.Row="3" 
                    Style="{StaticResource HeaderTextBlockStyle}"/>
-        <ComboBox x:Name="CmbLanguage" 
+                    <ComboBox x:Name="CmbLanguage" 
                   DataContext="{Binding Source={StaticResource LanguageVM}}"
                   DisplayMemberPath="DisplayName"
                   Grid.Row="3" Grid.Column="2"  Grid.ColumnSpan="3"
@@ -73,51 +82,84 @@
                   SelectedValuePath="LanguageCode" 
                   SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
                   Style="{StaticResource ComboBoxStyle}">
-            <i:Interaction.Behaviors>
-                <ic:EventTriggerBehavior EventName="SelectionChanged">
-                    <ic:InvokeCommandAction Command="{Binding ChangeLanguage}" 
+                        <i:Interaction.Behaviors>
+                            <ic:EventTriggerBehavior EventName="SelectionChanged">
+                                <ic:InvokeCommandAction Command="{Binding ChangeLanguage}" 
                                             CommandParameter="{Binding ElementName=CmbLanguage, Path=SelectedValue}"/>
-                </ic:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </ComboBox>
+                            </ic:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </ComboBox>
 
-        <TextBlock x:Uid="tbAddTile" Grid.Column="0" Grid.Row="4" Style="{StaticResource HeaderTextBlockStyle}"/>
-        <Button x:Uid="bnAddTile" Grid.Column="2" Grid.Row="4"
+                    <TextBlock x:Uid="tbAddTile" Grid.Column="0" Grid.Row="4" Style="{StaticResource HeaderTextBlockStyle}"/>
+                    <Button x:Uid="bnAddTile" Grid.Column="2" Grid.Row="4"
                 Command="{Binding AddTile}" CommandParameter="{Binding ElementName=Colour}"
-                DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}"
-                Style="{StaticResource ButtonsStyle}"/>
+                DataContext="{Binding SettingNewInstance , Source={StaticResource Locator}}"/>
 
-        <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" Style="{StaticResource ComboBoxStyle}" Width="Auto">
-            <ComboBoxItem Tag="FF000000" IsSelected="True">
-                <Rectangle Width="40" Height="14" Fill="Black"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FF808080">
-                <Rectangle Width="40" Height="14" Fill="Gray"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FFFF0000">
-                <Rectangle Width="40" Height="14" Fill="Red"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FFFFA500">
-                <Rectangle Width="40" Height="14" Fill="Orange"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FFFFFF00">
-                <Rectangle Width="40" Height="14" Fill="Yellow"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FF008000">
-                <Rectangle Width="40" Height="14" Fill="Green"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FF00FFFF">
-                <Rectangle Width="40" Height="14" Fill="Cyan"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FF0000FF">
-                <Rectangle Width="40" Height="14" Fill="Blue"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FFFF00FF">
-                <Rectangle Width="40" Height="14" Fill="Magenta"/>
-            </ComboBoxItem>
-            <ComboBoxItem Tag="FF800080">
-                <Rectangle Width="40" Height="14" Fill="Purple"/>
-            </ComboBoxItem>
-        </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="4" Name="Colour" Style="{StaticResource ComboBoxStyle}" Width="Auto">
+                        <ComboBoxItem Tag="FF000000" IsSelected="True">
+                            <Rectangle Width="40" Height="14" Fill="Black"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FF808080">
+                            <Rectangle Width="40" Height="14" Fill="Gray"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FFFF0000">
+                            <Rectangle Width="40" Height="14" Fill="Red"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FFFFA500">
+                            <Rectangle Width="40" Height="14" Fill="Orange"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FFFFFF00">
+                            <Rectangle Width="40" Height="14" Fill="Yellow"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FF008000">
+                            <Rectangle Width="40" Height="14" Fill="Green"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FF00FFFF">
+                            <Rectangle Width="40" Height="14" Fill="Cyan"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FF0000FF">
+                            <Rectangle Width="40" Height="14" Fill="Blue"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FFFF00FF">
+                            <Rectangle Width="40" Height="14" Fill="Magenta"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="FF800080">
+                            <Rectangle Width="40" Height="14" Fill="Purple"/>
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                </StackPanel>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Учетные записи сайтов" Style="{StaticResource TextBlockStyle}"/>
+                </PivotItem.Header>
+                <StackPanel DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}">
+                    <TextBlock Text="Логины и пароли пользователя для серверов/сайтов" />
+                    <Button Content="New" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+                    <Popup x:Name="AddNewAccount" DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
+                           IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
+                                    BorderBrush="White" BorderThickness="2">
+                            <TextBox Header="URL" x:Name="tbUrl" Text="{Binding Url, Mode=TwoWay}"/>
+                            <TextBox Header="Login" x:Name="tbLogin" Text="{Binding Login, Mode=TwoWay}"/>
+                            <TextBox Header="Password" x:Name="tbPassword" Text="{Binding Password, Mode=TwoWay}"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Add new" Command="{Binding AddAccount}"/>
+                                <Button Content="Cancel" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Popup>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Об приложении" Style="{StaticResource TextBlockStyle}"/>
+                </PivotItem.Header>
+                <!--Pivot content goes here-->
+                <TextBlock Text="Content of pivot item 3."/>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </Page>

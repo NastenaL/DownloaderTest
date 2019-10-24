@@ -2,10 +2,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/ThemeStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
-        <Setter Property="BorderBrush" Value="White"/>
-        <Setter Property="Background" Value="#03060D"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushColor}"/>
+        <Setter Property="Background" Value="{StaticResource MainWindowBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource MyButtonForegroundThemeBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="10,5"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -15,21 +19,21 @@
     <Style TargetType="TextBlock" x:Key="HeaderTextBlockStyle">
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Margin" Value="10,5"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource MyButtonForegroundThemeBrush}"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="TextBlockStyle">
         <Setter Property="Margin" Value="10,5"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Width" Value="370"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource MyButtonForegroundThemeBrush}"/>
     </Style>
     
     <Style TargetType="TextBox" x:Key="TextBoxStyle">
         <Setter Property="AcceptsReturn" Value="True"/>
-        <Setter Property="BorderBrush" Value="White"/>
-        <Setter Property="Background" Value="#03060D"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushColor}"/>
+        <Setter Property="Background" Value="{StaticResource MainWindowBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource MyButtonForegroundThemeBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Margin" Value="10,5"/>

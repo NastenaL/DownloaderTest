@@ -58,7 +58,6 @@ namespace DownLoader.ViewModels
         private ICommand downloadCommand;
         private ICommand downloadCommandAs;
         private ICommand openPopUp;
-        private ICommand enableButton;
         private ICommand refreshDataList;
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
@@ -112,15 +111,7 @@ namespace DownLoader.ViewModels
                 return openPopUp;
             }
         }
-        public ICommand EnableButton
-        {
-            get
-            {
-                if (enableButton == null)
-                    enableButton = new RelayCommand<Button>(i => EnableButtonAction(i));
-                return enableButton;
-            }
-        }
+      
         public ICommand ClosePopUp
         {
             get
@@ -156,22 +147,8 @@ namespace DownLoader.ViewModels
        
         #endregion
 
-        private void EnableButtonAction(Button button)
-        {
-            try
-            {
-                if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
-                {
-                    button.IsEnabled = true;
-                }
-                button.IsEnabled = false;
-            }
-            catch(Exception)
-            { }
-        }
         public MainPageViewModel(INavigationService NavigationService)
         {
-
             // Set theme for window root
             FrameworkElement root = (FrameworkElement)Window.Current.Content;
             root.RequestedTheme = AppSettings.Theme;

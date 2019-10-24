@@ -125,3 +125,9 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\MenuBarSty
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\MainPageStyle.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\MainPageStyle.xbf
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\MainPageStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ThemeStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ThemeStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\ThemeStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TabControlStyle.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\TabControlStyle.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Styles\TabControlStyle.xbf

@@ -20,6 +20,18 @@ namespace DownLoader.Models
             }
         }
 
+        public async void Save(ObservableCollection<UserAccount> userAccounts)
+        {
+            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await localFolder.CreateFileAsync("accounts.xml", CreationCollisionOption.ReplaceExisting);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<UserAccount>));
+
+            using (Stream stream = await file.OpenStreamForWriteAsync())
+            {
+                serializer.Serialize(stream, userAccounts);
+            }
+        }
+
         public async void Load(ObservableCollection<DownloadFile> downloadFiles)
         {
            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -30,9 +42,9 @@ namespace DownLoader.Models
             {
                 try
                 {
-                    ObservableCollection<DownloadFile> downloadList = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
+                    ObservableCollection<DownloadFile> downloads = serializer.Deserialize(stream) as ObservableCollection<DownloadFile>;
 
-                    foreach (var c in downloadList)
+                    foreach (var c in downloads)
                     {
                         downloadFiles.Add(c);
                     }
@@ -40,5 +52,27 @@ namespace DownLoader.Models
                 catch (Exception) {}
             }
         }
+
+        public async void Load(ObservableCollection<UserAccount> userAccounts)
+        {
+            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await localFolder.GetFileAsync("accounts.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<UserAccount>));
+
+            using (Stream stream = await file.OpenStreamForReadAsync())
+            {
+                try
+                {
+                    ObservableCollection<UserAccount> accounts = serializer.Deserialize(stream) as ObservableCollection<UserAccount>;
+
+                    foreach (var c in accounts)
+                    {
+                        userAccounts.Add(c);
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+
     }
 }

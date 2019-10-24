@@ -168,8 +168,14 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\PopupStyle.xbf">
       <PackagePath>Styles\PopupStyle.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TabControlStyle.xbf">
+      <PackagePath>Styles\TabControlStyle.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TextFieldsStyle.xbf">
       <PackagePath>Styles\TextFieldsStyle.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ThemeStyle.xbf">
+      <PackagePath>Styles\ThemeStyle.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
