@@ -150,12 +150,15 @@
             Header="Login" 
             Width="SizeToCells"
             Binding="{Binding Login}"  />
-                            <controls:DataGridTextColumn 
-            Header="Password"
-            Width="Auto"
-            Binding="{Binding Password}" >
-                            </controls:DataGridTextColumn>
-                       </controls:DataGrid.Columns>
+                            <controls:DataGridTemplateColumn Header="Password">
+                                <controls:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <PasswordBox Password="{Binding Password}" Width="Auto" BorderBrush="Transparent" 
+                                                     Background="Transparent"/>
+                                    </DataTemplate>
+                                </controls:DataGridTemplateColumn.CellTemplate>
+                            </controls:DataGridTemplateColumn>
+                        </controls:DataGrid.Columns>
         </controls:DataGrid>
 
                     <StackPanel Orientation="Horizontal">
@@ -177,7 +180,9 @@
                                     BorderBrush="White" BorderThickness="2">
                             <TextBox Header="URL" x:Name="tUrl" Text="{Binding Url, Mode=TwoWay}"/>
                             <TextBox Header="Login" x:Name="tLogin" Text="{Binding Login, Mode=TwoWay}"/>
-                            <TextBox Header="Password" x:Name="tPassword" Text="{Binding Password, Mode=TwoWay}"/>
+                            <PasswordBox Width="300" Header="Password" x:Name="tPassword" Password="{Binding Password, Mode=TwoWay}"
+                                         PlaceholderText="Enter your password" />
+                            
 
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Add new" >
@@ -199,7 +204,9 @@
                                     BorderBrush="White" BorderThickness="2">
                             <TextBox Header="URL" x:Name="tbUrl" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Url, Mode=TwoWay}"/>
                             <TextBox Header="Login" x:Name="tbLogin" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Login, Mode=TwoWay}"/>
-                            <TextBox Header="Password" x:Name="tbPassword" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Password, Mode=TwoWay}"/>
+                            <PasswordBox Width="300" Header="Password" x:Name="tbPassword" 
+                                         Password="{Binding ElementName=dataGrid1, Path=SelectedItem.Password, Mode=TwoWay}"
+                                         PlaceholderText="Enter your password"  />
 
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Edit" >
