@@ -158,9 +158,12 @@ namespace DownLoader.ViewModels
             ResumeDownload = new RelayCommand(ResumeDownloadAction);
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
+            AddQueue = new RelayCommand(AddQueueAction);
 
             Files = new ObservableCollection<DownloadFile>();
+            Queues = new ObservableCollection<Queue>();
             dataStorage.Load(Files);
+            dataStorage.Load(Queues);
         }
 
         #region Methods
@@ -304,8 +307,9 @@ namespace DownLoader.ViewModels
         public async void ProgressChanged(DownloadOperation downloadOperation)
         {
             int oneUse = 0;
-            int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)downloadOperation.Progress.TotalBytesToReceive));
             var NewTotalBytesToReceive = (double)downloadOperation.Progress.TotalBytesToReceive;
+            int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)NewTotalBytesToReceive));
+           
 
             if (downloadOperation.GetResponseInformation().Headers.ContainsKey("Content-Length"))
             {
@@ -440,8 +444,40 @@ namespace DownLoader.ViewModels
             }
         }
         #endregion
+        private string queueName;
+        public string QueueName
+        {
+            get { return this.queueName; }
+            set
+            {
+                // Implement with property changed handling for INotifyPropertyChanged
+                if (!string.Equals(this.queueName, value))
+                {
+                    this.queueName = value;
+                    this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                }
+            }
+        }
+        public ObservableCollection<Queue> Queues { get; set; }
+        public RelayCommand AddQueue { get; set; }
+        private void AddQueueAction()
+        {
+            Queue newAccount = new Queue
+            {
+                Id = Guid.NewGuid(),
+                Name = QueueName,
+                IsStartLoadAt = false,
+                IsStopLoadAt = false,
+    
+            };
+            Queues.Add(newAccount);
+            dataStorage.Save(Queues);
 
-     
+            QueueName = "";
+        }
+
+
+
 
     }
 }

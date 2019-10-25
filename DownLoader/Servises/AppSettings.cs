@@ -7,8 +7,9 @@ namespace DownLoader.Servises
 {
     class AppSettings
     {
-        public const ElementTheme DEFAULTTHEME = ElementTheme.Light;
-        public const ElementTheme NONDEFLTHEME = ElementTheme.Dark;
+        public const ElementTheme lightTheme = ElementTheme.Light;
+        public const ElementTheme darkTheme = ElementTheme.Dark;
+        public const ElementTheme defaultTheme = ElementTheme.Default;
 
         const string KEY_THEME = "appColourMode";
         static ApplicationDataContainer LOCALSETTINGS = ApplicationData.Current.LocalSettings;
@@ -19,15 +20,17 @@ namespace DownLoader.Servises
             {
                 if (LOCALSETTINGS.Values[KEY_THEME] == null)
                 {
-                    LOCALSETTINGS.Values[KEY_THEME] = (int)DEFAULTTHEME;
-                    return DEFAULTTHEME;
+                    LOCALSETTINGS.Values[KEY_THEME] = (int)lightTheme;
+                    return lightTheme;
                 }
                 // Previously set to default theme
-                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)DEFAULTTHEME)
-                    return DEFAULTTHEME;
+                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)lightTheme)
+                    return lightTheme;
                 // Previously set to non-default theme
+                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)darkTheme)
+                    return darkTheme;
                 else
-                    return NONDEFLTHEME;
+                    return defaultTheme;
             }
             set
             {

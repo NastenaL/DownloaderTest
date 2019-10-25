@@ -20,6 +20,18 @@ namespace DownLoader.Models
             }
         }
 
+        public async void Save(ObservableCollection<Queue> downloadFiles)
+        {
+            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await localFolder.CreateFileAsync("queues.xml", CreationCollisionOption.ReplaceExisting);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Queue>));
+
+            using (Stream stream = await file.OpenStreamForWriteAsync())
+            {
+                serializer.Serialize(stream, downloadFiles);
+            }
+        }
+
         public async void Save(ObservableCollection<UserAccount> userAccounts)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -50,6 +62,27 @@ namespace DownLoader.Models
                     }
                 }
                 catch (Exception) {}
+            }
+        }
+
+        public async void Load(ObservableCollection<Queue> queues)
+        {
+            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await localFolder.GetFileAsync("queues.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Queue>));
+
+            using (Stream stream = await file.OpenStreamForReadAsync())
+            {
+                try
+                {
+                    ObservableCollection<Queue> downloads = serializer.Deserialize(stream) as ObservableCollection<Queue>;
+
+                    foreach (var c in downloads)
+                    {
+                        queues.Add(c);
+                    }
+                }
+                catch (Exception) { }
             }
         }
 

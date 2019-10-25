@@ -23,7 +23,7 @@ namespace DownLoader.ViewModels
         public bool IsDark;
         readonly LiveTile tile = new LiveTile();
         #endregion
-
+        
         #region Properties
         public ICommand AddTile
         {
@@ -45,6 +45,7 @@ namespace DownLoader.ViewModels
         }
         public RelayCommand NavigateCommand { get; private set; }
         public RelayCommand IsLightCommand { get; private set; }
+
         #endregion
 
         #region Methods
@@ -53,28 +54,23 @@ namespace DownLoader.ViewModels
             tile.CreateTileAsync();
             tile.AddColor(color);
         }
+
         private void ChangeThemeAction(ToggleSwitch sender)
         {
             FrameworkElement window = (FrameworkElement)Window.Current.Content;
 
             if (((ToggleSwitch)sender).IsOn)
             {
-                AppSettings.Theme = AppSettings.NONDEFLTHEME;
-                window.RequestedTheme = AppSettings.NONDEFLTHEME;
+                AppSettings.Theme = AppSettings.darkTheme;
+                window.RequestedTheme = AppSettings.darkTheme;
             }
             else
             {
-                AppSettings.Theme = AppSettings.DEFAULTTHEME;
-                window.RequestedTheme = AppSettings.DEFAULTTHEME;
+                AppSettings.Theme = AppSettings.lightTheme;
+                window.RequestedTheme = AppSettings.lightTheme;
             }
         }
-        private void IsLightCommandAction()
-        {
-            if (AppSettings.Theme == ElementTheme.Light)
-                IsDark = true;
-            else
-                IsDark = false;
-        }
+       
         private void NavigateCommandAction()
         {
             navigationService.GoBack();
@@ -87,7 +83,6 @@ namespace DownLoader.ViewModels
             navigationService = _navigationService;
             AddNewAccount = new RelayCommand(AddNewAccountAction);
             NavigateCommand = new RelayCommand(NavigateCommandAction);
-            IsLightCommand = new RelayCommand(IsLightCommandAction);
 
             Accounts = new ObservableCollection<UserAccount>();
             dataStorage.Load(Accounts);
@@ -199,11 +194,13 @@ namespace DownLoader.ViewModels
         public RelayCommand AddNewAccount { get; set; }
         private void AddNewAccountAction()
         {
-           UserAccount newAccount = new UserAccount();
-            newAccount.Id = Guid.NewGuid();
-            newAccount.Url = Url;
-            newAccount.Login = Login;
-            newAccount.Password = Password;
+            UserAccount newAccount = new UserAccount
+            {
+                Id = Guid.NewGuid(),
+                Url = Url,
+                Login = Login,
+                Password = Password
+            };
             Accounts.Add(newAccount);
             dataStorage.Save(Accounts);
 

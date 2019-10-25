@@ -6,8 +6,8 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -106,9 +106,11 @@
                     Command="{Binding CancelDownload}"
                     IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
                     Style="{StaticResource ButtonsStyle}"/>
+            <Button Content="Queue" 
+                    Grid.Column="5" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=Queue}"/>
             <Button x:Uid="bnSetting" 
                     x:Name="bnSetting" 
-                    Grid.Column="5" 
+                    Grid.Column="6" 
                     Command="{Binding GoToSettings}"
                     Style="{StaticResource ButtonsStyle}"/>
         </StackPanel>
@@ -168,7 +170,6 @@
         </Popup>
 
         <Popup x:Name="FileDelails" 
-               DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
                IsOpen="{Binding IsOpen}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <StackPanel Style="{StaticResource StackPanelStyle}">
                 <TextBlock x:Uid="tblFileName" Style="{StaticResource HeaderTextBlockStyle}"/>
@@ -217,7 +218,6 @@
         </Popup>
 
         <ListView x:Name="lvDownloads" 
-                  DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"  
                   ItemsSource="{Binding Files, Mode=OneWay}" 
                   Style="{StaticResource ListViewStyle}" 
                   ContainerContentChanging="LvDownloads_ContainerContentChanging">
@@ -306,5 +306,41 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Popup x:Name="Queue"  IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
+            <StackPanel x:Name="spMain" BorderBrush="Black" Width="500" Style="{StaticResource StackPanelStyle}">
+                <Button Content="X" Background="Transparent" BorderBrush="Transparent"
+                            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
+                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=Queue}"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <ListView ItemsSource="{Binding Queues, Mode=OneWay}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <TextBlock Text="{Binding Name, Mode=TwoWay}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button Content="Add Queue" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Test"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
+                <StackPanel BorderBrush="Black" Width="300" Style="{StaticResource StackPanelStyle}">
+                        <TextBox Text="{Binding QueueName, Mode=TwoWay}" Header="Name"/>
+                        <Button Content="Add queue" Command="{Binding AddQueue}"/>
+                        <Button Content="Close" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                    </StackPanel>
+                </Popup>
+               
+                
+            </StackPanel>
+        </Popup>
     </Grid>
 </Page>
