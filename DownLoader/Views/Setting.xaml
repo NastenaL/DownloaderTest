@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:DownLoader.Models"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -47,7 +48,7 @@
                 Grid.Row="0"
                 Command="{Binding NavigateCommand}"/>
 
-        <Pivot x:Name="rootPivot" Title="PIVOT TITLE" Grid.Row="1" Style="{StaticResource PivotStyle}">
+        <Pivot x:Name="rootPivot" Title="PIVOT TITLE" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="6" Style="{StaticResource PivotStyle}">
             <PivotItem>
                 <PivotItem.Header>
                     <TextBlock Text="Общее" Style="{StaticResource TextBlockStyle}"/>
@@ -136,21 +137,85 @@
                 </PivotItem.Header>
                 <StackPanel DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}">
                     <TextBlock Text="Логины и пароли пользователя для серверов/сайтов" />
-                    <Button Content="New" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+
+                    <controls:DataGrid x:Name="dataGrid1" 
+    AutoGenerateColumns="False"
+    ItemsSource="{Binding Accounts, Mode=OneWay}">
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn 
+            Header="URL" 
+            Width="SizeToHeader"
+            Binding="{Binding Url}"  />
+                            <controls:DataGridTextColumn 
+            Header="Login" 
+            Width="SizeToCells"
+            Binding="{Binding Login}"  />
+                            <controls:DataGridTextColumn 
+            Header="Password"
+            Width="Auto"
+            Binding="{Binding Password}" >
+                            </controls:DataGridTextColumn>
+                       </controls:DataGrid.Columns>
+        </controls:DataGrid>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="New" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+                        <Button Content="Edit" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                        <Button Content="Remove" >
+                            <i:Interaction.Behaviors>
+                                <ic:EventTriggerBehavior EventName="Click">
+                                    <ic:InvokeCommandAction Command="{Binding RemoveAccount}" CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
+                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=dataGrid1}"/>
+                                </ic:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
+                    </StackPanel>
+                 
                     <Popup x:Name="AddNewAccount" DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
                            IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
                                     BorderBrush="White" BorderThickness="2">
-                            <TextBox Header="URL" x:Name="tbUrl" Text="{Binding Url, Mode=TwoWay}"/>
-                            <TextBox Header="Login" x:Name="tbLogin" Text="{Binding Login, Mode=TwoWay}"/>
-                            <TextBox Header="Password" x:Name="tbPassword" Text="{Binding Password, Mode=TwoWay}"/>
+                            <TextBox Header="URL" x:Name="tUrl" Text="{Binding Url, Mode=TwoWay}"/>
+                            <TextBox Header="Login" x:Name="tLogin" Text="{Binding Login, Mode=TwoWay}"/>
+                            <TextBox Header="Password" x:Name="tPassword" Text="{Binding Password, Mode=TwoWay}"/>
 
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Add new" Command="{Binding AddAccount}"/>
+                                <Button Content="Add new" >
+                                    <i:Interaction.Behaviors>
+                                        <ic:EventTriggerBehavior EventName="Click">
+                                            <ic:InvokeCommandAction Command="{Binding AddNewAccount}"/>
+                                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+                                        </ic:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                </Button>
                                 <Button Content="Cancel" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
                             </StackPanel>
                         </StackPanel>
                     </Popup>
+
+                    <Popup x:Name="EditAccount" DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
+                           IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
+                                    BorderBrush="White" BorderThickness="2">
+                            <TextBox Header="URL" x:Name="tbUrl" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Url, Mode=TwoWay}"/>
+                            <TextBox Header="Login" x:Name="tbLogin" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Login, Mode=TwoWay}"/>
+                            <TextBox Header="Password" x:Name="tbPassword" Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Password, Mode=TwoWay}"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Edit" >
+                                    <i:Interaction.Behaviors>
+                                        <ic:EventTriggerBehavior EventName="Click">
+                                            <ic:InvokeCommandAction Command="{Binding EditAccount}" CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
+                                            <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=dataGrid1}"/>
+                                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                                        </ic:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                </Button>
+                                <Button Content="Cancel" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Popup>
+
                 </StackPanel>
             </PivotItem>
             <PivotItem>

@@ -1,13 +1,23 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace DownLoader.Models
 {
     public class UserAccount
     {
+        private Guid id;
         private string url;
         private string login;
         private string password;
 
+        public Guid Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+            }
+        }
         public string Url
         {
             get

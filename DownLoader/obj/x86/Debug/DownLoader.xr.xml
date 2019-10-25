@@ -31,10 +31,14 @@
     <RootPropertyPathName Name="ActualHeight" />
     <RootPropertyPathName Name="SideMenu" />
     <RootPropertyPathName Name="SettingNewInstance" />
-    <RootPropertyPathName Name="AddAccount" />
+    <RootPropertyPathName Name="UpdateTable" />
+    <RootPropertyPathName Name="EditAccount" />
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="Login" />
     <RootPropertyPathName Name="Url" />
+    <RootPropertyPathName Name="AddNewAccount" />
+    <RootPropertyPathName Name="RemoveAccount" />
+    <RootPropertyPathName Name="Accounts" />
     <RootPropertyPathName Name="DisplayName" />
     <RootPropertyPathName Name="LanguageCode" />
     <RootPropertyPathName Name="AddTile" />
@@ -255,6 +259,16 @@
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <RootProperty Name="AutoGenerateColumns" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="Columns" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Binding" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
       <RootProperty Name="Name" />

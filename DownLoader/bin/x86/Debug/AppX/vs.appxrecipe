@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-10-24T10:23:21.815</Modified>
+      <Modified>2019-10-25T07:16:56.747</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.exe">
       <PackagePath>entrypoint\DownLoader.exe</PackagePath>
-      <Modified>2019-10-24T10:23:19.066</Modified>
+      <Modified>2019-10-25T07:16:53.862</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\8ipoe\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -192,55 +192,55 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\DownLoader.xr.xml">
       <PackagePath>DownLoader.xr.xml</PackagePath>
-      <Modified>2019-10-24T10:09:57.288</Modified>
+      <Modified>2019-10-25T07:16:53.309</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Microsoft.UI.Xaml\DensityStyles\Compact.xbf">
       <PackagePath>Microsoft.UI.Xaml\DensityStyles\Compact.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.535</Modified>
+      <Modified>2019-10-25T07:16:53.407</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.542</Modified>
+      <Modified>2019-10-25T07:16:53.412</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
       <PackagePath>Styles\ButtonStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.536</Modified>
+      <Modified>2019-10-25T07:16:53.408</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ListViewStyle.xbf">
       <PackagePath>Styles\ListViewStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.537</Modified>
+      <Modified>2019-10-25T07:16:53.408</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\MainPageStyle.xbf">
       <PackagePath>Styles\MainPageStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.538</Modified>
+      <Modified>2019-10-25T07:16:53.409</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\MenuBarStyle.xbf">
       <PackagePath>Styles\MenuBarStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.538</Modified>
+      <Modified>2019-10-25T07:16:53.410</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\PopupStyle.xbf">
       <PackagePath>Styles\PopupStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.539</Modified>
+      <Modified>2019-10-25T07:16:53.410</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TabControlStyle.xbf">
       <PackagePath>Styles\TabControlStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.541</Modified>
+      <Modified>2019-10-25T07:16:53.412</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\TextFieldsStyle.xbf">
       <PackagePath>Styles\TextFieldsStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.540</Modified>
+      <Modified>2019-10-25T07:16:53.411</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ThemeStyle.xbf">
       <PackagePath>Styles\ThemeStyle.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.541</Modified>
+      <Modified>2019-10-25T07:16:53.411</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.524</Modified>
+      <Modified>2019-10-25T07:16:53.390</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Views\Setting.xbf">
       <PackagePath>Views\Setting.xbf</PackagePath>
-      <Modified>2019-10-24T10:23:18.535</Modified>
+      <Modified>2019-10-25T07:16:53.407</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.18362.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -268,7 +268,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Core\DownLoader.exe">
       <PackagePath>DownLoader.exe</PackagePath>
-      <Modified>2019-10-24T10:23:21.801</Modified>
+      <Modified>2019-10-25T07:16:56.738</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

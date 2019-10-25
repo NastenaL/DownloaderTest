@@ -222,7 +222,6 @@
                   Style="{StaticResource ListViewStyle}" 
                   ContainerContentChanging="LvDownloads_ContainerContentChanging">
 
-
             <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="DoubleTapped">
                     <ic:InvokeCommandAction Command="{Binding OpenPopUp}" 

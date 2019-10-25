@@ -73,6 +73,5 @@ namespace DownLoader.Models
                 catch (Exception) { }
             }
         }
-
     }
 }

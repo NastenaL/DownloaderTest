@@ -3,8 +3,10 @@ using DownLoader.Servises;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using Microsoft.Toolkit.Uwp.UI.Controls;
+using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -82,20 +84,23 @@ namespace DownLoader.ViewModels
             FrameworkElement root = (FrameworkElement)Window.Current.Content;
             root.RequestedTheme = AppSettings.Theme;
 
-            Accounts = new ObservableCollection<UserAccount>();
-
             navigationService = _navigationService;
+            AddNewAccount = new RelayCommand(AddNewAccountAction);
             NavigateCommand = new RelayCommand(NavigateCommandAction);
             IsLightCommand = new RelayCommand(IsLightCommandAction);
+
+            Accounts = new ObservableCollection<UserAccount>();
             dataStorage.Load(Accounts);
         }
         #endregion
 
         //Accounts
-        ObservableCollection<UserAccount> Accounts;
+        public ObservableCollection<UserAccount> Accounts { get; set; }
         private ICommand openPopUp;
+        private ICommand editAccount;
         private ICommand closePopUp;
-        private ICommand addAccount;
+        private ICommand removeAccount;
+        private ICommand updateTable;
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControl popUpControl = new PopUpControl();
      
@@ -118,13 +123,34 @@ namespace DownLoader.ViewModels
                 return closePopUp;
             }
         }
-        public ICommand AddAccount
+
+        public ICommand EditAccount
         {
             get
             {
-                if (addAccount == null)
-                    addAccount = new RelayCommand<UserAccount>(i => AddNewAccount(i));
-                return addAccount;
+                if (editAccount == null)
+                    editAccount = new RelayCommand<UserAccount>(i => EditAccountAction(i));
+                return editAccount;
+            }
+        }
+
+        public ICommand RemoveAccount
+        {
+            get
+            {
+                if (removeAccount == null)
+                    removeAccount = new RelayCommand<UserAccount>(i => RemoveAccountAction(i));
+                return removeAccount;
+            }
+        }
+
+        public ICommand UpdateTable
+        {
+            get
+            {
+                if (updateTable == null)
+                    updateTable = new RelayCommand<DataGrid>(i => UpdateTableAction(i));
+                return updateTable;
             }
         }
 
@@ -170,10 +196,11 @@ namespace DownLoader.ViewModels
                 }
             }
         }
-
-        private void AddNewAccount(UserAccount newAccount)
+        public RelayCommand AddNewAccount { get; set; }
+        private void AddNewAccountAction()
         {
-            newAccount = new UserAccount();
+           UserAccount newAccount = new UserAccount();
+            newAccount.Id = Guid.NewGuid();
             newAccount.Url = Url;
             newAccount.Login = Login;
             newAccount.Password = Password;
@@ -182,6 +209,33 @@ namespace DownLoader.ViewModels
 
             Url = Login = Password = "";
         }
+
+        private void EditAccountAction(UserAccount file)
+        {
+            var item = Accounts.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
+            if (item != null)
+            {
+                item.Url = file.Url;
+            }
+            dataStorage.Save(Accounts);
+        }
+
+        private void RemoveAccountAction(UserAccount file)
+        {
+            var item = Accounts.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
+            if (item != null)
+            {
+                Accounts.Remove(item);
+            }
+            dataStorage.Save(Accounts);
+        }
+
+        private void UpdateTableAction(DataGrid accountTable)
+        {
+            accountTable.ItemsSource = null;
+            accountTable.ItemsSource = Accounts;
+        }
+
 
 
     }
