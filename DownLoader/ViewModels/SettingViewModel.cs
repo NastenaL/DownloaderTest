@@ -155,11 +155,10 @@ namespace DownLoader.ViewModels
             get { return this.url; }
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
                 if (!string.Equals(this.url, value))
                 {
                     this.url = value;
-                    this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                    this.RaisePropertyChanged();
                 }
             }
         }
@@ -169,11 +168,10 @@ namespace DownLoader.ViewModels
             get { return this.login; }
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
                 if (!string.Equals(this.login, value))
                 {
                     this.login = value;
-                    this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                    this.RaisePropertyChanged();
                 }
             }
         }

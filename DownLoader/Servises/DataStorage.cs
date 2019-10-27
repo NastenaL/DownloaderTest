@@ -8,6 +8,7 @@ namespace DownLoader.Models
 {
     class DataStorage
     {
+        #region Methods
         public async void Save(ObservableCollection<DownloadFile> downloadFiles)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -19,7 +20,6 @@ namespace DownLoader.Models
                 serializer.Serialize(stream, downloadFiles);
             }
         }
-
         public async void Save(ObservableCollection<Queue> downloadFiles)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -31,7 +31,6 @@ namespace DownLoader.Models
                 serializer.Serialize(stream, downloadFiles);
             }
         }
-
         public async void Save(ObservableCollection<UserAccount> userAccounts)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -64,7 +63,6 @@ namespace DownLoader.Models
                 catch (Exception) {}
             }
         }
-
         public async void Load(ObservableCollection<Queue> queues)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -85,7 +83,6 @@ namespace DownLoader.Models
                 catch (Exception) { }
             }
         }
-
         public async void Load(ObservableCollection<UserAccount> userAccounts)
         {
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -106,5 +103,6 @@ namespace DownLoader.Models
                 catch (Exception) { }
             }
         }
+        #endregion
     }
 }

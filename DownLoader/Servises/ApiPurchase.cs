@@ -13,72 +13,15 @@ namespace DownLoader.Servises
 {
     class ApiPurchase : Page
     {
+        #region Fields
         internal LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
         string LicenseMode;
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            string PurchasePrice;
-            CurrentAppSimulator.LicenseInformation.LicenseChanged += OnLicenseInformationChanged;
-            await ConfigureSimulatorAsync("trial-mode.xml");
-
-            try
-            {
-                ListingInformation listing = await CurrentAppSimulator.LoadListingInformationAsync();
-                PurchasePrice = listing.FormattedPrice;
-            }
-            catch (Exception)
-            {
-                NotifyUser("LoadListingInformationAsync API call failed", NotifyType.ErrorMessage);
-            }
-        }
-
-
-        public static async Task ConfigureSimulatorAsync(string filename)
-        {
-            StorageFile proxyFile = await Package.Current.InstalledLocation.GetFileAsync("data\\" + filename);
-            await CurrentAppSimulator.ReloadSimulatorAsync(proxyFile);
-        }
-
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            CurrentAppSimulator.LicenseInformation.LicenseChanged -= OnLicenseInformationChanged;
-            base.OnNavigatingFrom(e);
-        }
-
-        private void OnLicenseInformationChanged()
-        {
-            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-                if (licenseInformation.IsActive)
-                {
-                    if (licenseInformation.IsTrial)
-                    {
-                        LicenseMode = "Trial license";
-                    }
-                    else
-                    {
-                        LicenseMode = "Full license";
-                    }
-                }
-                else
-                {
-                    LicenseMode = "Inactive license";
-                }
-            });
-        }
-
-      
-
-        /// <summary>
-        /// Invoked when the user asks purchase the app.
-        /// </summary>
+        #endregion
+        #region Methods
         internal async void PurchaseFullLicense()
         {
             MainPageViewModel mainPageVM = ServiceLocator.Current.GetInstance<MainPageViewModel>();
             licenseInformation = CurrentAppSimulator.LicenseInformation;
-            NotifyUser("Buying the full license...", NotifyType.StatusMessage);
             if (licenseInformation.IsTrial)
             {
                 try
@@ -96,41 +39,61 @@ namespace DownLoader.Servises
                 catch (Exception)
                 {
                     mainPageVM.CancelDownloadAction();
-                    //  NotifyUser("The upgrade transaction failed. You still have a trial license for this app.", NotifyType.ErrorMessage);
                 }
             }
-            else
+        }
+        private async void DisplayFailDialog()
+        {
+            ContentDialog noWifiDialog = new ContentDialog()
             {
-                NotifyUser("You already bought this app and have a fully-licensed version.", NotifyType.ErrorMessage);
+                Title = "Notification",
+                Content = "LoadListingInformationAsync API call failed",
+                CloseButtonText = "Ok"
+            };
+            await noWifiDialog.ShowAsync();
+        }
+        private void OnLicenseInformationChanged()
+        {
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
+                if (licenseInformation.IsActive)
+                {
+                    if (licenseInformation.IsTrial)
+                    {
+                        LicenseMode = "Trial license";
+                    }
+                    else { LicenseMode = "Full license"; }
+                }
+                else { LicenseMode = "Inactive license"; }
+            });
+        }
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string PurchasePrice;
+            CurrentAppSimulator.LicenseInformation.LicenseChanged += OnLicenseInformationChanged;
+            await ConfigureSimulatorAsync("trial-mode.xml");
+
+            try
+            {
+                ListingInformation listing = await CurrentAppSimulator.LoadListingInformationAsync();
+                PurchasePrice = listing.FormattedPrice;
+            }
+            catch (Exception)
+            {
+                DisplayFailDialog();
             }
         }
-
-
-
-
-
-        public void NotifyUser(string strMessage, NotifyType type)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            // If called from the UI thread, then update immediately.
-            // Otherwise, schedule a task on the UI thread to perform the update.
-            if (Dispatcher.HasThreadAccess)
-            {
-            //    UpdateStatus(strMessage, type);
-            }
-            else
-            {
-         //       var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateStatus(strMessage, type));
-            }
+            CurrentAppSimulator.LicenseInformation.LicenseChanged -= OnLicenseInformationChanged;
+            base.OnNavigatingFrom(e);
         }
-
-        public enum NotifyType
+        public static async Task ConfigureSimulatorAsync(string filename)
         {
-            StatusMessage,
-            ErrorMessage
-        };
-
-       
-
-      
+            StorageFile proxyFile = await Package.Current.InstalledLocation.GetFileAsync("data\\" + filename);
+            await CurrentAppSimulator.ReloadSimulatorAsync(proxyFile);
+        }
+        #endregion
     }
 } 

@@ -20,11 +20,11 @@
     <RootPropertyPathName Name="UpdateFileDescription" />
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="DownloadCommandAs" />
-    <RootPropertyPathName Name="Text" />
     <RootPropertyPathName Name="UpdateTile" />
     <RootPropertyPathName Name="DownloadCommand" />
     <RootPropertyPathName Name="FileTypes" />
     <RootPropertyPathName Name="FType" />
+    <RootPropertyPathName Name="LinkURL" />
     <RootPropertyPathName Name="link" />
     <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="CancelDownload" />
@@ -148,9 +148,9 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Text" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Style" />
       <RootProperty Name="Name" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
       <RootProperty Name="Style" />

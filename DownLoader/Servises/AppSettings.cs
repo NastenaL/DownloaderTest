@@ -7,48 +7,16 @@ namespace DownLoader.Servises
 {
     class AppSettings
     {
-        public const ElementTheme lightTheme = ElementTheme.Light;
+        #region Fields
+        const string KEY_THEME = "appColourMode";
         public const ElementTheme darkTheme = ElementTheme.Dark;
         public const ElementTheme defaultTheme = ElementTheme.Default;
-
-        const string KEY_THEME = "appColourMode";
+        public const ElementTheme lightTheme = ElementTheme.Light;
         static ApplicationDataContainer LOCALSETTINGS = ApplicationData.Current.LocalSettings;
+        #endregion
 
-        public static ElementTheme Theme
-        {
-            get
-            {
-                if (LOCALSETTINGS.Values[KEY_THEME] == null)
-                {
-                    LOCALSETTINGS.Values[KEY_THEME] = (int)lightTheme;
-                    return lightTheme;
-                }
-                // Previously set to default theme
-                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)lightTheme)
-                    return lightTheme;
-                // Previously set to non-default theme
-                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)darkTheme)
-                    return darkTheme;
-                else
-                    return defaultTheme;
-            }
-            set
-            {
-                // Error check
-                if (value == ElementTheme.Default)
-                    throw new System.Exception("Only set the theme to light or dark mode!");
-                // Never set
-                else if (LOCALSETTINGS.Values[KEY_THEME] == null)
-                    LOCALSETTINGS.Values[KEY_THEME] = (int)value;
-                // No change
-                else if ((int)value == (int)LOCALSETTINGS.Values[KEY_THEME])
-                    return;
-                // Change
-                else
-                    LOCALSETTINGS.Values[KEY_THEME] = (int)value;
-            }
-        }
-        //For change language
+        #region Properties
+        public ApplicationDataContainer LocalSettings { get; set; }
         public bool UsePrimaryLanguageOverride
         {
             get => ReadSettings(nameof(UsePrimaryLanguageOverride), false);
@@ -58,17 +26,6 @@ namespace DownLoader.Servises
                 NotifyPropertyChanged();
             }
         }
-
-        public string PrimaryLanguageOverride
-        {
-            get => ReadSettings(nameof(PrimaryLanguageOverride), "ru-RU");
-            set
-            {
-                SaveSettings(nameof(PrimaryLanguageOverride), value);
-                NotifyPropertyChanged();
-            }
-        }
-
         public bool ShowTimeSheetSetting
         {
             get
@@ -81,19 +38,46 @@ namespace DownLoader.Servises
                 NotifyPropertyChanged();
             }
         }
+        public static ElementTheme Theme
+        {
+            get
+            {
+                if (LOCALSETTINGS.Values[KEY_THEME] == null)
+                {
+                    LOCALSETTINGS.Values[KEY_THEME] = (int)lightTheme;
+                    return lightTheme;
+                }
+                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)lightTheme)
+                    return lightTheme;
+                else if ((int)LOCALSETTINGS.Values[KEY_THEME] == (int)darkTheme)
+                    return darkTheme;
+                else
+                    return defaultTheme;
+            }
+            set
+            {
+                if ((int)value == (int)LOCALSETTINGS.Values[KEY_THEME])
+                    return;
+                else
+                    LOCALSETTINGS.Values[KEY_THEME] = (int)value;
+            }
+        }
+        public string PrimaryLanguageOverride
+        {
+            get => ReadSettings(nameof(PrimaryLanguageOverride), "ru-RU");
+            set
+            {
+                SaveSettings(nameof(PrimaryLanguageOverride), value);
+                NotifyPropertyChanged();
+            }
+        }
+        #endregion
 
-        public ApplicationDataContainer LocalSettings { get; set; }
-
+        #region Methods
         public AppSettings()
         {
             LocalSettings = ApplicationData.Current.LocalSettings;
         }
-
-        private void SaveSettings(string key, object value)
-        {
-            LocalSettings.Values[key] = value;
-        }
-
         private T ReadSettings<T>(string key, T defaultValue)
         {
             if (LocalSettings.Values.ContainsKey(key))
@@ -106,12 +90,19 @@ namespace DownLoader.Servises
             }
             return default(T);
         }
+        private void SaveSettings(string key, object value)
+        {
+            LocalSettings.Values[key] = value;
+        }
+        #endregion
 
+        #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
         internal void NotifyPropertyChanged([CallerMemberName]string propName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        #endregion
     }
 }

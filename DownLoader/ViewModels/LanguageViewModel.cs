@@ -7,8 +7,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Windows.Globalization;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace DownLoader.ViewModels
 {
@@ -58,7 +56,6 @@ namespace DownLoader.ViewModels
         {
             CmbLanguage = SelectedLanguage.LanguageCode;
             ApplicationLanguages.PrimaryLanguageOverride = CmbLanguage;
-       
             Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
         }
         public LanguageViewModel()

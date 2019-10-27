@@ -27,16 +27,15 @@ namespace DownLoader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        ApiPurchase api = new ApiPurchase();
-        ContentDialog dialog;
-        private bool isEnableB = false;
 
-        public bool IsEnableB
+
+
+        public bool IsEnableButtons
         {
-            get { return isEnableB; }
+            get { return isEnableButtons; }
             set
             {
-                isEnableB = value;
+                isEnableButtons = value;
                 OnPropertyChanged("IsEnableB");
             }
         }
@@ -52,11 +51,12 @@ namespace DownLoader.ViewModels
         #endregion
 
         #region Fields
+        ApiPurchase api = new ApiPurchase();
+        ContentDialog dialog;
+        private bool isEnableButtons = false;
         private CancellationTokenSource cancellationToken;
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
-        private ICommand downloadCommand;
-        private ICommand downloadCommandAs;
         private ICommand openPopUp;
         private ICommand refreshDataList;
         private ICommand updateFileDescription;
@@ -67,7 +67,7 @@ namespace DownLoader.ViewModels
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControl popUpControl = new PopUpControl();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
-        internal string linkURL;
+        public string LinkURL { get; set; }
         #endregion
 
         #region Properties
@@ -80,38 +80,6 @@ namespace DownLoader.ViewModels
                 return Enum.GetValues(typeof(FileType)).Cast<FileType>();
             }
         }
-        public RelayCommand GoToSettings { get; private set; }
-        public string Description { get; set; }
-        public string Status {get;set;}
-        public ICommand UpdateFileDescription
-        {
-            get
-            {
-                if (updateFileDescription == null)
-                    updateFileDescription = new RelayCommand<DownloadFile>(i => UpdateDescription(i));
-                return updateFileDescription;
-            }
-        }
-
-        public ICommand RefreshDataListView
-        {
-            get
-            {
-                if (refreshDataList == null)
-                    refreshDataList = new RelayCommand<ListView>(i => RefreshListView(i));
-                return refreshDataList;
-            }
-        }
-        public ICommand OpenPopUp
-        {
-            get
-            {
-                if (openPopUp == null)
-                    openPopUp = new RelayCommand<Popup>(i => popUpControl.OpenPopupAction(i));
-                return openPopUp;
-            }
-        }
-      
         public ICommand ClosePopUp
         {
             get
@@ -121,25 +89,40 @@ namespace DownLoader.ViewModels
                 return closePopUp;
             }
         }
-        public ICommand DownloadCommand
+   
+        public ICommand OpenPopUp
         {
             get
             {
-                if (downloadCommand == null)
-                    downloadCommand = new RelayCommand<string>(i => Download(i));
-                return downloadCommand;
+                if (openPopUp == null)
+                    openPopUp = new RelayCommand<Popup>(i => popUpControl.OpenPopupAction(i));
+                return openPopUp;
             }
         }
-        public ICommand DownloadCommandAs
+        public ICommand RefreshDataListView
         {
             get
             {
-                if (downloadCommandAs == null)
-                    downloadCommandAs = new RelayCommand<string>(i => SaveAs(i));
-                return downloadCommandAs;
+                if (refreshDataList == null)
+                    refreshDataList = new RelayCommand<ListView>(i => RefreshListView(i));
+                return refreshDataList;
             }
         }
+        public ICommand UpdateFileDescription
+        {
+            get
+            {
+                if (updateFileDescription == null)
+                    updateFileDescription = new RelayCommand<DownloadFile>(i => UpdateDescription(i));
+                return updateFileDescription;
+            }
+        }
+        public string Description { get; set; }
+        public string Status { get; set; }
         public RelayCommand CancelDownload { get; set; }
+        public RelayCommand DownloadCommand { get; set; }
+        public RelayCommand DownloadCommandAs { get; set; }
+        public RelayCommand GoToSettings { get; private set; }
         public RelayCommand ResumeDownload { get; set; }
         public RelayCommand StopDownload { get; set; }
         public RelayCommand UpdateTile { get; set; }
@@ -149,7 +132,7 @@ namespace DownLoader.ViewModels
 
         public MainPageViewModel(INavigationService NavigationService)
         {
-            // Set theme for window root
+          
             FrameworkElement root = (FrameworkElement)Window.Current.Content;
             root.RequestedTheme = AppSettings.Theme;
 
@@ -159,6 +142,8 @@ namespace DownLoader.ViewModels
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
             AddQueue = new RelayCommand(AddQueueAction);
+            DownloadCommand = new RelayCommand(DownloadAction);
+            DownloadCommandAs = new RelayCommand(DownloadAsAction);
 
             Files = new ObservableCollection<DownloadFile>();
             Queues = new ObservableCollection<Queue>();
@@ -218,11 +203,10 @@ namespace DownLoader.ViewModels
             downloadOperation.Resume();
         }
   
-        public async void Download(string link)
+        public async void DownloadAction()
         {
-            linkURL = link;
             Progress<DownloadOperation> progress = null;
-            if (link == null || link == "")
+            if (LinkURL == null || LinkURL == "")
             {
                 ContentDialog notFoundLinkFileDialog = new ContentDialog()
                 {
@@ -242,7 +226,7 @@ namespace DownLoader.ViewModels
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
-                Uri downloadUrl = new Uri(link);
+                Uri downloadUrl = new Uri(LinkURL);
                 String fileName = Path.GetFileName(downloadUrl.ToString());
                 var request = HttpWebRequest.Create(downloadUrl) as HttpWebRequest;
                 StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
@@ -266,14 +250,16 @@ namespace DownLoader.ViewModels
                     Files.Add(newFile);
                 
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
-                    
-                    if(downloadOperation.Progress.Status == BackgroundTransferStatus.Completed)
+                    LinkURL = Description = "";
+
+                    if (downloadOperation.Progress.Status == BackgroundTransferStatus.Completed)
                     {
                         toastNotification.SendCompletedToast(fileName);
                         dataStorage.Save(Files);
                         UpdateTileAction();
                     }
-                    IsEnableB = false;
+                    IsEnableButtons = false;
+                   
                 }
                 catch (TaskCanceledException)
                 {
@@ -336,7 +322,7 @@ namespace DownLoader.ViewModels
                 {
                     case BackgroundTransferStatus.Running:
                         {
-                        IsEnableB = true;
+                        IsEnableButtons = true;
                             var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                             if (item != null)
                             {
@@ -350,7 +336,7 @@ namespace DownLoader.ViewModels
                         }
                     case BackgroundTransferStatus.Completed:
                         {
-                        
+
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                             if (item != null)
                             {
@@ -385,7 +371,7 @@ namespace DownLoader.ViewModels
                         }
                     case BackgroundTransferStatus.Canceled:
                         {
-                        IsEnableB = false;
+                        IsEnableButtons = false;
                         Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
                             break;
                         }
@@ -396,9 +382,9 @@ namespace DownLoader.ViewModels
                 }
         }
 
-        public async void SaveAs(string link)
+        public async void DownloadAsAction()
         {
-            Uri downloadUrl = new Uri(link);
+            Uri downloadUrl = new Uri(LinkURL);
             String fileName = Path.GetFileName(downloadUrl.ToString());
 
             FileSavePicker savePicker = new FileSavePicker
