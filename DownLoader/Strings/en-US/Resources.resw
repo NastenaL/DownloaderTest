@@ -123,8 +123,17 @@
   <data name="bnAddAccountCancel.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="bnAddCancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="bnAddNewAccount.Content" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="bnAddQueue.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="bnAddQueues.Content" xml:space="preserve">
+    <value>Add queue</value>
   </data>
   <data name="bnAddTile.Content" xml:space="preserve">
     <value>Add tile</value>
@@ -153,6 +162,15 @@
   <data name="bnEditAccount.Content" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="bnEditCancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="bnEditQueue.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="bnEditQueues.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="bnEditSelectedAccount.Content" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -163,6 +181,9 @@
     <value>Queue</value>
   </data>
   <data name="bnRemoveAccount.Content" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="bnRemoveQueue.Content" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="bnResume.Content" xml:space="preserve">
@@ -185,6 +206,9 @@
   </data>
   <data name="contentErrorRemoveAccountDialog" xml:space="preserve">
     <value>Can not remove account because you did not select account. Try again.</value>
+  </data>
+  <data name="contentErrorRemoveQueueDialog" xml:space="preserve">
+    <value>Can not remove queue because you did not select account. Try again.</value>
   </data>
   <data name="dgColumnLogin.Header" xml:space="preserve">
     <value>Login</value>
@@ -276,6 +300,9 @@
   <data name="tbAddLink.Text" xml:space="preserve">
     <value>Add link</value>
   </data>
+  <data name="tbAddQueueName.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="tbAddTile.Text" xml:space="preserve">
     <value>Tile</value>
   </data>
@@ -293,6 +320,9 @@
   </data>
   <data name="tbEditPassword.PlaceholderText" xml:space="preserve">
     <value>Enter your password</value>
+  </data>
+  <data name="tbEditQueneName.Header" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="tbEditUrl.Header" xml:space="preserve">
     <value>Url</value>
@@ -325,6 +355,9 @@
     <value>Type</value>
   </data>
   <data name="titleErrorDeleteAccountDialog" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="titleErrorDeleteQueueDialog" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="titleErrorDownloadFileDialog" xml:space="preserve">

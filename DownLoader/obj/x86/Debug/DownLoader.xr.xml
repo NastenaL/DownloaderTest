@@ -209,7 +209,6 @@
       <RootProperty Name="AcceptsReturn" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Text" />
-      <RootProperty Name="Header" />
       <RootProperty Name="Name" />
       <RootProperty Name="Style" />
     </RootType>

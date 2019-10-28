@@ -469,7 +469,7 @@ namespace DownLoader.ViewModels
             QueueName = "";
         }
 
-        private void EditQueueAction(Queue selectedQueue)
+        private async void EditQueueAction(Queue selectedQueue)
         {
             var queue = Queues.FirstOrDefault(i => i.Id.ToString() == selectedQueue.Id.ToString());
             if (queue != null)
@@ -507,8 +507,19 @@ namespace DownLoader.ViewModels
             }
         }
 
-        private void RemoveQueueAction(Queue file)
+        private async void RemoveQueueAction(Queue file)
         {
+            if (file == null)
+            {
+                ContentDialog notSelectQueueDialog = new ContentDialog()
+                {
+                    Title = resourceMap.GetValue("titleErrorDeleteQueueDialog", resourceContext).ValueAsString,
+                    Content = resourceMap.GetValue("contentErrorRemoveQueueDialog", resourceContext).ValueAsString,
+                    PrimaryButtonText = "ОК"
+                };
+                ContentDialogResult result = await notSelectQueueDialog.ShowAsync();
+                return;
+            }
             var item = Queues.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
             if (item != null)
             {

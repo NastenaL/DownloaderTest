@@ -65,7 +65,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBlock Text="sdkvll"/>
+                                        <TextBlock Text="Test Menu"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -171,12 +171,16 @@
         <Popup x:Name="FileDelails" 
                IsOpen="{Binding IsOpen}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <StackPanel Style="{StaticResource StackPanelStyle}">
-                <TextBlock x:Uid="tblFileName" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbFileName" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
+                <TextBlock x:Uid="tblFileName" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock Name="tbFileName" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
                            Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBlock x:Uid="tbSize" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbFileSize" Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" 
+                <TextBlock x:Uid="tbSize" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock Name="tbFileSize" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" 
                            Style="{StaticResource TextBlockStyle}"/>
 
                 <TextBlock x:Uid="tbType" 
@@ -205,7 +209,8 @@
                                                         CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
                                 <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" 
                                                         CommandParameter="{Binding ElementName=lvDownloads}"/>                                
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=FileDelails}"/>
+                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=FileDelails}"/>
                             </ic:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
@@ -306,8 +311,11 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Popup x:Name="Queue"  IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
-            <StackPanel x:Name="spMain" BorderBrush="Black" Width="500" Style="{StaticResource StackPanelStyle}">
+        <Popup x:Name="Queue"  IsOpen="{Binding IsOpen}" 
+               VerticalAlignment="Center" HorizontalAlignment="Center" 
+               Style="{StaticResource PopupStyle}">
+            <StackPanel x:Name="spMain" 
+                        BorderBrush="Black" Width="500" Style="{StaticResource StackPanelStyle}">
                 <Button Content="X" Background="Transparent" BorderBrush="Transparent"
                             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
                             Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=Queue}"/>
@@ -323,9 +331,13 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Button Content="Add Queue" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
-                        <Button Content="Edit queue" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=EditQueue}"/>
-                        <Button Content="Remove">
+                        <Button x:Uid="bnAddQueues"
+                                Command="{Binding OpenPopUp}" 
+                                CommandParameter="{Binding ElementName=AddQueue}"/>
+                        <Button x:Uid="bnEditQueues" 
+                                Command="{Binding OpenPopUp}" 
+                                CommandParameter="{Binding ElementName=EditQueue}"/>
+                        <Button x:Uid="bnRemoveQueue">
                             <i:Interaction.Behaviors>
                                 <ic:EventTriggerBehavior EventName="Click">
                                     <ic:InvokeCommandAction Command="{Binding RemoveQueue}" CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
@@ -336,10 +348,14 @@
                     </StackPanel>
                 </StackPanel>
                 
-                <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
-                <StackPanel BorderBrush="Black" Width="300" Style="{StaticResource StackPanelStyle}">
-                        <TextBox Text="{Binding QueueName, Mode=TwoWay}" Header="Name"/>
-                        <Button Content="Add queue" >
+                <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Style="{StaticResource PopupStyle}">
+                <StackPanel BorderBrush="Black" Width="300" 
+                            Style="{StaticResource StackPanelStyle}">
+                        <TextBox x:Uid="tbAddQueueName"
+                            Text="{Binding QueueName, Mode=TwoWay}"/>
+                        <Button x:Uid="bnAddQueue">
                             <i:Interaction.Behaviors>
                                 <ic:EventTriggerBehavior EventName="Click">
                                     <ic:InvokeCommandAction Command="{Binding AddQueue}"/>
@@ -347,23 +363,34 @@
                                 </ic:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </Button>
-                        <Button Content="Close" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                        <Button x:Uid="bnAddCancel"
+                                Command="{Binding ClosePopUp}" 
+                                CommandParameter="{Binding ElementName=AddQueue}"/>
                     </StackPanel>
                 </Popup>
 
-                <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
-                    <StackPanel BorderBrush="Black" Width="300" Style="{StaticResource StackPanelStyle}">
-                        <TextBox Text="{Binding ElementName=QueuesTable, Path=SelectedItem.Name, Mode=TwoWay}" Header="Name"/>
-                        <Button Content="Add queue" >
+                <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Style="{StaticResource PopupStyle}">
+                    <StackPanel BorderBrush="Black" Width="300" 
+                                Style="{StaticResource StackPanelStyle}">
+                        <TextBox x:Uid="tbEditQueneName"
+                            Text="{Binding ElementName=QueuesTable, Path=SelectedItem.Name, Mode=TwoWay}"/>
+                        <Button x:Uid="bnEditQueue">
                             <i:Interaction.Behaviors>
                                 <ic:EventTriggerBehavior EventName="Click">
-                                    <ic:InvokeCommandAction Command="{Binding EditQueue}" CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
-                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=QueuesTable}"/>
-                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditQueue}"/>
+                                    <ic:InvokeCommandAction Command="{Binding EditQueue}" 
+                                                            CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
+                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
+                                                            CommandParameter="{Binding ElementName=QueuesTable}"/>
+                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                            CommandParameter="{Binding ElementName=EditQueue}"/>
                                 </ic:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </Button>
-                        <Button Content="Close" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                        <Button x:Uid="bnEditCancel" 
+                                Command="{Binding ClosePopUp}" 
+                                CommandParameter="{Binding ElementName=EditQueue}"/>
                     </StackPanel>
                 </Popup>
 

@@ -123,8 +123,17 @@
   <data name="bnAddAccountCancel.Content" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="bnAddCancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
   <data name="bnAddNewAccount.Content" xml:space="preserve">
     <value>Добавить</value>
+  </data>
+  <data name="bnAddQueue.Content" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="bnAddQueues.Content" xml:space="preserve">
+    <value>Добавить очередь</value>
   </data>
   <data name="bnAddTile.Content" xml:space="preserve">
     <value>Добавить плитку</value>
@@ -153,6 +162,15 @@
   <data name="bnEditAccount.Content" xml:space="preserve">
     <value>Редактировать</value>
   </data>
+  <data name="bnEditCancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="bnEditQueue.Content" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="bnEditQueues.Content" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
   <data name="bnEditSelectedAccount.Content" xml:space="preserve">
     <value>Редактировать</value>
   </data>
@@ -163,6 +181,9 @@
     <value>Очередь</value>
   </data>
   <data name="bnRemoveAccount.Content" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="bnRemoveQueue.Content" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="bnResume.Content" xml:space="preserve">
@@ -185,6 +206,9 @@
   </data>
   <data name="contentErrorRemoveAccountDialog" xml:space="preserve">
     <value>Невозможно удалить аккаунт, так как вы не выбрали запись. Попробуйте еще раз.</value>
+  </data>
+  <data name="contentErrorRemoveQueueDialog" xml:space="preserve">
+    <value>Невозможно удалить очередь, так как вы не выбрали запись. Попробуйте еще раз.</value>
   </data>
   <data name="dgColumnLogin.Header" xml:space="preserve">
     <value>Логин</value>
@@ -276,6 +300,9 @@
   <data name="tbAddLink.Text" xml:space="preserve">
     <value>Добавить ссылку</value>
   </data>
+  <data name="tbAddQueueName.Header" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
   <data name="tbAddTile.Text" xml:space="preserve">
     <value>Плитка</value>
   </data>
@@ -293,6 +320,9 @@
   </data>
   <data name="tbEditPassword.PlaceholderText" xml:space="preserve">
     <value>Введите свой пароль</value>
+  </data>
+  <data name="tbEditQueneName.Header" xml:space="preserve">
+    <value>Наименование</value>
   </data>
   <data name="tbEditUrl.Header" xml:space="preserve">
     <value>Ссылка</value>
@@ -326,6 +356,9 @@
   </data>
   <data name="titleErrorDeleteAccountDialog" xml:space="preserve">
     <value>Ошибка удаления аккаунта</value>
+  </data>
+  <data name="titleErrorDeleteQueueDialog" xml:space="preserve">
+    <value>Ошибка удаления очереди</value>
   </data>
   <data name="titleErrorDownloadFileDialog" xml:space="preserve">
     <value>Подтверждение действия</value>
