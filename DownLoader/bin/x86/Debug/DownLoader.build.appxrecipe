@@ -159,9 +159,6 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\AddLinkControl.xbf">
       <PackagePath>Controls\MainPage\AddLinkControl.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\FilesDetailesControl.xbf">
-      <PackagePath>Controls\FilesDetailesControl.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
       <PackagePath>Styles\ButtonStyle.xbf</PackagePath>
     </AppxPackagedFile>

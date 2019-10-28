@@ -138,6 +138,7 @@
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Name" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
       <RootMethod Name="GetBehaviors" />
@@ -165,7 +166,6 @@
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="DownLoader.Controls.AddLinkControl" />
-    <RootType FullName="DownLoader.Controls.MainPage.FilesDetailesControl" />
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
       <RootProperty Name="HorizontalAlignment" />
