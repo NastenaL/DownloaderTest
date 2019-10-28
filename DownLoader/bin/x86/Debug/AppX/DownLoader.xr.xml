@@ -18,11 +18,11 @@
     <RootPropertyPathName Name="FType" />
     <RootPropertyPathName Name="LinkURL" />
     <RootPropertyPathName Name="link" />
+    <RootPropertyPathName Name="AddQueue" />
+    <RootPropertyPathName Name="QueueName" />
     <RootPropertyPathName Name="IsOpen" />
     <RootPropertyPathName Name="UpdateTable" />
     <RootPropertyPathName Name="EditQueue" />
-    <RootPropertyPathName Name="AddQueue" />
-    <RootPropertyPathName Name="QueueName" />
     <RootPropertyPathName Name="RemoveQueue" />
     <RootPropertyPathName Name="OpenPopUp" />
     <RootPropertyPathName Name="Queues" />
@@ -98,12 +98,12 @@
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Style" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Orientation" />
       <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Orientation" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Background" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
@@ -166,6 +166,35 @@
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="DownLoader.Controls.AddLinkControl" />
+    <RootType FullName="DownLoader.Controls.MainPage.QueueAddControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
+      <RootProperty Name="IsOpen" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="Child" />
+      <RootProperty Name="IsLightDismissEnabled" />
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="HeaderTemplate" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Items" />
+      <RootEvent Name="ContainerContentChanging" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Border">
+      <RootProperty Name="Child" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Style" />
+    </RootType>
+    <RootType FullName="DownLoader.Controls.MainPage.QueueControl" />
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
       <RootProperty Name="HorizontalAlignment" />
@@ -187,12 +216,6 @@
       <RootProperty Name="Value" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Border">
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Child" />
-      <RootProperty Name="Style" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
       <RootProperty Name="Style" />
       <RootProperty Name="Value" />
@@ -200,15 +223,6 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.RangeBase">
       <RootProperty Name="Maximum" />
       <RootProperty Name="Minimum" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="HeaderTemplate" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Items" />
-      <RootEvent Name="ContainerContentChanging" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.UIElement">
       <RootProperty Name="Opacity" />
@@ -218,15 +232,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.NavigationViewItem" />
     <RootType FullName="Windows.UI.Xaml.Controls.MenuBar" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
-      <RootProperty Name="IsLightDismissEnabled" />
-      <RootProperty Name="IsOpen" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Child" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
       <RootProperty Name="Title" />
       <RootProperty Name="Style" />
@@ -246,9 +251,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.DataTemplate">
-      <RootProperty Name="Template" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Stretch" />

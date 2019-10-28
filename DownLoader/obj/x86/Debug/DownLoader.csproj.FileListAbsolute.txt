@@ -141,3 +141,13 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\DetailsControl.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\DetailsControl.xbf
 D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\DetailsControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueControl.g.i.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueControl.g.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueControl.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueAddControl.g.i.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueAddControl.g.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueAddControl.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\MainPage\QueueAddControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueAddControl.xbf

@@ -5,9 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:local="using:DownLoader.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:local="using:DownLoader.Controls.MainPage"
+    xmlns:local1="using:DownLoader.Controls"
     DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -120,60 +121,12 @@
         <Popup x:Name="AddLinkPopup" 
                x:FieldModifier="public"
                Style="{StaticResource PopupStyle}">
-            <local:AddLinkControl/>
+            <local1:AddLinkControl/>
         </Popup>
 
         <Popup x:Name="FileDelails" 
                VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <StackPanel Style="{StaticResource StackPanelStyle}">
-                <TextBlock x:Uid="tblFileName" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbFileName" 
-                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
-                           Style="{StaticResource TextBlockStyle}"/>
-
-                <TextBlock x:Uid="tbSize" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbFileSize" 
-                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" 
-                           Style="{StaticResource TextBlockStyle}"/>
-
-                <TextBlock x:Uid="tbType" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbFileType" 
-                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Type}"
-                           Style="{StaticResource TextBlockStyle}"/>
-
-                <TextBlock x:Uid="tbDate" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBlock Name="tbDataTime" 
-                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.DateTime}"
-                           Style="{StaticResource TextBlockStyle}"/>
-
-                <TextBlock x:Uid="tbDescription" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbpDescription"
-                         Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}"/>
-
-                <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
-                    <Button x:Uid="bnUpdate">
-                        <i:Interaction.Behaviors>
-                            <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" 
-                                                        CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
-                                <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" 
-                                                        CommandParameter="{Binding ElementName=lvDownloads}"/>
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                        CommandParameter="{Binding ElementName=FileDelails}"/>
-                            </ic:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button x:Uid="bnClosePopup"
-                            Command="{Binding ClosePopUp}" 
-                            CommandParameter="{Binding ElementName=FileDelails}"/>
-                </StackPanel>
-            </StackPanel>
+            <local1:DetailsControl/>
         </Popup>
 
         <ListView x:Name="lvDownloads" 
@@ -269,87 +222,7 @@
         <Popup x:Name="Queue"  IsOpen="{Binding IsOpen}" 
                VerticalAlignment="Center" HorizontalAlignment="Center" 
                Style="{StaticResource PopupStyle}">
-            <StackPanel x:Name="spMain" 
-                        BorderBrush="Black" Width="500" Style="{StaticResource StackPanelStyle}">
-                <Button Content="X" Background="Transparent" BorderBrush="Transparent"
-                            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
-                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=Queue}"/>
-
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <ListView x:Name="QueuesTable" ItemsSource="{Binding Queues, Mode=OneWay}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border>
-                                        <TextBlock x:Name="NameQ" Text="{Binding Name, Mode=TwoWay}"/>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <Button x:Uid="bnAddQueues"
-                                Command="{Binding OpenPopUp}" 
-                                CommandParameter="{Binding ElementName=AddQueue}"/>
-                        <Button x:Uid="bnEditQueues" 
-                                Command="{Binding OpenPopUp}" 
-                                CommandParameter="{Binding ElementName=EditQueue}"/>
-                        <Button x:Uid="bnRemoveQueue">
-                            <i:Interaction.Behaviors>
-                                <ic:EventTriggerBehavior EventName="Click">
-                                    <ic:InvokeCommandAction Command="{Binding RemoveQueue}" CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
-                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=QueuesTable}"/>
-                                </ic:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
-                
-                <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" 
-                       VerticalAlignment="Center" HorizontalAlignment="Center" 
-                       Style="{StaticResource PopupStyle}">
-                <StackPanel BorderBrush="Black" Width="300" 
-                            Style="{StaticResource StackPanelStyle}">
-                        <TextBox x:Uid="tbAddQueueName"
-                            Text="{Binding QueueName, Mode=TwoWay}"/>
-                        <Button x:Uid="bnAddQueue">
-                            <i:Interaction.Behaviors>
-                                <ic:EventTriggerBehavior EventName="Click">
-                                    <ic:InvokeCommandAction Command="{Binding AddQueue}"/>
-                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
-                                </ic:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
-                        </Button>
-                        <Button x:Uid="bnAddCancel"
-                                Command="{Binding ClosePopUp}" 
-                                CommandParameter="{Binding ElementName=AddQueue}"/>
-                    </StackPanel>
-                </Popup>
-
-                <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" 
-                       VerticalAlignment="Center" HorizontalAlignment="Center" 
-                       Style="{StaticResource PopupStyle}">
-                    <StackPanel BorderBrush="Black" Width="300" 
-                                Style="{StaticResource StackPanelStyle}">
-                        <TextBox x:Uid="tbEditQueneName"
-                            Text="{Binding ElementName=QueuesTable, Path=SelectedItem.Name, Mode=TwoWay}"/>
-                        <Button x:Uid="bnEditQueue">
-                            <i:Interaction.Behaviors>
-                                <ic:EventTriggerBehavior EventName="Click">
-                                    <ic:InvokeCommandAction Command="{Binding EditQueue}" 
-                                                            CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
-                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
-                                                            CommandParameter="{Binding ElementName=QueuesTable}"/>
-                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                            CommandParameter="{Binding ElementName=EditQueue}"/>
-                                </ic:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
-                        </Button>
-                        <Button x:Uid="bnEditCancel" 
-                                Command="{Binding ClosePopUp}" 
-                                CommandParameter="{Binding ElementName=EditQueue}"/>
-                    </StackPanel>
-                </Popup>
-
-            </StackPanel>
+            <local:QueueControl/>
         </Popup>
 
     </Grid>

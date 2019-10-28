@@ -125,6 +125,12 @@
     <Compile Include="Controls\MainPage\AddLinkControl.xaml.cs">
       <DependentUpon>AddLinkControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainPage\QueueAddControl.xaml.cs">
+      <DependentUpon>QueueAddControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainPage\QueueControl.xaml.cs">
+      <DependentUpon>QueueControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Servises\ApiPurchase.cs" />
@@ -177,6 +183,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\MainPage\AddLinkControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainPage\QueueAddControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainPage\QueueControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

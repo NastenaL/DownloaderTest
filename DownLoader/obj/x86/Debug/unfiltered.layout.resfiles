@@ -12,6 +12,8 @@ Assets\Wide310x150Logo.scale-400.png
 App.xbf
 Controls\MainPage\AddLinkControl.xbf
 Controls\MainPage\DetailsControl.xbf
+Controls\MainPage\QueueAddControl.xbf
+Controls\MainPage\QueueControl.xbf
 DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf
