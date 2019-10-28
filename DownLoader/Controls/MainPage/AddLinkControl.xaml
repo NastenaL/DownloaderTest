@@ -1,0 +1,75 @@
+﻿<UserControl
+    x:Class="DownLoader.Controls.AddLinkControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DownLoader.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MainPageStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MenuBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel Style="{StaticResource StackPanelStyle}">
+
+            <TextBlock x:Uid="tblockLink" Text="{Binding link, Mode=TwoWay}"
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBox Name="tbLink"  Text="{Binding LinkURL, Mode=TwoWay}"
+                         Style="{StaticResource TextBoxStyle}"/>
+
+            <TextBlock x:Uid="tblockDescription" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBox Name="tbDescription"
+                         Text="{Binding Description, Mode=TwoWay}"
+                         Style="{StaticResource TextBoxStyle}"/>
+
+            <TextBlock x:Uid="tblockType" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <ComboBox Name="cbType"
+                          ItemsSource="{Binding FileTypes}"
+                          SelectedValue="{Binding FType, Mode=TwoWay}"
+                          Style="{StaticResource ComboBoxStyle}"/>
+
+            <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
+                <Button x:Uid="downLoadFile" >
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="Click">
+                          <!--  <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/> -->
+                            <ic:InvokeCommandAction Command="{Binding DownloadCommand}" />
+                            <ic:InvokeCommandAction Command="{Binding UpdateTile}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </Button>
+
+                <Button x:Uid="downLoadFileAs">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="Click">
+                            <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" />
+                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </Button>
+
+                <Button x:Uid="bnClosePopup"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

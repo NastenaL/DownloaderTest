@@ -10,6 +10,9 @@ Assets\StoreLogo.png
 Assets\Wide310x150Logo.scale-200.png
 Assets\Wide310x150Logo.scale-400.png
 App.xbf
+Controls\FilesDetailesControl.xbf
+Controls\MainPage\AddLinkControl.xbf
+Controls\MainPage\DetailsControl.xbf
 DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf

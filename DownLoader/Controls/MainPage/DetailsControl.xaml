@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="DownLoader.Controls.DetailsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DownLoader.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MainPageStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/MenuBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel Style="{StaticResource StackPanelStyle}">
+            <TextBlock x:Uid="tblFileName" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Name="tbFileName" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Name}"
+                           Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock x:Uid="tbSize" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Name="tbFileSize" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.FileSize}" 
+                           Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock x:Uid="tbType" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Name="tbFileType" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Type}"
+                           Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock x:Uid="tbDate" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Name="tbDataTime" 
+                           Text="{Binding ElementName=lvDownloads, Path=SelectedItem.DateTime}"
+                           Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock x:Uid="tbDescription" 
+                           Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBox Name="tbpDescription"
+                         Text="{Binding ElementName=lvDownloads, Path=SelectedItem.Description, Mode=TwoWay}"
+                         Style="{StaticResource TextBoxStyle}"/>
+
+            <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
+                <Button x:Uid="bnUpdate">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="Click">
+                            <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" 
+                                                        CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
+                            <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" 
+                                                        CommandParameter="{Binding ElementName=lvDownloads}"/>
+                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                                                        CommandParameter="{Binding ElementName=FileDelails}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </Button>
+                <Button x:Uid="bnClosePopup"
+                            Command="{Binding ClosePopUp}" 
+                            CommandParameter="{Binding ElementName=FileDelails}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

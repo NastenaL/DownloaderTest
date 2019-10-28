@@ -2,26 +2,15 @@
 <Roots >
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="MainPageLocator" />
-    <RootPropertyPathName Name="IsOpen" />
     <RootPropertyPathName Name="ClosePopUp" />
-    <RootPropertyPathName Name="UpdateTable" />
-    <RootPropertyPathName Name="EditQueue" />
-    <RootPropertyPathName Name="SelectedItem" />
-    <RootPropertyPathName Name="Name" />
-    <RootPropertyPathName Name="AddQueue" />
-    <RootPropertyPathName Name="QueueName" />
-    <RootPropertyPathName Name="RemoveQueue" />
-    <RootPropertyPathName Name="OpenPopUp" />
-    <RootPropertyPathName Name="Queues" />
-    <RootPropertyPathName Name="Files" />
-    <RootPropertyPathName Name="Description" />
-    <RootPropertyPathName Name="DateTime" />
-    <RootPropertyPathName Name="Status" />
-    <RootPropertyPathName Name="State" />
-    <RootPropertyPathName Name="Type" />
-    <RootPropertyPathName Name="FileSize" />
     <RootPropertyPathName Name="RefreshDataListView" />
     <RootPropertyPathName Name="UpdateFileDescription" />
+    <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="Description" />
+    <RootPropertyPathName Name="DateTime" />
+    <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="FileSize" />
+    <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="DownloadCommandAs" />
     <RootPropertyPathName Name="UpdateTile" />
     <RootPropertyPathName Name="DownloadCommand" />
@@ -29,6 +18,17 @@
     <RootPropertyPathName Name="FType" />
     <RootPropertyPathName Name="LinkURL" />
     <RootPropertyPathName Name="link" />
+    <RootPropertyPathName Name="IsOpen" />
+    <RootPropertyPathName Name="UpdateTable" />
+    <RootPropertyPathName Name="EditQueue" />
+    <RootPropertyPathName Name="AddQueue" />
+    <RootPropertyPathName Name="QueueName" />
+    <RootPropertyPathName Name="RemoveQueue" />
+    <RootPropertyPathName Name="OpenPopUp" />
+    <RootPropertyPathName Name="Queues" />
+    <RootPropertyPathName Name="Files" />
+    <RootPropertyPathName Name="Status" />
+    <RootPropertyPathName Name="State" />
     <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="CancelDownload" />
     <RootPropertyPathName Name="IsEnableButtons" />
@@ -65,22 +65,24 @@
       <RootProperty Name="Source" />
       <RootProperty Name="ThemeDictionaries" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Orientation" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Children" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Margin" />
+    <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Resources" />
+      <RootProperty Name="Content" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Data.Binding">
+      <RootProperty Name="Source" />
+      <RootProperty Name="ElementName" />
+      <RootProperty Name="Path" />
+      <RootProperty Name="Mode" />
+      <RootProperty Name="UpdateSourceTrigger" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
+      <RootProperty Name="Children" />
       <RootProperty Name="Style" />
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
-      <RootProperty Name="Children" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Height" />
       <RootProperty Name="Background" />
@@ -93,6 +95,77 @@
       <RootMethod Name="GetRowSpan" />
       <RootMethod Name="SetRowSpan" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Style" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
+      <RootProperty Name="Style" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
+      <RootProperty Name="Name" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="AcceptsReturn" />
+      <RootProperty Name="TextWrapping" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Command" />
+      <RootProperty Name="CommandParameter" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="IsEnabled" />
+      <RootProperty Name="Name" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+      <RootProperty Name="CommandParameter" />
+    </RootType>
+    <RootType FullName="DownLoader.Controls.DetailsControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="Name" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedValue" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="DisplayMemberPath" />
+      <RootProperty Name="SelectedValuePath" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="DownLoader.Controls.AddLinkControl" />
+    <RootType FullName="DownLoader.Controls.MainPage.FilesDetailesControl" />
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
       <RootProperty Name="HorizontalAlignment" />
@@ -101,22 +174,6 @@
       <RootProperty Name="Height" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Content" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Command" />
-      <RootProperty Name="CommandParameter" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Padding" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="IsEnabled" />
-      <RootProperty Name="Name" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
@@ -130,29 +187,11 @@
       <RootProperty Name="Value" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
-    <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Source" />
-      <RootProperty Name="ElementName" />
-      <RootProperty Name="Path" />
-      <RootProperty Name="Mode" />
-      <RootProperty Name="UpdateSourceTrigger" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Child" />
       <RootProperty Name="Style" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
-      <RootProperty Name="FontWeight" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
       <RootProperty Name="Style" />
@@ -193,25 +232,6 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Items" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="Name" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedValue" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="DisplayMemberPath" />
-      <RootProperty Name="SelectedValuePath" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Items" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="AcceptsReturn" />
-      <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Style" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
       <RootProperty Name="Color" />
     </RootType>
@@ -226,18 +246,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
-      <RootMethod Name="GetBehaviors" />
-      <RootMethod Name="SetBehaviors" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
-      <RootProperty Name="EventName" />
-      <RootProperty Name="Actions" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
-      <RootProperty Name="Command" />
-      <RootProperty Name="CommandParameter" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />

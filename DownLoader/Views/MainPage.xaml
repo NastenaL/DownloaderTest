@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:local="using:DownLoader.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
@@ -119,57 +120,11 @@
         <Popup x:Name="AddLinkPopup" 
                x:FieldModifier="public"
                Style="{StaticResource PopupStyle}">
-
-            <StackPanel Style="{StaticResource StackPanelStyle}">
-
-                <TextBlock x:Uid="tblockLink" Text="{Binding link, Mode=TwoWay}"
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbLink"  Text="{Binding LinkURL, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}"/>
-
-                <TextBlock x:Uid="tblockDescription" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <TextBox Name="tbDescription"
-                         Text="{Binding Description, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}"/>
-
-                <TextBlock x:Uid="tblockType" 
-                           Style="{StaticResource HeaderTextBlockStyle}"/>
-                <ComboBox Name="cbType"
-                          ItemsSource="{Binding FileTypes}"
-                          SelectedValue="{Binding FType, Mode=TwoWay}"
-                          Style="{StaticResource ComboBoxStyle}"/>
-
-                <StackPanel Style="{StaticResource ButtonStackPanelStyle}">
-                    <Button x:Uid="downLoadFile" >
-                        <i:Interaction.Behaviors>
-                            <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/>
-                                <ic:InvokeCommandAction Command="{Binding DownloadCommand}" />
-                                <ic:InvokeCommandAction Command="{Binding UpdateTile}"/>
-                            </ic:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-
-                    <Button x:Uid="downLoadFileAs">
-                        <i:Interaction.Behaviors>
-                            <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding DownloadCommandAs}" />
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                        CommandParameter="{Binding ElementName=AddLinkPopup}"/>
-                            </ic:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    
-                    <Button x:Uid="bnClosePopup"
-                            Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddLinkPopup}"/>
-                </StackPanel>
-            </StackPanel>
+            <local:AddLinkControl/>
         </Popup>
 
         <Popup x:Name="FileDelails" 
-               IsOpen="{Binding IsOpen}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+               VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <StackPanel Style="{StaticResource StackPanelStyle}">
                 <TextBlock x:Uid="tblFileName" 
                            Style="{StaticResource HeaderTextBlockStyle}"/>
@@ -208,7 +163,7 @@
                                 <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" 
                                                         CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
                                 <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" 
-                                                        CommandParameter="{Binding ElementName=lvDownloads}"/>                                
+                                                        CommandParameter="{Binding ElementName=lvDownloads}"/>
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
                                                         CommandParameter="{Binding ElementName=FileDelails}"/>
                             </ic:EventTriggerBehavior>

@@ -119,6 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainPage\DetailsControl.xaml.cs">
+      <DependentUpon>DetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainPage\AddLinkControl.xaml.cs">
+      <DependentUpon>AddLinkControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Servises\ApiPurchase.cs" />
@@ -166,6 +172,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\MainPage\DetailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MainPage\AddLinkControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -26,15 +26,6 @@ namespace DownLoader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyChanged)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
-        }
-        #endregion
-
         #region Fields
         readonly ApiPurchase api = new ApiPurchase();
         ContentDialog dialog;
@@ -489,7 +480,6 @@ namespace DownLoader.ViewModels
                 return updateTable;
             }
         }
-
         private void UpdateTableAction(ListView queueTable)
         {
             queueTable.ItemsSource = null;
@@ -527,5 +517,13 @@ namespace DownLoader.ViewModels
             }
             dataStorage.Save(Queues);
         }
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+        #endregion
     }
 }
