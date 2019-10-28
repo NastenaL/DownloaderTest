@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="bnAddAccount.Content" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="bnAddAccountCancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="bnAddNewAccount.Content" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
   <data name="bnAddTile.Content" xml:space="preserve">
     <value>Добавить плитку</value>
   </data>
@@ -124,6 +133,9 @@
     <value>Назад</value>
   </data>
   <data name="bnCancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="bnCancelEdit.Content" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="bnClosePopup.Content" xml:space="preserve">
@@ -138,11 +150,20 @@
   <data name="bnDownloadAs.Text" xml:space="preserve">
     <value>Скачать как</value>
   </data>
+  <data name="bnEditAccount.Content" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="bnEditSelectedAccount.Content" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
   <data name="bnOpenFolder.Content" xml:space="preserve">
     <value>Открыть</value>
   </data>
   <data name="bnQueue.Content" xml:space="preserve">
     <value>Очередь</value>
+  </data>
+  <data name="bnRemoveAccount.Content" xml:space="preserve">
+    <value>Удалить</value>
   </data>
   <data name="bnResume.Content" xml:space="preserve">
     <value>Возобновить</value>
@@ -161,6 +182,18 @@
   </data>
   <data name="contentErrorDownloadFileDialog" xml:space="preserve">
     <value>Вы не ввели ссылку для скачивания файла, попробуйте еще раз</value>
+  </data>
+  <data name="contentErrorRemoveAccountDialog" xml:space="preserve">
+    <value>Невозможно удалить аккаунт, так как вы не выбрали запись. Попробуйте еще раз.</value>
+  </data>
+  <data name="dgColumnLogin.Header" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="dgColumnPassword.Header" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="dgColumnUrl.Header" xml:space="preserve">
+    <value>Ссылка</value>
   </data>
   <data name="downLoadFile.Content" xml:space="preserve">
     <value>Скачать</value>
@@ -231,6 +264,15 @@
   <data name="runningStatus" xml:space="preserve">
     <value>{0} из {1} kb. загружено</value>
   </data>
+  <data name="tabAboutApp.Text" xml:space="preserve">
+    <value>О приложении</value>
+  </data>
+  <data name="tabAccounts.Text" xml:space="preserve">
+    <value>Учетные записи сайтов</value>
+  </data>
+  <data name="tabGeneral.Text" xml:space="preserve">
+    <value>Общее</value>
+  </data>
   <data name="tbAddLink.Text" xml:space="preserve">
     <value>Добавить ссылку</value>
   </data>
@@ -242,6 +284,21 @@
   </data>
   <data name="tbDescription.Text" xml:space="preserve">
     <value>Описание</value>
+  </data>
+  <data name="tbEditLogin.Header" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="tbEditPassword.Header" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="tbEditPassword.PlaceholderText" xml:space="preserve">
+    <value>Введите свой пароль</value>
+  </data>
+  <data name="tbEditUrl.Header" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="tblAccountHeader.Text" xml:space="preserve">
+    <value>Логины и пароли пользователя для серверов/сайтов</value>
   </data>
   <data name="tbLanguage.Text" xml:space="preserve">
     <value>Язык</value>
@@ -267,7 +324,22 @@
   <data name="tbType.Text" xml:space="preserve">
     <value>Тип</value>
   </data>
+  <data name="titleErrorDeleteAccountDialog" xml:space="preserve">
+    <value>Ошибка удаления аккаунта</value>
+  </data>
   <data name="titleErrorDownloadFileDialog" xml:space="preserve">
     <value>Подтверждение действия</value>
+  </data>
+  <data name="tLogin.Header" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="tPassword.Header" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="tPassword.PlaceholderText" xml:space="preserve">
+    <value>Введите свой пароль</value>
+  </data>
+  <data name="tUrl.Header" xml:space="preserve">
+    <value>Ссылка</value>
   </data>
 </root>

@@ -275,19 +275,15 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="Width" />
-      <RootProperty Name="Header" />
       <RootProperty Name="Password" />
-      <RootProperty Name="PlaceholderText" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
-      <RootProperty Name="Header" />
       <RootProperty Name="Width" />
       <RootProperty Name="Binding" />
     </RootType>
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTemplateColumn">
-      <RootProperty Name="Header" />
       <RootProperty Name="CellTemplate" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">

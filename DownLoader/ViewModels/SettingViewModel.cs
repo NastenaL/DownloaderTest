@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,6 +22,8 @@ namespace DownLoader.ViewModels
         private ICommand changeTheme;
         private readonly INavigationService navigationService;
         public bool IsDark;
+        private readonly ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
+        private readonly ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
         readonly LiveTile tile = new LiveTile();
         #endregion
         
@@ -216,8 +219,20 @@ namespace DownLoader.ViewModels
             dataStorage.Save(Accounts);
         }
 
-        private void RemoveAccountAction(UserAccount file)
+        private async void RemoveAccountAction(UserAccount file)
         {
+            if (file == null)
+            {
+                ContentDialog notSelectAccountDialog = new ContentDialog()
+                {
+                    Title = resourceMap.GetValue("titleErrorDeleteAccountDialog", resourceContext).ValueAsString,
+                    Content = resourceMap.GetValue("contentErrorRemoveAccountDialog", resourceContext).ValueAsString,
+                    PrimaryButtonText = "ОК"
+                };
+                ContentDialogResult result = await notSelectAccountDialog.ShowAsync();
+                return;
+            }
+
             var item = Accounts.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
             if (item != null)
             {
@@ -231,8 +246,5 @@ namespace DownLoader.ViewModels
             accountTable.ItemsSource = null;
             accountTable.ItemsSource = Accounts;
         }
-
-
-
     }
 }
