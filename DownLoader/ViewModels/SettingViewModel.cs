@@ -89,7 +89,7 @@ namespace DownLoader.ViewModels
         }
         #endregion
 
-        //Accounts
+      
         public ObservableCollection<UserAccount> Accounts { get; set; }
         private ICommand openPopUp;
         private ICommand editAccount;
@@ -211,6 +211,7 @@ namespace DownLoader.ViewModels
             if (item != null)
             {
                 item.Url = file.Url;
+
             }
             dataStorage.Save(Accounts);
         }

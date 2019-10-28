@@ -141,6 +141,9 @@
   <data name="bnOpenFolder.Content" xml:space="preserve">
     <value>Открыть</value>
   </data>
+  <data name="bnQueue.Content" xml:space="preserve">
+    <value>Очередь</value>
+  </data>
   <data name="bnResume.Content" xml:space="preserve">
     <value>Возобновить</value>
   </data>

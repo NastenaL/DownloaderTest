@@ -20,7 +20,6 @@
                 <ResourceDictionary Source="/Styles/MenuBarStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/PopupStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextFieldsStyle.xaml"/>
-             
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -95,19 +94,21 @@
                 </StackPanel>
             </Button>
             <Button x:Uid="bnResume" Grid.Column="2" 
-                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
+                    IsEnabled="{Binding IsEnableButtons, Mode=TwoWay}" 
                     Command="{Binding ResumeDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnStop" x:Name="bnStop" Grid.Column="3"
-                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
+                    IsEnabled="{Binding IsEnableButtons, Mode=TwoWay}" 
                     Command="{Binding StopDownload}"
                     Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnCancel" Grid.Column="4" 
                     Command="{Binding CancelDownload}"
-                    IsEnabled="{Binding IsEnableB, Mode=TwoWay}" 
+                    IsEnabled="{Binding IsEnableButtons, Mode=TwoWay}" 
                     Style="{StaticResource ButtonsStyle}"/>
-            <Button Content="Queue" 
-                    Grid.Column="5" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=Queue}"/>
+            <Button x:Uid="bnQueue" 
+                    Grid.Column="5" 
+                    Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=Queue}"
+                    Style="{StaticResource ButtonsStyle}"/>
             <Button x:Uid="bnSetting" 
                     x:Name="bnSetting" 
                     Grid.Column="6" 
@@ -313,32 +314,61 @@
 
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <ListView ItemsSource="{Binding Queues, Mode=OneWay}">
+                        <ListView x:Name="QueuesTable" ItemsSource="{Binding Queues, Mode=OneWay}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Border>
-                                        <TextBlock Text="{Binding Name, Mode=TwoWay}"/>
+                                        <TextBlock x:Name="NameQ" Text="{Binding Name, Mode=TwoWay}"/>
                                     </Border>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                         <Button Content="Add Queue" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <TextBlock Text="Test"/>
+                        <Button Content="Edit queue" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=EditQueue}"/>
+                        <Button Content="Remove">
+                            <i:Interaction.Behaviors>
+                                <ic:EventTriggerBehavior EventName="Click">
+                                    <ic:InvokeCommandAction Command="{Binding RemoveQueue}" CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
+                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=QueuesTable}"/>
+                                </ic:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
                 
                 <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
                 <StackPanel BorderBrush="Black" Width="300" Style="{StaticResource StackPanelStyle}">
                         <TextBox Text="{Binding QueueName, Mode=TwoWay}" Header="Name"/>
-                        <Button Content="Add queue" Command="{Binding AddQueue}"/>
+                        <Button Content="Add queue" >
+                            <i:Interaction.Behaviors>
+                                <ic:EventTriggerBehavior EventName="Click">
+                                    <ic:InvokeCommandAction Command="{Binding AddQueue}"/>
+                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                                </ic:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
                         <Button Content="Close" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
                     </StackPanel>
                 </Popup>
-               
-                
+
+                <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PopupStyle}">
+                    <StackPanel BorderBrush="Black" Width="300" Style="{StaticResource StackPanelStyle}">
+                        <TextBox Text="{Binding ElementName=QueuesTable, Path=SelectedItem.Name, Mode=TwoWay}" Header="Name"/>
+                        <Button Content="Add queue" >
+                            <i:Interaction.Behaviors>
+                                <ic:EventTriggerBehavior EventName="Click">
+                                    <ic:InvokeCommandAction Command="{Binding EditQueue}" CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
+                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=QueuesTable}"/>
+                                    <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditQueue}"/>
+                                </ic:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
+                        <Button Content="Close" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddQueue}"/>
+                    </StackPanel>
+                </Popup>
+
             </StackPanel>
         </Popup>
+
     </Grid>
 </Page>
