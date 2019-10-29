@@ -248,7 +248,7 @@ namespace DownLoader.ViewModels
                     Files.Add(newFile);
                 
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
-                    LinkURL = Description = "";
+                   
 
                     if (downloadOperation.Progress.Status == BackgroundTransferStatus.Completed)
                     {
@@ -257,7 +257,8 @@ namespace DownLoader.ViewModels
                         UpdateTileAction();
                     }
                     IsEnableButtons = false;
-                   
+                    LinkURL = Description = "";
+                    FType = FileType.None;
                 }
                 catch (TaskCanceledException)
                 {

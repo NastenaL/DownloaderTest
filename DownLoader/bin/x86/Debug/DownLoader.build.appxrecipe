@@ -159,11 +159,14 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\AddLinkControl.xbf">
       <PackagePath>Controls\MainPage\AddLinkControl.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueAddControl.xbf">
-      <PackagePath>Controls\MainPage\QueueAddControl.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueControl.xbf">
       <PackagePath>Controls\MainPage\QueueControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountAddControl.xbf">
+      <PackagePath>Controls\Setting\AccountAddControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountEditControl.xbf">
+      <PackagePath>Controls\Setting\AccountEditControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
       <PackagePath>Styles\ButtonStyle.xbf</PackagePath>

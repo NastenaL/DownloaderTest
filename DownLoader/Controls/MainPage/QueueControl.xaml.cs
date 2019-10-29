@@ -1,5 +1,4 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.Controls.MainPage
@@ -11,12 +10,11 @@ namespace DownLoader.Controls.MainPage
             this.InitializeComponent();
         }
 
-        private void ClosePopUp(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Popup p = (Popup)this.Parent;
 
             p.IsOpen = false;
         }
-       
     }
 }

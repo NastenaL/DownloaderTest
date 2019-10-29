@@ -8,6 +8,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:local="using:DownLoader.Controls.Setting"
     DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -179,28 +180,7 @@
                  
                     <Popup x:Name="AddNewAccount" 
                            IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
-                                    BorderBrush="White" BorderThickness="2">
-                            <TextBox x:Uid="tUrl" x:Name="tUrl" Text="{Binding Url, Mode=TwoWay}"/>
-                            <TextBox x:Uid="tLogin" x:Name="tLogin" Text="{Binding Login, Mode=TwoWay}"/>
-                            <PasswordBox Width="300" x:Uid="tPassword" x:Name="tPassword" 
-                                         Password="{Binding Password, Mode=TwoWay}"/>
-                            
-
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Uid="bnAddAccount">
-                                    <i:Interaction.Behaviors>
-                                        <ic:EventTriggerBehavior EventName="Click">
-                                            <ic:InvokeCommandAction Command="{Binding AddNewAccount}"/>
-                                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                                    CommandParameter="{Binding ElementName=AddNewAccount}"/>
-                                        </ic:EventTriggerBehavior>
-                                    </i:Interaction.Behaviors>
-                                </Button>
-                                <Button x:Uid="bnAddAccountCancel"
-                                        Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <local:AccountAddControl/>
                     </Popup>
 
                     <Popup x:Name="EditAccount"

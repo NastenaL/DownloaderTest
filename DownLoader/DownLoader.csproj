@@ -125,25 +125,29 @@
     <Compile Include="Controls\MainPage\AddLinkControl.xaml.cs">
       <DependentUpon>AddLinkControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainPage\QueueAddControl.xaml.cs">
-      <DependentUpon>QueueAddControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MainPage\QueueControl.xaml.cs">
       <DependentUpon>QueueControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Setting\AccountAddControl.xaml.cs">
+      <DependentUpon>AccountAddControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Setting\AccountEditControl.xaml.cs">
+      <DependentUpon>AccountEditControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\UserAccount.cs" />
-    <Compile Include="Servises\ApiPurchase.cs" />
-    <Compile Include="Servises\ContentDialogMaker.cs" />
-    <Compile Include="Servises\DataStorage.cs" />
+    <Compile Include="Services\ApiPurchase.cs" />
+    <Compile Include="Services\ContentDialogMaker.cs" />
+    <Compile Include="Services\DataStorage.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Servises\LiveTile.cs" />
-    <Compile Include="Servises\Controls\PopUpControl.cs" />
-    <Compile Include="Servises\Controls\ToastNotificationViewModel.cs" />
-    <Compile Include="Servises\AppSettings.cs" />
+    <Compile Include="Services\LiveTile.cs" />
+    <Compile Include="Services\Controls\PopUpControl.cs" />
+    <Compile Include="Services\Controls\ToastNotificationViewModel.cs" />
+    <Compile Include="Services\AppSettings.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\QueueViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -186,11 +190,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainPage\QueueAddControl.xaml">
+    <Page Include="Controls\MainPage\QueueControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainPage\QueueControl.xaml">
+    <Page Include="Controls\Setting\AccountAddControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Setting\AccountEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

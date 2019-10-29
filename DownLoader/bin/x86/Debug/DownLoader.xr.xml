@@ -18,14 +18,20 @@
     <RootPropertyPathName Name="FType" />
     <RootPropertyPathName Name="LinkURL" />
     <RootPropertyPathName Name="link" />
-    <RootPropertyPathName Name="AddQueue" />
-    <RootPropertyPathName Name="QueueName" />
     <RootPropertyPathName Name="IsOpen" />
     <RootPropertyPathName Name="UpdateTable" />
     <RootPropertyPathName Name="EditQueue" />
+    <RootPropertyPathName Name="AddQueue" />
+    <RootPropertyPathName Name="QueueName" />
     <RootPropertyPathName Name="RemoveQueue" />
     <RootPropertyPathName Name="OpenPopUp" />
     <RootPropertyPathName Name="Queues" />
+    <RootPropertyPathName Name="SettingNewInstance" />
+    <RootPropertyPathName Name="AddNewAccount" />
+    <RootPropertyPathName Name="Password" />
+    <RootPropertyPathName Name="Login" />
+    <RootPropertyPathName Name="Url" />
+    <RootPropertyPathName Name="EditAccount" />
     <RootPropertyPathName Name="Files" />
     <RootPropertyPathName Name="Status" />
     <RootPropertyPathName Name="State" />
@@ -36,12 +42,6 @@
     <RootPropertyPathName Name="ResumeDownload" />
     <RootPropertyPathName Name="ActualHeight" />
     <RootPropertyPathName Name="SideMenu" />
-    <RootPropertyPathName Name="SettingNewInstance" />
-    <RootPropertyPathName Name="EditAccount" />
-    <RootPropertyPathName Name="Password" />
-    <RootPropertyPathName Name="Login" />
-    <RootPropertyPathName Name="Url" />
-    <RootPropertyPathName Name="AddNewAccount" />
     <RootPropertyPathName Name="RemoveAccount" />
     <RootPropertyPathName Name="Accounts" />
     <RootPropertyPathName Name="DisplayName" />
@@ -166,7 +166,6 @@
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="DownLoader.Controls.AddLinkControl" />
-    <RootType FullName="DownLoader.Controls.MainPage.QueueAddControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
       <RootProperty Name="IsOpen" />
       <RootProperty Name="VerticalAlignment" />
@@ -195,6 +194,14 @@
       <RootProperty Name="Style" />
     </RootType>
     <RootType FullName="DownLoader.Controls.MainPage.QueueControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Password" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Background" />
+    </RootType>
+    <RootType FullName="DownLoader.Controls.Setting.AccountAddControl" />
+    <RootType FullName="DownLoader.Controls.Setting.AccountEditControl" />
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
       <RootProperty Name="HorizontalAlignment" />
@@ -281,12 +288,6 @@
       <RootProperty Name="AutoGenerateColumns" />
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="Columns" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Password" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
       <RootProperty Name="Width" />
