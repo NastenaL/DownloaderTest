@@ -148,7 +148,11 @@ namespace DownLoader.ViewModels
 
                 if (!SelectedItem.IsStartLoadAt)
                 {
-                    SelectedItem.StartDownload = "";
+                    NewStartTime = TimeSpan.Zero;
+                }
+                if (!SelectedItem.IsStopLoadAt)
+                {
+                    NewStopTime = TimeSpan.Zero;
                 }
                 queue.IsStartLoadAt = SelectedItem.IsStartLoadAt;
                 queue.StartDownload = NewStartTime.ToString();
