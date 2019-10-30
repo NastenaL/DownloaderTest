@@ -103,17 +103,6 @@ namespace DownLoader.ViewModels
             }
         }
 
-
-        private ICommand editQueue;
-        public ICommand EditQueue
-        {
-            get
-            {
-                if (editQueue == null)
-                    editQueue = new RelayCommand<Queue>(i => EditQueueAction(i));
-                return editQueue;
-            }
-        }
         public string Description { get; set; }
         public string Status { get; set; }
         public RelayCommand CancelDownload { get; set; }
@@ -138,14 +127,11 @@ namespace DownLoader.ViewModels
             ResumeDownload = new RelayCommand(ResumeDownloadAction);
             StopDownload = new RelayCommand(StopDownloadAction);
             CancelDownload = new RelayCommand(CancelDownloadAction);
-            AddQueue = new RelayCommand(AddQueueAction);
             DownloadCommand = new RelayCommand(DownloadAction);
             DownloadCommandAs = new RelayCommand(DownloadAsAction);
 
             Files = new ObservableCollection<DownloadFile>();
-            Queues = new ObservableCollection<Queue>();
             dataStorage.Load(Files);
-            dataStorage.Load(Queues);
         }
 
         #region Methods
@@ -429,95 +415,6 @@ namespace DownLoader.ViewModels
             }
         }
         #endregion
-        private string queueName;
-        public string QueueName
-        {
-            get { return this.queueName; }
-            set
-            {
-                if (!string.Equals(this.queueName, value))
-                {
-                    this.queueName = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-        public ObservableCollection<Queue> Queues { get; set; }
-        public RelayCommand AddQueue { get; set; }
-        
-        private void AddQueueAction()
-        {
-            Queue newAccount = new Queue
-            {
-                Id = Guid.NewGuid(),
-                Name = QueueName,
-                IsStartLoadAt = false,
-                IsStopLoadAt = false,
-    
-            };
-            Queues.Add(newAccount);
-            dataStorage.Save(Queues);
-
-            QueueName = "";
-        }
-
-        private async void EditQueueAction(Queue selectedQueue)
-        {
-            var queue = Queues.FirstOrDefault(i => i.Id.ToString() == selectedQueue.Id.ToString());
-            if (queue != null)
-            {
-                queue.Name = selectedQueue.Name;
-            }
-            dataStorage.Save(Queues);
-        }
-
-        private ICommand updateTable;
-        public ICommand UpdateTable
-        {
-            get
-            {
-                if (updateTable == null)
-                    updateTable = new RelayCommand<ListView>(i => UpdateTableAction(i));
-                return updateTable;
-            }
-        }
-        private void UpdateTableAction(ListView queueTable)
-        {
-            queueTable.ItemsSource = null;
-            queueTable.ItemsSource = Queues;
-        }
-
-        private ICommand removeQueue;
-        public ICommand RemoveQueue
-        {
-            get
-            {
-                if (removeQueue == null)
-                    removeQueue = new RelayCommand<Queue>(i => RemoveQueueAction(i));
-                return removeQueue;
-            }
-        }
-
-        private async void RemoveQueueAction(Queue file)
-        {
-            if (file == null)
-            {
-                ContentDialog notSelectQueueDialog = new ContentDialog()
-                {
-                    Title = resourceMap.GetValue("titleErrorDeleteQueueDialog", resourceContext).ValueAsString,
-                    Content = resourceMap.GetValue("contentErrorRemoveQueueDialog", resourceContext).ValueAsString,
-                    PrimaryButtonText = "ОК"
-                };
-                ContentDialogResult result = await notSelectQueueDialog.ShowAsync();
-                return;
-            }
-            var item = Queues.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
-            if (item != null)
-            {
-                Queues.Remove(item);
-            }
-            dataStorage.Save(Queues);
-        }
 
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;

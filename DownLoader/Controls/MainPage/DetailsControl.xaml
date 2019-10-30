@@ -27,6 +27,9 @@
 
     <Grid>
         <StackPanel Style="{StaticResource StackPanelStyle}">
+            <ContentPresenter Content="{Binding MainContent}" />
+            
+            
             <TextBlock x:Uid="tblFileName" 
                            Style="{StaticResource HeaderTextBlockStyle}"/>
             <TextBlock Name="tbFileName" 

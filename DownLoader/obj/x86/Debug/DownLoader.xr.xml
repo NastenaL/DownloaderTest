@@ -11,6 +11,7 @@
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="FileSize" />
     <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="MainContent" />
     <RootPropertyPathName Name="DownloadCommandAs" />
     <RootPropertyPathName Name="UpdateTile" />
     <RootPropertyPathName Name="DownloadCommand" />
@@ -23,6 +24,8 @@
     <RootPropertyPathName Name="EditQueue" />
     <RootPropertyPathName Name="AddQueue" />
     <RootPropertyPathName Name="QueueName" />
+    <RootPropertyPathName Name="IsStopLoadAt" />
+    <RootPropertyPathName Name="IsStartLoadAt" />
     <RootPropertyPathName Name="RemoveQueue" />
     <RootPropertyPathName Name="OpenPopUp" />
     <RootPropertyPathName Name="Queues" />
@@ -80,9 +83,9 @@
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
       <RootProperty Name="Children" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Height" />
       <RootProperty Name="Background" />
@@ -101,20 +104,25 @@
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="Width" />
       <RootProperty Name="Orientation" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Background" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
+      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Style" />
       <RootProperty Name="Name" />
       <RootProperty Name="Text" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Name" />
@@ -158,16 +166,25 @@
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="SelectedValue" />
       <RootProperty Name="Style" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Items" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="DisplayMemberPath" />
       <RootProperty Name="SelectedValuePath" />
       <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="DownLoader.Controls.AddLinkControl" />
+    <RootType FullName="DownLoader.ViewModels.QueueViewModel" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
+      <RootProperty Name="Height" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
       <RootProperty Name="IsOpen" />
+      <RootProperty Name="DataContext" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Style" />
@@ -175,8 +192,33 @@
       <RootProperty Name="IsLightDismissEnabled" />
       <RootProperty Name="Width" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
+      <RootProperty Name="Items" />
+      <RootProperty Name="Title" />
+      <RootProperty Name="Style" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsOn" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="OffContent" />
+      <RootProperty Name="OnContent" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBoxItem">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Tag" />
+      <RootProperty Name="IsSelected" />
+    </RootType>
+    <RootType FullName="System.String" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="Height" />
+      <RootProperty Name="BorderBrush" />
       <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="Style" />
       <RootProperty Name="HeaderTemplate" />
@@ -239,11 +281,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.NavigationViewItem" />
     <RootType FullName="Windows.UI.Xaml.Controls.MenuBar" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
-      <RootProperty Name="Title" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Items" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
       <RootProperty Name="Color" />
     </RootType>
@@ -252,12 +289,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Resources" />
       <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
-      <RootProperty Name="Height" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Stretch" />
@@ -280,10 +311,6 @@
     <RootType FullName="DownLoader.MainPage" />
     <RootType FullName="DownLoader.ViewModels.LanguageViewModel" />
     <RootType FullName="DownLoader.Models.UserAccount" />
-    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
-      <RootProperty Name="Header" />
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <RootProperty Name="AutoGenerateColumns" />
       <RootProperty Name="ItemsSource" />
@@ -295,18 +322,6 @@
     </RootType>
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTemplateColumn">
       <RootProperty Name="CellTemplate" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="OffContent" />
-      <RootProperty Name="OnContent" />
-      <RootProperty Name="IsOn" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBoxItem">
-      <RootProperty Name="Tag" />
-      <RootProperty Name="IsSelected" />
-      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Width" />

@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources.Core;
@@ -11,8 +12,34 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.ViewModels
 {
-    public class QueueViewModel: ViewModelBase
+    public class QueueViewModel: ViewModelBase, INotifyPropertyChanged
     {
+        Queue selectedItem;
+        public Queue SelectedItem
+        {
+            get
+            {
+                return (this.selectedItem);
+            }
+            set
+            {
+                if (this.selectedItem != value)
+                {
+                    this.selectedItem = value;
+                    this.OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+        #endregion
+
         private readonly ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
         private readonly ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
         readonly DataStorage dataStorage = new DataStorage();
@@ -42,6 +69,7 @@ namespace DownLoader.ViewModels
         public QueueViewModel()
         {
             AddQueue = new RelayCommand(AddQueueAction);
+            EditQueue = new RelayCommand(EditQueueAction);
             Queues = new ObservableCollection<Queue>();
             dataStorage.Load(Queues);
         }
@@ -61,7 +89,6 @@ namespace DownLoader.ViewModels
         }
         public ObservableCollection<Queue> Queues { get; set; }
         public RelayCommand AddQueue { get; set; }
-
         private void AddQueueAction()
         {
             Queue newAccount = new Queue
@@ -78,12 +105,12 @@ namespace DownLoader.ViewModels
             QueueName = "";
         }
 
-        private async void EditQueueAction(Queue selectedQueue)
+        private void EditQueueAction()
         {
-            var queue = Queues.FirstOrDefault(i => i.Id.ToString() == selectedQueue.Id.ToString());
+            var queue = Queues.FirstOrDefault(i => i.Id.ToString() == SelectedItem.Id.ToString());
             if (queue != null)
             {
-                queue.Name = selectedQueue.Name;
+                queue.Name = SelectedItem.Name;
             }
             dataStorage.Save(Queues);
         }
@@ -135,16 +162,8 @@ namespace DownLoader.ViewModels
             }
             dataStorage.Save(Queues);
         }
-        private ICommand editQueue;
-        public ICommand EditQueue
-        {
-            get
-            {
-                if (editQueue == null)
-                    editQueue = new RelayCommand<Queue>(i => EditQueueAction(i));
-                return editQueue;
-            }
-        }
+      
+        public RelayCommand EditQueue { get; set; }
 
 
 

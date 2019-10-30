@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using DownLoader.ViewModels;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.Controls.MainPage
@@ -16,5 +17,7 @@ namespace DownLoader.Controls.MainPage
 
             p.IsOpen = false;
         }
+
+    
     }
 }

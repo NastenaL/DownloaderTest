@@ -142,7 +142,7 @@
 
                     <controls:DataGrid x:Name="dataGrid1" 
     AutoGenerateColumns="False"
-    ItemsSource="{Binding Accounts, Mode=OneWay}">
+    ItemsSource="{Binding Accounts, Mode=TwoWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                                 x:Uid="dgColumnUrl"
@@ -185,30 +185,7 @@
 
                     <Popup x:Name="EditAccount"
                            IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
-                                    BorderBrush="White" BorderThickness="2">
-                            <TextBox x:Uid="tbEditUrl" 
-                                     Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Url, Mode=TwoWay}"/>
-                            <TextBox x:Uid="tbEditLogin" 
-                                     Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Login, Mode=TwoWay}"/>
-                            <PasswordBox Width="300" x:Uid="tbEditPassword" 
-                                         Password="{Binding ElementName=dataGrid1, Path=SelectedItem.Password, Mode=TwoWay}" />
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Uid="bnEditSelectedAccount" >
-                                    <i:Interaction.Behaviors>
-                                        <ic:EventTriggerBehavior EventName="Click">
-                                            <ic:InvokeCommandAction Command="{Binding EditAccount}" 
-                                                                    CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
-                                            <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
-                                                                    CommandParameter="{Binding ElementName=dataGrid1}"/>
-                                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                                    CommandParameter="{Binding ElementName=EditAccount}"/>
-                                        </ic:EventTriggerBehavior>
-                                    </i:Interaction.Behaviors>
-                                </Button>
-                                <Button x:Uid="bnCancelEdit" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <local:AccountEditControl/>
                     </Popup>
 
                 </StackPanel>

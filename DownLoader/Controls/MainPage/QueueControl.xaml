@@ -2,22 +2,20 @@
     x:Class="DownLoader.Controls.MainPage.QueueControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DownLoader.Controls.MainPage"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:vm="using:DownLoader.ViewModels"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
+
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-<!--<UserControl.DataContext>
-        <vm:QueueViewModel/>
-    </UserControl.DataContext>-->
-    
     <UserControl.Resources>
         <ResourceDictionary>
+            <vm:QueueViewModel x:Key="queueVM"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListViewStyle.xaml"/>
@@ -30,15 +28,27 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <StackPanel x:Name="spMain" 
-                        BorderBrush="Black" Width="500" Style="{StaticResource StackPanelStyle}">
-            <Button Content="X" Background="Transparent" BorderBrush="Transparent"
+                        BorderBrush="Black" Width="600" Style="{StaticResource StackPanelStyle}">
+            <Button Content="X" Background="Transparent" BorderBrush="Transparent" 
                             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
                             Click="Button_Click"/>
 
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <ListView x:Name="QueuesTable" ItemsSource="{Binding Queues, Mode=OneWay}">
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" DataContext="{Binding Source={StaticResource queueVM}}" >
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5">
+                    <ListView x:Name="QueuesTable" Height="250" BorderBrush="Black" 
+                              ItemsSource="{Binding Queues, Mode=OneWay}"
+                              SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                       
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border>
@@ -62,33 +72,85 @@
                         </i:Interaction.Behaviors>
                     </Button>
                 </StackPanel>
+
+                <StackPanel x:Name="spTabs" Orientation="Vertical" Grid.Column="1" Margin="5">
+                    <Pivot>
+                        <PivotItem>
+                            <PivotItem.Header>
+                                <TextBlock Text="Schedule"/>
+                            </PivotItem.Header>
+                            <StackPanel Orientation="Vertical" Height="300">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
+                                            Margin="5" >
+                                    <TextBlock Text="Start download at" Margin="5"/>
+                                    <ToggleSwitch Margin="5" IsOn="{Binding SelectedItem.IsStartLoadAt, Mode=TwoWay}"/>
+                                    <ComboBox HorizontalAlignment="Right" Width="80">
+                                        <ComboBoxItem>
+                                            <x:String>11:00</x:String>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <x:String>12:00</x:String>
+                                        </ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                               
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
+                                            Margin="5" >
+                                        <TextBlock Text="Stop download at" Margin="5"/>
+                                    <ToggleSwitch Margin="5" x:Name="tsIsStopLoadAt"
+                                                  IsOn="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
+                                        <ComboBox HorizontalAlignment="Right" Width="80">
+                                            <ComboBoxItem>
+                                                <x:String>11:00</x:String>
+                                            </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                <x:String>12:00</x:String>
+                                            </ComboBoxItem>
+                                        </ComboBox>
+                                    </StackPanel>
+                            </StackPanel>
+                        </PivotItem>
+                        <PivotItem>
+                            <PivotItem.Header>
+                                <TextBlock Text="Files in the queue"/>
+                            </PivotItem.Header>
+                            <StackPanel>
+                                <TextBlock Text="TEST"/>
+                            </StackPanel>
+                        </PivotItem>
+                    </Pivot>
+                  
+                </StackPanel>
+
+
             </StackPanel>
 
-            <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}" 
+            <Popup x:Name="AddQueue" IsOpen="{Binding IsOpen}"      DataContext="{Binding Source={StaticResource queueVM}}" 
+                   Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2"
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        Style="{StaticResource PopupStyle}">
-                <StackPanel BorderBrush="Black" Width="300" 
+                 <StackPanel BorderBrush="Black" Width="300" 
                             Style="{StaticResource StackPanelStyle}">
-                    <TextBox x:Uid="tbAddQueueName"
+            <TextBox x:Uid="tbAddQueueName"
                             Text="{Binding QueueName, Mode=TwoWay}"/>
-                    <Button x:Uid="bnAddQueue">
-                        <i:Interaction.Behaviors>
-                            <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding AddQueue}"/>
-                                <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
+            <Button x:Uid="bnAddQueue">
+                <i:Interaction.Behaviors>
+                    <ic:EventTriggerBehavior EventName="Click">
+                        <ic:InvokeCommandAction Command="{Binding AddQueue}"/>
+                        <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
                                                 CommandParameter="{Binding ElementName=QueuesTable}"/>
-                                <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
+                        <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
                                                         CommandParameter="{Binding ElementName=AddQueue}"/>
-                            </ic:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button x:Uid="bnAddCancel" 
+                    </ic:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Button>
+            <Button x:Uid="bnAddCancel" 
                             Command="{Binding ClosePopUp}" 
                             CommandParameter="{Binding ElementName=AddQueue}"/>
-                </StackPanel>
+        </StackPanel>
             </Popup>
 
-            <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" 
+            <Popup x:Name="EditQueue" IsOpen="{Binding IsOpen}" DataContext="{Binding Source={StaticResource queueVM}}" 
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        Style="{StaticResource PopupStyle}">
                 <StackPanel BorderBrush="Black" Width="300" 
@@ -98,8 +160,7 @@
                     <Button x:Uid="bnEditQueue">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Click">
-                                <ic:InvokeCommandAction Command="{Binding EditQueue}" 
-                                                            CommandParameter="{Binding ElementName=QueuesTable, Path=SelectedItem}"/>
+                                <ic:InvokeCommandAction Command="{Binding EditQueue}"/>
                                 <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
                                                             CommandParameter="{Binding ElementName=QueuesTable}"/>
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
