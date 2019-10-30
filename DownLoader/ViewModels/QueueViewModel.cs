@@ -14,6 +14,7 @@ namespace DownLoader.ViewModels
 {
     public class QueueViewModel: ViewModelBase, INotifyPropertyChanged
     {
+      
         Queue selectedItem;
         public Queue SelectedItem
         {
@@ -72,6 +73,7 @@ namespace DownLoader.ViewModels
             EditQueue = new RelayCommand(EditQueueAction);
             Queues = new ObservableCollection<Queue>();
             dataStorage.Load(Queues);
+
         }
 
         private string queueName;

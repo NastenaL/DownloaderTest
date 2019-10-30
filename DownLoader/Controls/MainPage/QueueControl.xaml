@@ -37,7 +37,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="spMain" 
-                        BorderBrush="Black" Width="600" Style="{StaticResource StackPanelStyle}">
+                        BorderBrush="Black" Width="720" Style="{StaticResource StackPanelStyle}">
             <Button Content="X" Background="Transparent" BorderBrush="Transparent" 
                             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
                             Click="Button_Click"/>
@@ -48,7 +48,6 @@
                     <ListView x:Name="QueuesTable" Height="250" BorderBrush="Black" 
                               ItemsSource="{Binding Queues, Mode=OneWay}"
                               SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                       
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border>
@@ -79,36 +78,7 @@
                             <PivotItem.Header>
                                 <TextBlock Text="Schedule"/>
                             </PivotItem.Header>
-                            <StackPanel Orientation="Vertical" Height="300">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-                                            Margin="5" >
-                                    <TextBlock Text="Start download at" Margin="5"/>
-                                    <ToggleSwitch Margin="5" IsOn="{Binding SelectedItem.IsStartLoadAt, Mode=TwoWay}"/>
-                                    <ComboBox HorizontalAlignment="Right" Width="80">
-                                        <ComboBoxItem>
-                                            <x:String>11:00</x:String>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <x:String>12:00</x:String>
-                                        </ComboBoxItem>
-                                    </ComboBox>
-                                </StackPanel>
-                               
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-                                            Margin="5" >
-                                        <TextBlock Text="Stop download at" Margin="5"/>
-                                    <ToggleSwitch Margin="5" x:Name="tsIsStopLoadAt"
-                                                  IsOn="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
-                                        <ComboBox HorizontalAlignment="Right" Width="80">
-                                            <ComboBoxItem>
-                                                <x:String>11:00</x:String>
-                                            </ComboBoxItem>
-                                            <ComboBoxItem>
-                                                <x:String>12:00</x:String>
-                                            </ComboBoxItem>
-                                        </ComboBox>
-                                    </StackPanel>
-                            </StackPanel>
+                            <local:QueueControlSchedule/>
                         </PivotItem>
                         <PivotItem>
                             <PivotItem.Header>

@@ -128,6 +128,9 @@
     <Compile Include="Controls\MainPage\QueueControl.xaml.cs">
       <DependentUpon>QueueControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainPage\QueueControlSchedule.xaml.cs">
+      <DependentUpon>QueueControlSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Setting\AccountAddControl.xaml.cs">
       <DependentUpon>AccountAddControl.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MainPage\QueueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainPage\QueueControlSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

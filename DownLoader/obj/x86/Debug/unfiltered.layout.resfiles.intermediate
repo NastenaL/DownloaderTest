@@ -13,6 +13,7 @@ App.xbf
 Controls\MainPage\AddLinkControl.xbf
 Controls\MainPage\DetailsControl.xbf
 Controls\MainPage\QueueControl.xbf
+Controls\MainPage\QueueControlSchedule.xbf
 Controls\Setting\AccountAddControl.xbf
 Controls\Setting\AccountEditControl.xbf
 DownLoader.xr.xml

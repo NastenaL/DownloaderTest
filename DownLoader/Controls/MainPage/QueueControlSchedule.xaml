@@ -1,0 +1,30 @@
+﻿<UserControl
+    x:Class="DownLoader.Controls.MainPage.QueueControlSchedule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Height="300">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
+                                            Margin="5" >
+                <TextBlock Text="Start download at" Margin="5"/>
+                <ToggleSwitch Margin="5" 
+                              IsOn="{Binding SelectedItem.IsStartLoadAt, Mode=TwoWay}"/>
+                <TimePicker SelectedTime="{Binding SelectedItem.StartDownload, Mode=TwoWay}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5" >
+                <TextBlock Text="Stop download at" Margin="5"/>
+                <ToggleSwitch Margin="5" 
+                              x:Name="tsIsStopLoadAt"
+                              IsOn="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
+                <TimePicker SelectedTime="{Binding SelectedItem.StopDownload, Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

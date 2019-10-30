@@ -8,9 +8,9 @@ namespace DownLoader.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsStartLoadAt { get; set; }
-        public DateTime StartDownload { get; set; }
+        public string StartDownload { get; set; }
         public bool IsStopLoadAt { get; set; }
-        public DateTime StopDownload { get; set; }
+        public string StopDownload { get; set; }
         #endregion
     }
 }

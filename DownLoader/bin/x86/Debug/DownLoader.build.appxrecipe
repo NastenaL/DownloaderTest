@@ -162,6 +162,9 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueControl.xbf">
       <PackagePath>Controls\MainPage\QueueControl.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\MainPage\QueueControlSchedule.xbf">
+      <PackagePath>Controls\MainPage\QueueControlSchedule.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountAddControl.xbf">
       <PackagePath>Controls\Setting\AccountAddControl.xbf</PackagePath>
     </AppxPackagedFile>
