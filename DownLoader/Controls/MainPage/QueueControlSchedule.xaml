@@ -15,7 +15,9 @@
                 <TextBlock Text="Start download at" Margin="5"/>
                 <ToggleSwitch Margin="5" 
                               IsOn="{Binding SelectedItem.IsStartLoadAt, Mode=TwoWay}"/>
-                <TimePicker SelectedTime="{Binding SelectedItem.StartDownload, Mode=TwoWay}"
+                <TimePicker x:Name="timeStart" 
+                            SelectedTime="{Binding SelectedItem.StartDownload, Mode=TwoWay}" 
+                           Time="{Binding NewStartTime, Mode=TwoWay}"
                             IsEnabled="{Binding SelectedItem.IsStartLoadAt, Mode=TwoWay}"/>
             </StackPanel>
 
@@ -25,6 +27,7 @@
                               x:Name="tsIsStopLoadAt"
                               IsOn="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
                 <TimePicker SelectedTime="{Binding SelectedItem.StopDownload, Mode=TwoWay}" 
+                            Time="{Binding NewStopTime, Mode=TwoWay}" 
                             IsEnabled="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
             </StackPanel>
         </StackPanel>

@@ -14,7 +14,39 @@ namespace DownLoader.ViewModels
 {
     public class QueueViewModel: ViewModelBase, INotifyPropertyChanged
     {
-      
+
+        TimeSpan newStartTime;
+        public TimeSpan NewStartTime
+        {
+            get
+            {
+                return (this.newStartTime);
+            }
+            set
+            {
+                if (this.newStartTime != value)
+                {
+                    this.newStartTime = value;
+                    this.OnPropertyChanged("NewStartTime");
+                }
+            }
+        }
+        TimeSpan newStopTime;
+        public TimeSpan NewStopTime
+        {
+            get
+            {
+                return (this.newStopTime);
+            }
+            set
+            {
+                if (this.newStopTime != value)
+                {
+                    this.newStopTime = value;
+                    this.OnPropertyChanged("NewStopTime");
+                }
+            }
+        }
         Queue selectedItem;
         public Queue SelectedItem
         {
@@ -32,6 +64,7 @@ namespace DownLoader.ViewModels
             }
         }
 
+      
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -73,7 +106,6 @@ namespace DownLoader.ViewModels
             EditQueue = new RelayCommand(EditQueueAction);
             Queues = new ObservableCollection<Queue>();
             dataStorage.Load(Queues);
-
         }
 
         private string queueName;
@@ -113,6 +145,15 @@ namespace DownLoader.ViewModels
             if (queue != null)
             {
                 queue.Name = SelectedItem.Name;
+
+                if (!SelectedItem.IsStartLoadAt)
+                {
+                    SelectedItem.StartDownload = "";
+                }
+                queue.IsStartLoadAt = SelectedItem.IsStartLoadAt;
+                queue.StartDownload = NewStartTime.ToString();
+                queue.IsStopLoadAt = SelectedItem.IsStopLoadAt;
+                queue.StopDownload = NewStopTime.ToString();
             }
             dataStorage.Save(Queues);
         }

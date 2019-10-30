@@ -28,8 +28,10 @@
     <RootPropertyPathName Name="OpenPopUp" />
     <RootPropertyPathName Name="Queues" />
     <RootPropertyPathName Name="StopDownload" />
+    <RootPropertyPathName Name="NewStopTime" />
     <RootPropertyPathName Name="IsStopLoadAt" />
     <RootPropertyPathName Name="StartDownload" />
+    <RootPropertyPathName Name="NewStartTime" />
     <RootPropertyPathName Name="IsStartLoadAt" />
     <RootPropertyPathName Name="SettingNewInstance" />
     <RootPropertyPathName Name="AddNewAccount" />
@@ -233,6 +235,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TimePicker">
       <RootProperty Name="SelectedTime" />
+      <RootProperty Name="Time" />
       <RootProperty Name="IsEnabled" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
