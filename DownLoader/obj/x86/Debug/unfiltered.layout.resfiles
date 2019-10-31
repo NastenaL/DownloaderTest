@@ -16,6 +16,7 @@ Controls\MainPage\QueueControl.xbf
 Controls\MainPage\QueueControlSchedule.xbf
 Controls\Setting\AccountAddControl.xbf
 Controls\Setting\AccountEditControl.xbf
+Controls\Setting\AccountsControl.xbf
 DownLoader.xr.xml
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
 Styles\ButtonStyle.xbf

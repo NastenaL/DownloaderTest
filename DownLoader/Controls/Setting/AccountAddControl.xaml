@@ -2,8 +2,7 @@
     x:Class="DownLoader.Controls.Setting.AccountAddControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DownLoader.Controls.Setting"
-    DataContext="{Binding SettingPageLocator, Source={StaticResource Locator}}"
+    xmlns:vm="using:DownLoader.ViewModels"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,9 +11,14 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
+    <UserControl.Resources>
+        <vm:AccountViewModel x:Key="AccountVM"/>
+    </UserControl.Resources>
+
     <Grid>
         <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
-                    BorderBrush="White" BorderThickness="2">
+                    BorderBrush="White" BorderThickness="2"
+                    DataContext="{Binding Source={StaticResource AccountVM}}">
             <TextBox x:Uid="tUrl" x:Name="tUrl" Text="{Binding Url, Mode=TwoWay}"/>
             <TextBox x:Uid="tLogin" x:Name="tLogin" Text="{Binding Login, Mode=TwoWay}"/>
             <PasswordBox Width="300" x:Uid="tPassword" x:Name="tPassword" 
@@ -24,7 +28,8 @@
                     <i:Interaction.Behaviors>
                         <ic:EventTriggerBehavior EventName="Click">
                             <ic:InvokeCommandAction Command="{Binding AddNewAccount}"/>
-
+                            <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
+                                                    CommandParameter="{Binding ElementName=dgAccounts}"/>
                         </ic:EventTriggerBehavior>
                     </i:Interaction.Behaviors>
                 </Button>

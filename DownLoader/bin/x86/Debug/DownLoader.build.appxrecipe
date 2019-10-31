@@ -171,6 +171,9 @@
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountEditControl.xbf">
       <PackagePath>Controls\Setting\AccountEditControl.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountsControl.xbf">
+      <PackagePath>Controls\Setting\AccountsControl.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Styles\ButtonStyle.xbf">
       <PackagePath>Styles\ButtonStyle.xbf</PackagePath>
     </AppxPackagedFile>

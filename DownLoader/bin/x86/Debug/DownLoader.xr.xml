@@ -33,23 +33,22 @@
     <RootPropertyPathName Name="StartDownload" />
     <RootPropertyPathName Name="NewStartTime" />
     <RootPropertyPathName Name="IsStartLoadAt" />
-    <RootPropertyPathName Name="SettingPageLocator" />
     <RootPropertyPathName Name="AddNewAccount" />
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="Login" />
     <RootPropertyPathName Name="EditAccount" />
+    <RootPropertyPathName Name="RemoveAccount" />
+    <RootPropertyPathName Name="Accounts" />
     <RootPropertyPathName Name="Files" />
     <RootPropertyPathName Name="Status" />
     <RootPropertyPathName Name="State" />
-    <RootPropertyPathName Name="DownloaderVM" />
     <RootPropertyPathName Name="GoToSettings" />
     <RootPropertyPathName Name="CancelDownload" />
     <RootPropertyPathName Name="IsEnableButtons" />
     <RootPropertyPathName Name="ResumeDownload" />
     <RootPropertyPathName Name="ActualHeight" />
-    <RootPropertyPathName Name="SideMenu" />
-    <RootPropertyPathName Name="RemoveAccount" />
-    <RootPropertyPathName Name="Accounts" />
+    <RootPropertyPathName Name="SettingPageLocator" />
+    <RootPropertyPathName Name="AccountVM" />
     <RootPropertyPathName Name="DisplayName" />
     <RootPropertyPathName Name="LanguageCode" />
     <RootPropertyPathName Name="AddTile" />
@@ -130,9 +129,9 @@
       <RootProperty Name="Name" />
       <RootProperty Name="Text" />
       <RootProperty Name="Style" />
+      <RootProperty Name="Header" />
       <RootProperty Name="AcceptsReturn" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Header" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Command" />
@@ -191,8 +190,8 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Style" />
       <RootProperty Name="Child" />
-      <RootProperty Name="IsLightDismissEnabled" />
       <RootProperty Name="Width" />
+      <RootProperty Name="IsLightDismissEnabled" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
       <RootProperty Name="Items" />
@@ -212,7 +211,6 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="Style" />
       <RootProperty Name="HeaderTemplate" />
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Items" />
       <RootEvent Name="ContainerContentChanging" />
     </RootType>
@@ -238,6 +236,7 @@
       <RootProperty Name="Time" />
       <RootProperty Name="IsEnabled" />
     </RootType>
+    <RootType FullName="DownLoader.ViewModels.AccountViewModel" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="Width" />
       <RootProperty Name="Password" />
@@ -246,6 +245,22 @@
     </RootType>
     <RootType FullName="DownLoader.Controls.Setting.AccountAddControl" />
     <RootType FullName="DownLoader.Controls.Setting.AccountEditControl" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <RootProperty Name="AutoGenerateColumns" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="Columns" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Binding" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTemplateColumn">
+      <RootProperty Name="CellTemplate" />
+    </RootType>
+    <RootType FullName="DownLoader.Controls.Setting.AccountsControl">
+      <RootProperty Name="DataContext" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="DataContext" />
       <RootProperty Name="HorizontalAlignment" />
@@ -312,20 +327,6 @@
     </RootType>
     <RootType FullName="DownLoader.MainPage" />
     <RootType FullName="DownLoader.ViewModels.LanguageViewModel" />
-    <RootType FullName="DownLoader.Models.UserAccount" />
-    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <RootProperty Name="AutoGenerateColumns" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Columns" />
-    </RootType>
-    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Binding" />
-    </RootType>
-    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTemplateColumn">
-      <RootProperty Name="CellTemplate" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBoxItem">
       <RootProperty Name="Tag" />
       <RootProperty Name="IsSelected" />

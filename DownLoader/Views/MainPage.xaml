@@ -64,7 +64,7 @@
                            ExpandDirection="Down">
                     <Grid Height="auto"
                        Background="{ThemeResource NavigationViewItemBackground}">
-                        <ListView Grid.Row="0" DataContext="{Binding SideMenu}">
+                        <ListView Grid.Row="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
@@ -121,8 +121,7 @@
 
         <Popup x:Name="AddLinkPopup" 
                x:FieldModifier="public"
-               Style="{StaticResource PopupStyle}"
-               DataContext="{Binding DownloaderVM}">
+               Style="{StaticResource PopupStyle}">
             <local1:AddLinkControl/>
         </Popup>
 

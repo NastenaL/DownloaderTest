@@ -161,3 +161,8 @@ D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountEditControl.g.cs
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountEditControl.xaml
 D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountEditControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\bin\x86\Debug\Controls\Setting\AccountsControl.xbf
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountsControl.g.i.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountsControl.g.cs
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountsControl.xaml
+D:\Study\Programs\TestTask\DownLoader\DownLoader\obj\x86\Debug\Controls\Setting\AccountsControl.xbf

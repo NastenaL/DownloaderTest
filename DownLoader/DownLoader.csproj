@@ -137,6 +137,9 @@
     <Compile Include="Controls\Setting\AccountEditControl.xaml.cs">
       <DependentUpon>AccountEditControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Setting\AccountsControl.xaml.cs">
+      <DependentUpon>AccountsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\ApiPurchase.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Services\Controls\PopUpControl.cs" />
     <Compile Include="Services\Controls\ToastNotificationViewModel.cs" />
     <Compile Include="Services\AppSettings.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\QueueViewModel.cs" />
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Setting\AccountEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Setting\AccountsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
