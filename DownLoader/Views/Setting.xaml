@@ -9,7 +9,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:DownLoader.Controls.Setting"
-    DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
+    DataContext="{Binding SettingPageLocator, Source={StaticResource Locator}}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:vm="using:DownLoader.ViewModels">
@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <vm:LanguageViewModel x:Key="LanguageVM"/>
             <model:UserAccount x:Key="UserAccount"/>
+            <vm:QueueViewModel x:Key="QueueVM"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/MainPageStyle.xaml"/>
@@ -83,9 +84,7 @@
                       Margin="10"
                       Grid.Row="3" Grid.Column="2"
                       OffContent="Light"
-                      OnContent="Dark"
-                      IsOn="{Binding IsDark}"
-                      >
+                      OnContent="Dark">
                         <i:Interaction.Behaviors>
                             <ic:EventTriggerBehavior EventName="Toggled">
                                 <ic:InvokeCommandAction Command="{Binding ChangeTheme}" 
@@ -140,9 +139,10 @@
                 <StackPanel>
                     <TextBlock x:Uid="tblAccountHeader" />
 
-                    <controls:DataGrid x:Name="dataGrid1" 
-    AutoGenerateColumns="False"
-    ItemsSource="{Binding Accounts, Mode=TwoWay}">
+                    <controls:DataGrid x:Name="dgAccounts" 
+                    AutoGenerateColumns="False" x:FieldModifier="public"
+                    ItemsSource="{Binding Accounts, Mode=OneWay}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                                 x:Uid="dgColumnUrl"
@@ -163,29 +163,46 @@
                         </controls:DataGrid.Columns>
         </controls:DataGrid>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Uid="bnAddNewAccount" 
-                                Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
-                        <Button x:Uid="bnEditAccount" 
-                                Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                 <StackPanel Orientation="Horizontal">
+                        <Button x:Uid="bnNewAccount" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=AddNewAccount}"/>
+                        <Button x:Uid="bnMainEditAccount" Command="{Binding OpenPopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
                         <Button x:Uid="bnRemoveAccount">
                             <i:Interaction.Behaviors>
                                 <ic:EventTriggerBehavior EventName="Click">
-                                    <ic:InvokeCommandAction Command="{Binding RemoveAccount}" CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
-                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=dataGrid1}"/>
+                                    <ic:InvokeCommandAction Command="{Binding RemoveAccount}" 
+                                                            CommandParameter="{Binding ElementName=dgAccounts, Path=SelectedItem}"/>
+                                    <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
+                                                            CommandParameter="{Binding ElementName=dgAccounts}"/>
                                 </ic:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </Button>
                     </StackPanel>
                  
-                    <Popup x:Name="AddNewAccount" 
-                           IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Popup x:Name="AddNewAccount" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <local:AccountAddControl/>
                     </Popup>
 
-                    <Popup x:Name="EditAccount"
-                           IsOpen="{Binding IsOpen}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <local:AccountEditControl/>
+                    <Popup x:Name="EditAccount"  
+                           Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
+                                    BorderBrush="White" BorderThickness="2">
+                            <TextBox Header="URL" x:Name="tbUrl" Text="{Binding ElementName=dgAccounts, Path=SelectedItem.Url, Mode=TwoWay}"/>
+                            <TextBox Header="Login" x:Name="tbLogin" Text="{Binding ElementName=dgAccounts, Path=SelectedItem.Login, Mode=TwoWay}"/>
+                            <PasswordBox Width="300" x:Uid="tbEditPassword" 
+                                         Password="{Binding ElementName=dgAccounts, Path=SelectedItem.Password, Mode=TwoWay}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Uid="bnEditAccount">
+                                    <i:Interaction.Behaviors>
+                                        <ic:EventTriggerBehavior EventName="Click">
+                                            <ic:InvokeCommandAction Command="{Binding EditAccount}" CommandParameter="{Binding ElementName=dgAccounts, Path=SelectedItem}"/>
+                                            <ic:InvokeCommandAction Command="{Binding UpdateTable}" CommandParameter="{Binding ElementName=dgAccounts}"/>
+                                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                                        </ic:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                </Button>
+                                <Button x:Uid="bnEditCancel" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                            </StackPanel>
+                        </StackPanel>
                     </Popup>
 
                 </StackPanel>

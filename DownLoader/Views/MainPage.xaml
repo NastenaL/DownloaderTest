@@ -9,6 +9,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:local="using:DownLoader.Controls.MainPage"
     xmlns:local1="using:DownLoader.Controls"
+    xmlns:vm="using:DownLoader.ViewModels"
     DataContext="{Binding MainPageLocator, Source={StaticResource Locator}}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -120,7 +121,8 @@
 
         <Popup x:Name="AddLinkPopup" 
                x:FieldModifier="public"
-               Style="{StaticResource PopupStyle}">
+               Style="{StaticResource PopupStyle}"
+               DataContext="{Binding DownloaderVM}">
             <local1:AddLinkControl/>
         </Popup>
 
@@ -163,7 +165,7 @@
                             <ic:EventTriggerBehavior EventName="Click">
                                 <ic:InvokeCommandAction Command="{Binding UpdateFileDescription}" 
                                                         CommandParameter="{Binding ElementName=lvDownloads, Path=SelectedItem}"/>
-                                <ic:InvokeCommandAction Command="{Binding RefreshDataListView}" 
+                                <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
                                                         CommandParameter="{Binding ElementName=lvDownloads}"/>
                                 <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
                                                         CommandParameter="{Binding ElementName=FileDelails}"/>
@@ -177,7 +179,7 @@
             </StackPanel>
         </Popup>
 
-        <ListView x:Name="lvDownloads" 
+        <ListView x:Name="lvDownloads"
                   ItemsSource="{Binding Files, Mode=OneWay}" 
                   Style="{StaticResource ListViewStyle}" 
                   ContainerContentChanging="LvDownloads_ContainerContentChanging">

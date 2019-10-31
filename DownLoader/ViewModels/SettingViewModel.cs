@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Views;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources.Core;
@@ -15,18 +16,27 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DownLoader.ViewModels
 {
-   public class SettingViewModel : ViewModelBase
+   public class SettingViewModel : ViewModelBase, INotifyPropertyChanged
     {
         #region Fields
         private ICommand addTile;
         private ICommand changeTheme;
+        private ICommand closePopUp;
+        private ICommand openPopUp;
+        private ICommand removeAccount;
+        private ICommand updateTable;
         private readonly INavigationService navigationService;
-        public bool IsDark;
         private readonly ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
         private readonly ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+        readonly DataStorage dataStorage = new DataStorage();
         readonly LiveTile tile = new LiveTile();
+        readonly PopUpControl popUpControl = new PopUpControl();
+        private string login;
+        private string password;
+        private string url;
+        UserAccount selectedItem;
         #endregion
-        
+
         #region Properties
         public ICommand AddTile
         {
@@ -46,72 +56,6 @@ namespace DownLoader.ViewModels
                 return changeTheme;
             }
         }
-        public RelayCommand NavigateCommand { get; private set; }
-        public RelayCommand IsLightCommand { get; private set; }
-
-        #endregion
-
-        #region Methods
-        private void AddTileAction(ComboBox color)
-        {
-            tile.CreateTileAsync();
-            tile.AddColor(color);
-        }
-
-        private void ChangeThemeAction(ToggleSwitch sender)
-        {
-            FrameworkElement window = (FrameworkElement)Window.Current.Content;
-
-            if (((ToggleSwitch)sender).IsOn)
-            {
-                AppSettings.Theme = AppSettings.darkTheme;
-                window.RequestedTheme = AppSettings.darkTheme;
-            }
-            else
-            {
-                AppSettings.Theme = AppSettings.lightTheme;
-                window.RequestedTheme = AppSettings.lightTheme;
-            }
-        }
-       
-        private void NavigateCommandAction()
-        {
-            navigationService.GoBack();
-        }
-        public SettingViewModel(INavigationService _navigationService)
-        {
-            FrameworkElement root = (FrameworkElement)Window.Current.Content;
-            root.RequestedTheme = AppSettings.Theme;
-
-            navigationService = _navigationService;
-            AddNewAccount = new RelayCommand(AddNewAccountAction);
-            NavigateCommand = new RelayCommand(NavigateCommandAction);
-
-            Accounts = new ObservableCollection<UserAccount>();
-            dataStorage.Load(Accounts);
-        }
-        #endregion
-
-      
-        public ObservableCollection<UserAccount> Accounts { get; set; }
-        private ICommand openPopUp;
-        private ICommand editAccount;
-        private ICommand closePopUp;
-        private ICommand removeAccount;
-        private ICommand updateTable;
-        readonly DataStorage dataStorage = new DataStorage();
-        readonly PopUpControl popUpControl = new PopUpControl();
-     
-        public ICommand OpenPopUp
-        {
-            get
-            {
-                if (openPopUp == null)
-                    openPopUp = new RelayCommand<Popup>(i => popUpControl.OpenPopupAction(i));
-                return openPopUp;
-            }
-        }
-
         public ICommand ClosePopUp
         {
             get
@@ -121,17 +65,15 @@ namespace DownLoader.ViewModels
                 return closePopUp;
             }
         }
-
-        public ICommand EditAccount
+        public ICommand OpenPopUp
         {
             get
             {
-                if (editAccount == null)
-                    editAccount = new RelayCommand<UserAccount>(i => EditAccountAction(i));
-                return editAccount;
+                if (openPopUp == null)
+                    openPopUp = new RelayCommand<Popup>(i => popUpControl.OpenPopupAction(i));
+                return openPopUp;
             }
         }
-
         public ICommand RemoveAccount
         {
             get
@@ -141,7 +83,6 @@ namespace DownLoader.ViewModels
                 return removeAccount;
             }
         }
-
         public ICommand UpdateTable
         {
             get
@@ -151,74 +92,62 @@ namespace DownLoader.ViewModels
                 return updateTable;
             }
         }
-
-        private string url;
+        public ObservableCollection<UserAccount> Accounts { get; set; }
+        public RelayCommand AddNewAccount { get; set; }
+        public RelayCommand EditAccount { get; set; }
+        public RelayCommand IsLightCommand { get; private set; }
+        public RelayCommand NavigateCommand { get; private set; }
+        public UserAccount SelectedItem
+        {
+            get {  return (selectedItem);}
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
         public string Url
         {
-            get { return this.url; }
+            get { return url; }
             set
             {
-                if (!string.Equals(this.url, value))
+                if (!string.Equals(url, value))
                 {
-                    this.url = value;
-                    this.RaisePropertyChanged();
+                    url = value;
+                    RaisePropertyChanged();
                 }
             }
         }
-        private string login;
         public string Login
         {
-            get { return this.login; }
+            get { return login; }
             set
             {
-                if (!string.Equals(this.login, value))
+                if (!string.Equals(login, value))
                 {
-                    this.login = value;
-                    this.RaisePropertyChanged();
+                    login = value;
+                    RaisePropertyChanged();
                 }
             }
         }
-        private string password;
         public string Password
         {
-            get { return this.password; }
+            get { return password; }
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
-                if (!string.Equals(this.password, value))
+                if (!string.Equals(password, value))
                 {
-                    this.password = value;
-                    this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                    password = value;
+                    RaisePropertyChanged();
                 }
             }
         }
-        public RelayCommand AddNewAccount { get; set; }
-        private void AddNewAccountAction()
-        {
-            UserAccount newAccount = new UserAccount
-            {
-                Id = Guid.NewGuid(),
-                Url = Url,
-                Login = Login,
-                Password = Password
-            };
-            Accounts.Add(newAccount);
-            dataStorage.Save(Accounts);
+        #endregion
 
-            Url = Login = Password = "";
-        }
-
-        private void EditAccountAction(UserAccount file)
-        {
-            var item = Accounts.FirstOrDefault(i => i.Id.ToString() == file.Id.ToString());
-            if (item != null)
-            {
-                item.Url = file.Url;
-
-            }
-            dataStorage.Save(Accounts);
-        }
-
+        #region Methods
         private async void RemoveAccountAction(UserAccount file)
         {
             if (file == null)
@@ -240,11 +169,79 @@ namespace DownLoader.ViewModels
             }
             dataStorage.Save(Accounts);
         }
+        public SettingViewModel(INavigationService _navigationService)
+        {
+            FrameworkElement root = (FrameworkElement)Window.Current.Content;
+            root.RequestedTheme = AppSettings.Theme;
 
+            navigationService = _navigationService;
+            AddNewAccount = new RelayCommand(AddNewAccountAction);
+            EditAccount = new RelayCommand(EditAccountAction);
+            NavigateCommand = new RelayCommand(NavigateCommandAction);
+
+            Accounts = new ObservableCollection<UserAccount>();
+            dataStorage.Load(Accounts);
+        }
+        private void AddNewAccountAction()
+        {
+            UserAccount newAccount = new UserAccount
+            {
+                Id = Guid.NewGuid(),
+                Url = Url,
+                Login = Login,
+                Password = Password
+            };
+            Accounts.Add(newAccount);
+            dataStorage.Save(Accounts);
+        }
+        private void AddTileAction(ComboBox color)
+        {
+            tile.CreateTileAsync();
+            tile.AddColor(color);
+        }
+        private void ChangeThemeAction(ToggleSwitch sender)
+        {
+            FrameworkElement window = (FrameworkElement)Window.Current.Content;
+            if (((ToggleSwitch)sender).IsOn)
+            {
+                AppSettings.Theme = AppSettings.darkTheme;
+                window.RequestedTheme = AppSettings.darkTheme;
+            }
+            else
+            {
+                AppSettings.Theme = AppSettings.lightTheme;
+                window.RequestedTheme = AppSettings.lightTheme;
+            }
+        }
+        private void EditAccountAction()
+        {
+            var item = Accounts.FirstOrDefault(i => i.Id.ToString() == SelectedItem.Id.ToString());
+            if (item != null)
+            {
+                item.Url = SelectedItem.Url;
+                item.Login = SelectedItem.Login;
+                item.Password = SelectedItem.Password;
+            }
+            dataStorage.Save(Accounts);
+        }
+        private void NavigateCommandAction()
+        {
+            navigationService.GoBack();
+        }
         private void UpdateTableAction(DataGrid accountTable)
         {
             accountTable.ItemsSource = null;
             accountTable.ItemsSource = Accounts;
         }
+        #endregion
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+        #endregion
     }
 }

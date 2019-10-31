@@ -8,14 +8,11 @@ namespace DownLoader.ViewModels
     public class ViewModelLocator
     {
         #region Fields
-
         public const string MainPageKey = "MainPage";
         public const string NewKey = "Setting";
-
         #endregion
 
         #region Properties
-
         public MainPageViewModel MainPageLocator
         {
             get
@@ -23,8 +20,7 @@ namespace DownLoader.ViewModels
                 return ServiceLocator.Current.GetInstance<MainPageViewModel>();
             }
         }
-
-        public SettingViewModel SettingNewInstance
+        public SettingViewModel SettingPageLocator
         {
             get
             {
@@ -44,6 +40,5 @@ namespace DownLoader.ViewModels
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<SettingViewModel>();
         }
-
     }
 }

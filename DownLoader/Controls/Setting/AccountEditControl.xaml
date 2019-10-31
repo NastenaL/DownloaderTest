@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DownLoader.Controls.Setting"
-    DataContext="{Binding SettingNewInstance, Source={StaticResource Locator}}"
+    DataContext="{Binding SettingPageLocator, Source={StaticResource Locator}}"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,27 +14,24 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" Width="{Binding ElementName=AddNewAccount}" 
-                                    BorderBrush="White" BorderThickness="2">
+                    BorderBrush="White" BorderThickness="2">
             <TextBox x:Uid="tbEditUrl" 
-                                     Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Url, Mode=TwoWay}"/>
+                     Text="{Binding SelectedItem.Url, Mode=TwoWay}"/>
             <TextBox x:Uid="tbEditLogin" 
-                                     Text="{Binding ElementName=dataGrid1, Path=SelectedItem.Login, Mode=TwoWay}"/>
+                     Text="{Binding SelectedItem.Login, Mode=TwoWay}"/>
             <PasswordBox Width="300" x:Uid="tbEditPassword" 
-                                         Password="{Binding ElementName=dataGrid1, Path=SelectedItem.Password, Mode=TwoWay}" />
+                                         Password="{Binding SelectedItem.Password, Mode=TwoWay}" />
             <StackPanel Orientation="Horizontal">
-                <Button x:Uid="bnEditSelectedAccount" >
+                <Button x:Uid="bnEditSelectedAccount" Click="ClosePopUp">
                     <i:Interaction.Behaviors>
                         <ic:EventTriggerBehavior EventName="Click">
-                            <ic:InvokeCommandAction Command="{Binding EditAccount}" 
-                                                                    CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
+                            <ic:InvokeCommandAction Command="{Binding EditAccount}"/>
                             <ic:InvokeCommandAction Command="{Binding UpdateTable}" 
-                                                                    CommandParameter="{Binding ElementName=dataGrid1}"/>
-                            <ic:InvokeCommandAction Command="{Binding ClosePopUp}" 
-                                                                    CommandParameter="{Binding ElementName=EditAccount}"/>
+                                                            CommandParameter="{Binding ElementName=dgAccounts}"/>
                         </ic:EventTriggerBehavior>
                     </i:Interaction.Behaviors>
                 </Button>
-                <Button x:Uid="bnCancelEdit" Command="{Binding ClosePopUp}" CommandParameter="{Binding ElementName=EditAccount}"/>
+                <Button x:Uid="bnCancelEdit" Click="ClosePopUp"/>
             </StackPanel>
         </StackPanel>
     </Grid>

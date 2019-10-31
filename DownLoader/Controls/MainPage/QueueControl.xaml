@@ -8,7 +8,6 @@
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -41,7 +40,6 @@
             <Button Content="X" Background="Transparent" BorderBrush="Transparent" 
                             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,5"
                             Click="Button_Click"/>
-
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" DataContext="{Binding Source={StaticResource queueVM}}" >
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5">

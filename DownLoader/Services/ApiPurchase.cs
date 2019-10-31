@@ -17,6 +17,7 @@ namespace DownLoader.Servises
         internal LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
         string LicenseMode;
         #endregion
+
         #region Methods
         internal async void PurchaseFullLicense()
         {

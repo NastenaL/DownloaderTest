@@ -56,6 +56,7 @@ namespace DownLoader.Models
             }
         }
         public string Description { get; set; }
+        public Queue QueueType { get; set; }
         #endregion
 
         #region INotifyPropertyChanged Members

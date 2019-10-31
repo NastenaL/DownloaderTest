@@ -129,6 +129,9 @@
   <data name="bnAddNewAccount.Content" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="bnAddNewAccount.New" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="bnAddQueue.Content" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="bnEditSelectedAccount.Content" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="bnMainEditAccount.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="bnNewAccount.Content" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="bnOpenFolder.Content" xml:space="preserve">
     <value>Open</value>

@@ -30,8 +30,13 @@
                               x:Name="tsIsStopLoadAt"
                               IsOn="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}"/>
                 <TimePicker SelectedTime="{Binding SelectedItem.StopDownload, Mode=TwoWay}" 
-                            Time="{Binding NewStopTime, Mode=TwoWay}" 
+                            Time="{Binding NewStopTime, Mode=TwoWay}"
                             IsEnabled="{Binding SelectedItem.IsStopLoadAt, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="SelectedTimeChanged">
+                            <ic:InvokeCommandAction Command="{Binding EditQueueAction}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
                 </TimePicker>
             </StackPanel>
         </StackPanel>

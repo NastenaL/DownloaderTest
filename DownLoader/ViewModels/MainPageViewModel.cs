@@ -26,28 +26,26 @@ namespace DownLoader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        #region Fields
-        readonly ApiPurchase api = new ApiPurchase();
+        #region Fields  
         ContentDialog dialog;
         private bool isEnableButtons = false;
         private CancellationTokenSource cancellationToken;
         private DownloadOperation downloadOperation;
         private ICommand closePopUp;
         private ICommand openPopUp;
-        private ICommand refreshDataList;
+        private ICommand updateTable;
         private ICommand updateFileDescription;
         private readonly INavigationService navigationService;
         private readonly BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
         private readonly ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
         private readonly ResourceMap resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+        readonly ApiPurchase api = new ApiPurchase();
         readonly DataStorage dataStorage = new DataStorage();
         readonly PopUpControl popUpControl = new PopUpControl();
         readonly ToastNotificationViewModel toastNotification = new ToastNotificationViewModel();
-        public string LinkURL { get; set; }
         #endregion
 
         #region Properties
-
         public bool IsEnableButtons
         {
             get { return isEnableButtons; }
@@ -74,7 +72,6 @@ namespace DownLoader.ViewModels
                 return closePopUp;
             }
         }
-   
         public ICommand OpenPopUp
         {
             get
@@ -84,13 +81,13 @@ namespace DownLoader.ViewModels
                 return openPopUp;
             }
         }
-        public ICommand RefreshDataListView
+        public ICommand UpdateTable
         {
             get
             {
-                if (refreshDataList == null)
-                    refreshDataList = new RelayCommand<ListView>(i => RefreshListView(i));
-                return refreshDataList;
+                if (updateTable == null)
+                    updateTable = new RelayCommand<ListView>(i => UpdateTableAction(i));
+                return updateTable;
             }
         }
         public ICommand UpdateFileDescription
@@ -102,9 +99,7 @@ namespace DownLoader.ViewModels
                 return updateFileDescription;
             }
         }
-
-        public string Description { get; set; }
-        public string Status { get; set; }
+        public ObservableCollection<DownloadFile> Files { get; set; }
         public RelayCommand CancelDownload { get; set; }
         public RelayCommand DownloadCommand { get; set; }
         public RelayCommand DownloadCommandAs { get; set; }
@@ -112,36 +107,12 @@ namespace DownLoader.ViewModels
         public RelayCommand ResumeDownload { get; set; }
         public RelayCommand StopDownload { get; set; }
         public RelayCommand UpdateTile { get; set; }
-        public ObservableCollection<DownloadFile> Files { get; set; }
-       
+        public string Description { get; set; }
+        public string Status { get; set; }
+        public string Url { get; set; }
         #endregion
 
-        public MainPageViewModel(INavigationService NavigationService)
-        {
-          
-            FrameworkElement root = (FrameworkElement)Window.Current.Content;
-            root.RequestedTheme = AppSettings.Theme;
-
-            navigationService = NavigationService;
-            GoToSettings = new RelayCommand(NavigateCommandAction);
-            ResumeDownload = new RelayCommand(ResumeDownloadAction);
-            StopDownload = new RelayCommand(StopDownloadAction);
-            CancelDownload = new RelayCommand(CancelDownloadAction);
-            DownloadCommand = new RelayCommand(DownloadAction);
-            DownloadCommandAs = new RelayCommand(DownloadAsAction);
-
-            Files = new ObservableCollection<DownloadFile>();
-            dataStorage.Load(Files);
-        }
-
         #region Methods
-
-        private void UpdateTileAction()
-        {
-            LiveTile tile = new LiveTile();
-            tile.CreateTileAsync();
-        }
-
         internal void CancelDownloadAction()
         {
             cancellationToken.Cancel();
@@ -155,16 +126,27 @@ namespace DownLoader.ViewModels
                 dataStorage.Save(Files);
             }
         }
-
+        internal void StopDownloadAction()
+        {
+            if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
+                downloadOperation.Pause();
+        }
+        internal void ResumeDownloadAction()
+        {
+            downloadOperation.Resume();
+        }
+        private void CancelPurchase()
+        {
+            CancelDownloadAction();
+        }
         private void NavigateCommandAction()
         {
             navigationService.NavigateTo("Setting");
         }
-
-        private void RefreshListView(ListView dataGrid)
+        private void Purchase()
         {
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = Files;
+            api.PurchaseFullLicense();
+            dialog.Hide();
         }
         private void UpdateDescription(DownloadFile file)
         {
@@ -175,22 +157,15 @@ namespace DownLoader.ViewModels
             }
             dataStorage.Save(Files);
         }
-
-        internal void StopDownloadAction()
+        private void UpdateTableAction(ListView dataGrid)
         {
-           if(downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
-         downloadOperation.Pause();
+            dataGrid.ItemsSource = null;
+            dataGrid.ItemsSource = Files;
         }
-
-        internal void ResumeDownloadAction()
-        {
-            downloadOperation.Resume();
-        }
-  
         public async void DownloadAction()
         {
             Progress<DownloadOperation> progress = null;
-            if (LinkURL == null || LinkURL == "")
+            if (Url == null || Url == "")
             {
                 ContentDialog notFoundLinkFileDialog = new ContentDialog()
                 {
@@ -207,10 +182,11 @@ namespace DownLoader.ViewModels
                 ViewMode = PickerViewMode.Thumbnail
             };
             folderPicker.FileTypeFilter.Add("*");
+
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
-                Uri downloadUrl = new Uri(LinkURL);
+                Uri downloadUrl = new Uri(Url);
                 String fileName = Path.GetFileName(downloadUrl.ToString());
                 var request = HttpWebRequest.Create(downloadUrl) as HttpWebRequest;
                 StorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
@@ -225,17 +201,13 @@ namespace DownLoader.ViewModels
                         Name = fileName
                     };
                     toastNotification.SendUpdatableToastWithProgress(newFile.Name);
-
                     newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
                     newFile.DateTime = DateTime.Now;
                     newFile.Type = FType;
                     newFile.Description = Description;
                     newFile.Status = Status;
                     Files.Add(newFile);
-                
                     await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
-                   
-
                     if (downloadOperation.Progress.Status == BackgroundTransferStatus.Completed)
                     {
                         toastNotification.SendCompletedToast(fileName);
@@ -243,7 +215,7 @@ namespace DownLoader.ViewModels
                         UpdateTileAction();
                     }
                     IsEnableButtons = false;
-                    LinkURL = Description = "";
+                    Url = Description = "";
                     FType = FileType.None;
                 }
                 catch (TaskCanceledException)
@@ -256,32 +228,60 @@ namespace DownLoader.ViewModels
                 {
                     Status = "File not found";
                     var messageDialog = new MessageDialog("No internet connection has been found.");
-
                     await downloadOperation.ResultFile.DeleteAsync();
                     downloadOperation = null;
                 }
             }
         }
-
-        private void Purchase()
+        public async void DownloadAsAction()
         {
-         api.PurchaseFullLicense();
-            dialog.Hide();
+            Uri downloadUrl = new Uri(Url);
+            String fileName = Path.GetFileName(downloadUrl.ToString());
+            FileSavePicker savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+            savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { Path.GetExtension(fileName) });
+            savePicker.SuggestedFileName = Path.GetFileName(downloadUrl.ToString());
+
+            var request = HttpWebRequest.Create(downloadUrl) as HttpWebRequest;
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            downloadOperation = backgroundDownloader.CreateDownload(downloadUrl, file);
+            Progress<DownloadOperation> progress = new Progress<DownloadOperation>(x => ProgressChanged(downloadOperation));
+            cancellationToken = new CancellationTokenSource();
+            try
+            {
+                DownloadFile newFile = new DownloadFile
+                {
+                    Id = downloadOperation.Guid,
+                    Name = fileName
+                };
+                toastNotification.SendUpdatableToastWithProgress(newFile.Name);
+
+                newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
+                newFile.DateTime = DateTime.Now;
+                newFile.Type = FType;
+                newFile.Description = Description;
+                newFile.Status = Status;
+                Files.Add(newFile);
+                await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
+                toastNotification.SendCompletedToast(fileName);
+                dataStorage.Save(Files);
+                UpdateTileAction();
+            }
+            catch (TaskCanceledException)
+            {
+                Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
+                await downloadOperation.ResultFile.DeleteAsync();
+                downloadOperation = null;
+            }
         }
-
-        private void CancelPurchase()
-        {
-            CancelDownloadAction();
-        }
-
-
         public async void ProgressChanged(DownloadOperation downloadOperation)
         {
             int oneUse = 0;
             var NewTotalBytesToReceive = (double)downloadOperation.Progress.TotalBytesToReceive;
             int progress = (int)(100 * ((double)downloadOperation.Progress.BytesReceived / (double)NewTotalBytesToReceive));
-           
-
+          
             if (downloadOperation.GetResponseInformation().Headers.ContainsKey("Content-Length"))
             {
                 NewTotalBytesToReceive = Convert.ToDouble(downloadOperation.GetResponseInformation().Headers["Content-Length"]);
@@ -290,7 +290,6 @@ namespace DownLoader.ViewModels
             {
                 StopDownloadAction();
                 oneUse++;
-
                 dialog = new ContentDialog
                 {
                     Title = resourceMap.GetValue("purchaseDialogTitle", resourceContext).ValueAsString,
@@ -321,13 +320,11 @@ namespace DownLoader.ViewModels
                         }
                     case BackgroundTransferStatus.Completed:
                         {
-
                         var item = Files.FirstOrDefault(i => i.Id.ToString() == downloadOperation.Guid.ToString());
                             if (item != null)
                             {
                                 item.Status = string.Format(resourceMap.GetValue("runningStatus", resourceContext).ValueAsString, downloadOperation.Progress.BytesReceived / 1024, downloadOperation.Progress.TotalBytesToReceive / 1024);
                             }
-                    
                             break;
                         }
                     case BackgroundTransferStatus.PausedByApplication:
@@ -366,53 +363,26 @@ namespace DownLoader.ViewModels
                     downloadOperation = null;
                 }
         }
-
-        public async void DownloadAsAction()
+        public MainPageViewModel(INavigationService navigationService)
         {
-            Uri downloadUrl = new Uri(LinkURL);
-            String fileName = Path.GetFileName(downloadUrl.ToString());
+            FrameworkElement root = (FrameworkElement)Window.Current.Content;
+            root.RequestedTheme = AppSettings.Theme;
 
-            FileSavePicker savePicker = new FileSavePicker
-            {
-                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
-            };
-            savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { Path.GetExtension(fileName) });
-            savePicker.SuggestedFileName = Path.GetFileName(downloadUrl.ToString());
+            CancelDownload = new RelayCommand(CancelDownloadAction);
+            DownloadCommand = new RelayCommand(DownloadAction);
+            DownloadCommandAs = new RelayCommand(DownloadAsAction);
+            GoToSettings = new RelayCommand(NavigateCommandAction);
+            this.navigationService = navigationService;
+            ResumeDownload = new RelayCommand(ResumeDownloadAction);
+            StopDownload = new RelayCommand(StopDownloadAction);
 
-            var request = HttpWebRequest.Create(downloadUrl) as HttpWebRequest;
-            StorageFile file = await savePicker.PickSaveFileAsync();
-            downloadOperation = backgroundDownloader.CreateDownload(downloadUrl, file);
-            Progress<DownloadOperation> progress = new Progress<DownloadOperation>(x => ProgressChanged(downloadOperation));
-            cancellationToken = new CancellationTokenSource();
-
-            try
-            {
-                DownloadFile newFile = new DownloadFile
-                {
-                    Id = downloadOperation.Guid,
-                    Name = fileName
-                };
-                toastNotification.SendUpdatableToastWithProgress(newFile.Name);
-
-                newFile.FileSize = (downloadOperation.Progress.TotalBytesToReceive / 1024).ToString() + " kb";
-                newFile.DateTime = DateTime.Now;
-                newFile.Type = FType;
-                newFile.Description = Description;
-                newFile.Status = Status;
-                Files.Add(newFile);
-
-                await downloadOperation.StartAsync().AsTask(cancellationToken.Token, progress);
-
-                toastNotification.SendCompletedToast(fileName);
-                dataStorage.Save(Files);
-                UpdateTileAction();
-            }
-            catch (TaskCanceledException)
-            {
-                Status = resourceMap.GetValue("canceledStatus", resourceContext).ValueAsString;
-                await downloadOperation.ResultFile.DeleteAsync();
-                downloadOperation = null;
-            }
+            Files = new ObservableCollection<DownloadFile>();
+            dataStorage.Load(Files);
+        }
+        private void UpdateTileAction()
+        {
+            LiveTile tile = new LiveTile();
+            tile.CreateTileAsync();
         }
         #endregion
 
